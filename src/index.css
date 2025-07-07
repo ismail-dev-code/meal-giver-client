@@ -8,9 +8,12 @@
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
-  --color-primary: #F97316;
-  --color-secondary: #10B981;
+  --color-primary:  #10B981;
+  --color-secondary: #1f1a15;
+  --color-accent: #F97316;
 }
+
+
 .font-montserrat {
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
@@ -20,5 +23,5 @@
 
 a.active{
   @apply bg-primary
-  text-black
+  text-white
 }
