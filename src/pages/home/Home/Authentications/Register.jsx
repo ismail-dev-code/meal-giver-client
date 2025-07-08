@@ -1,12 +1,12 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router";
-
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
 import SocialLogin from "./Login/SocialLogin";
 import useAuth from "../../../../hooks/useAuth";
+import useImageUploader from "../../../../hooks/useImageLoader";
+
 
 const Register = () => {
   const {
@@ -17,17 +17,15 @@ const Register = () => {
   } = useForm();
 
   const password = watch("password");
-
   const { createUser, updateProfile } = useAuth();
-  const [profilePic, setProfilePic] = useState("");
-  const [uploading, setUploading] = useState(false);
+  const { uploadImage, uploading, uploadedUrl } = useImageUploader();
 
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from || "/";
 
   const onSubmit = async (data) => {
-    if (!profilePic) {
+    if (!uploadedUrl) {
       toast.error("Please upload a profile picture before registering.");
       return;
     }
@@ -41,7 +39,7 @@ const Register = () => {
         email: data.email,
         name: data.name,
         role: "user",
-        photo: profilePic,
+        photo: uploadedUrl,
         created_at: new Date().toISOString(),
         last_log_in: new Date().toISOString(),
       };
@@ -50,7 +48,7 @@ const Register = () => {
 
       await updateProfile({
         displayName: data.name,
-        photoURL: profilePic,
+        photoURL: uploadedUrl,
       });
 
       toast.success("Registration successful! Welcome to MealGiver.");
@@ -61,32 +59,15 @@ const Register = () => {
     }
   };
 
-  const handleImageUpload = async (e) => {
-    const image = e.target.files[0];
-    if (!image) return;
-
-    const formData = new FormData();
-    formData.append("image", image);
-
-    const uploadUrl = `https://api.imgbb.com/1/upload?key=${
-      import.meta.env.VITE_IMG_UPLOAD_KEY
-    }`;
-
-    try {
-      setUploading(true);
-      const res = await axios.post(uploadUrl, formData);
-      setProfilePic(res.data.data.url);
-      toast.success("Image uploaded successfully!");
-    } catch (err) {
-      console.error(err);
-      toast.error("Image upload failed.");
-    } finally {
-      setUploading(false);
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      await uploadImage(file);
     }
   };
 
   return (
-    <div className="card max-w-md  mx-auto md:px-4 py-6 md:shadow-md bg-white">
+    <div data-aos="fade-up" className="card max-w-md mx-auto md:px-4 py-6 md:shadow-md bg-white">
       <h1 className="md:text-2xl text-center font-bold mb-4 text-primary">
         Join MealGiver
       </h1>
@@ -112,12 +93,12 @@ const Register = () => {
           <input
             type="file"
             accept="image/*"
-            onChange={handleImageUpload}
+            onChange={handleImageChange}
             className="file-input file-input-bordered w-full"
           />
-          {profilePic && (
+          {uploadedUrl && (
             <img
-              src={profilePic}
+              src={uploadedUrl}
               alt="Profile"
               className="w-20 h-20 rounded-full mt-2 object-cover border"
             />
