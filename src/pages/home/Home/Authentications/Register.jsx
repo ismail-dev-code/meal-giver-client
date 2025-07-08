@@ -3,19 +3,20 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router";
 
 import axios from "axios";
-
 import { toast } from "react-hot-toast";
 
 import SocialLogin from "./Login/SocialLogin";
 import useAuth from "../../../../hooks/useAuth";
-
 
 const Register = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm();
+
+  const password = watch("password");
 
   const { createUser, updateProfile } = useAuth();
   const [profilePic, setProfilePic] = useState("");
@@ -32,12 +33,11 @@ const Register = () => {
     }
 
     try {
-      // Create user in Firebase Auth
       const result = await createUser(data.email, data.password);
       const createdUser = result.user;
-console.log(createdUser);
-      // Save to MealGiver DB
+
       const userInfo = {
+        uid: createdUser.uid,
         email: data.email,
         name: data.name,
         role: "user",
@@ -48,7 +48,6 @@ console.log(createdUser);
 
       await axios.post(`${import.meta.env.VITE_API_BASE_URL}/users`, userInfo);
 
-      // Update Firebase display name and photo
       await updateProfile({
         displayName: data.name,
         photoURL: profilePic,
@@ -69,7 +68,9 @@ console.log(createdUser);
     const formData = new FormData();
     formData.append("image", image);
 
-    const uploadUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMG_UPLOAD_KEY}`;
+    const uploadUrl = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_IMG_UPLOAD_KEY
+    }`;
 
     try {
       setUploading(true);
@@ -85,10 +86,12 @@ console.log(createdUser);
   };
 
   return (
-    <div className="card max-w-md mx-auto px-4 py-6 shadow-md bg-white">
-      <h1 className="text-3xl text-center font-bold mb-4 text-primary">Join MealGiver</h1>
+    <div className="card max-w-md  mx-auto md:px-4 py-6 md:shadow-md bg-white">
+      <h1 className="md:text-2xl text-center font-bold mb-4 text-primary">
+        Join MealGiver
+      </h1>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
         {/* Name */}
         <div>
           <label className="label">Full Name</label>
@@ -154,10 +157,30 @@ console.log(createdUser);
           )}
         </div>
 
+        {/* Confirm Password */}
+        <div>
+          <label className="label">Confirm Password</label>
+          <input
+            type="password"
+            {...register("confirmPassword", {
+              required: "Please confirm your password",
+              validate: (value) =>
+                value === password || "Passwords do not match",
+            })}
+            className="input input-bordered w-full mb-2"
+            placeholder="Re-type your password"
+          />
+          {errors.confirmPassword && (
+            <p className="text-red-500 text-sm">
+              {errors.confirmPassword.message}
+            </p>
+          )}
+        </div>
+
         {/* Submit */}
         <button
           type="submit"
-          className="btn btn-primary text-black w-full"
+          className="btn btn-primary text-white w-full"
           disabled={uploading}
         >
           {uploading ? "Uploading image..." : "Register"}
@@ -165,14 +188,14 @@ console.log(createdUser);
 
         <p className="text-center text-sm mt-4">
           Already have an account?{" "}
-          <Link to="/login" className="text-blue-600 underline">
+          <Link to="/login" className="text-primary hover:underline">
             Login
           </Link>
         </p>
       </form>
 
       {/* Social login */}
-      <div className="mt-6">
+      <div className="md:mt-2">
         <SocialLogin />
       </div>
     </div>

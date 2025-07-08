@@ -51,12 +51,12 @@ const SocialLogin = () => {
       <div className="divider text-sm text-gray-500">OR</div>
       <button
         onClick={handleGoogleSignIn}
-        className="btn w-full flex items-center justify-center gap-2 bg-white text-black border border-gray-300 hover:shadow-md transition duration-300"
+        className="btn w-full flex items-center justify-center md:gap-2 bg-white text-black border border-gray-300 hover:shadow-md transition duration-300"
       >
         <svg
           aria-label="Google logo"
-          width="20"
-          height="20"
+          width="25"
+          height="25"
           viewBox="0 0 512 512"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -80,7 +80,7 @@ const SocialLogin = () => {
             />
           </g>
         </svg>
-        <span className="font-medium">Continue with Google</span>
+        <span className="font-medium text-nowrap">Continue with Google</span>
       </button>
     </div>
   );

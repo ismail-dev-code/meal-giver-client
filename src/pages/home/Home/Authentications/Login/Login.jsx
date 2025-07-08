@@ -3,11 +3,9 @@ import { useForm } from "react-hook-form";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { Link, useLocation, useNavigate } from "react-router";
 
-
 import toast from "react-hot-toast";
 import useAuth from "../../../../../hooks/useAuth";
 import SocialLogin from "./SocialLogin";
-
 
 const Login = () => {
   const {
@@ -61,19 +59,16 @@ const Login = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10">
-      <h2 className="text-3xl font-bold text-center mb-6 text-primary">
-        {forgotMode ? "Reset Your Password" : "Login to MealGiver"}
+    <div data-aos="fade-up" className="card max-w-md mx-auto md:px-4 py-6 md:shadow-md bg-white">
+      <h2 className="md:text-2xl font-bold text-center mb-4 text-primary">
+        {forgotMode ? "Reset Your Password" : "Access your account"}
       </h2>
 
       {!forgotMode ? (
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="p-6 rounded-lg space-y-4 border bg-white shadow"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
           {/* Email */}
           <div>
-            <label className="label font-medium mb-1.5" htmlFor="email">
+            <label className="label font-medium" htmlFor="email">
               Email
             </label>
             <input
@@ -98,7 +93,7 @@ const Login = () => {
 
           {/* Password */}
           <div>
-            <label className="label font-medium mb-1.5" htmlFor="password">
+            <label className="label font-medium" htmlFor="password">
               Password
             </label>
             <div className="relative">
@@ -145,7 +140,7 @@ const Login = () => {
           {/* Submit */}
           <button
             type="submit"
-            className="btn btn-primary text-black w-full"
+            className="btn btn-primary text-white w-full"
             disabled={loading}
           >
             {loading ? "Logging in..." : "Login"}
@@ -157,15 +152,14 @@ const Login = () => {
             <Link
               state={{ from }}
               to="/register"
-              className="text-secondary font-medium hover:underline"
+              className="text-primary font-medium hover:underline"
             >
               Create one
             </Link>
           </p>
         </form>
       ) : (
-        // Forgot Password Mode
-        <div className="p-6 rounded-lg shadow-md bg-white max-w-md mx-auto space-y-4 border border-gray-200">
+        <div className="space-y-4">
           <p className="text-center text-sm text-gray-500">
             Enter your email and we’ll send a link to reset your password.
           </p>
@@ -191,7 +185,7 @@ const Login = () => {
             <button
               onClick={handleResetPassword}
               disabled={resetLoading}
-              className="btn btn-primary text-black w-full sm:w-auto"
+              className="btn btn-primary text-white w-full sm:w-auto"
             >
               {resetLoading ? "Sending..." : "Send Reset Email"}
             </button>
@@ -207,7 +201,7 @@ const Login = () => {
       )}
 
       {/* Social Login */}
-      <div className="mt-6">
+      <div className="md:mt-2">
         <SocialLogin />
       </div>
     </div>

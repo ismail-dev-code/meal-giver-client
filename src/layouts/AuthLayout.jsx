@@ -10,23 +10,21 @@ const AuthLayout = () => {
   }, []);
 
   return (
-    <div className="w-11/12 lg:w-8/12 mx-auto pt-10">
+    <div className="w-9/12 max-w-6xl mx-auto pt-10 px-2">
       {/* Logo */}
       <Link to="/" className="block mb-4">
         <MealGiverLogo />
       </Link>
 
-      <div className="hero-content flex-col lg:flex-row-reverse rounded-xl p-6 lg:p-10 bg-white shadow-lg">
-        {/* Animation */}
-        <div className="flex-1 flex justify-center items-center mb-6 lg:mb-0">
-          <Lottie animationData={authLottie} loop className="w-full max-w-md" />
+      <div className="flex flex-col-reverse lg:flex-row items-center overflow-hidden">
+        {/* Lottie Animation (left on large, bottom on small) */}
+        <div className="w-full lg:w-1/2 p-4 sm:p-6 flex justify-center items-center">
+          <Lottie animationData={authLottie} loop className="w-full max-w-sm" />
         </div>
 
-        {/* Auth Form Outlet */}
-        <div className="flex-1 w-full max-w-md">
-          <div className="bg-white">
-            <Outlet />
-          </div>
+        {/* Form Outlet (right on large, top on small) */}
+        <div className="w-full lg:w-1/2 p-4 sm:p-6 md:p-8">
+          <Outlet />
         </div>
       </div>
     </div>

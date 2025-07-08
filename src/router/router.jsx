@@ -4,6 +4,8 @@ import RootLayout from "../layouts/RootLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/home/Home/Authentications/Login/Login";
 import Register from "../pages/home/Home/Authentications/Register";
+import DashboardLayout from "../layouts/DashboardLayout";
+import PrivateRoute from "../routes/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -13,6 +15,24 @@ export const router = createBrowserRouter([
       { index: true, Component: Home },
      
     ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
+
+    // children: [
+    //   {
+    //     index: true,
+    //     element: <DashboardHome />,
+    //   },
+    //   {
+    //     path: "edit-profile",
+    //     element: <EditProfile />,
+    //   },
   },
   {
     path: "/",
@@ -28,4 +48,5 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  
 ]);
