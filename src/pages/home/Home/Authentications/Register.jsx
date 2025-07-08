@@ -1,0 +1,182 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Link, useLocation, useNavigate } from "react-router";
+
+import axios from "axios";
+
+import { toast } from "react-hot-toast";
+
+import SocialLogin from "./Login/SocialLogin";
+import useAuth from "../../../../hooks/useAuth";
+
+
+const Register = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const { createUser, updateProfile } = useAuth();
+  const [profilePic, setProfilePic] = useState("");
+  const [uploading, setUploading] = useState(false);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from || "/";
+
+  const onSubmit = async (data) => {
+    if (!profilePic) {
+      toast.error("Please upload a profile picture before registering.");
+      return;
+    }
+
+    try {
+      // Create user in Firebase Auth
+      const result = await createUser(data.email, data.password);
+      const createdUser = result.user;
+console.log(createdUser);
+      // Save to MealGiver DB
+      const userInfo = {
+        email: data.email,
+        name: data.name,
+        role: "user",
+        photo: profilePic,
+        created_at: new Date().toISOString(),
+        last_log_in: new Date().toISOString(),
+      };
+
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/users`, userInfo);
+
+      // Update Firebase display name and photo
+      await updateProfile({
+        displayName: data.name,
+        photoURL: profilePic,
+      });
+
+      toast.success("Registration successful! Welcome to MealGiver.");
+      navigate(from, { replace: true });
+    } catch (err) {
+      console.error("Registration error:", err);
+      toast.error(err.message || "Something went wrong during registration.");
+    }
+  };
+
+  const handleImageUpload = async (e) => {
+    const image = e.target.files[0];
+    if (!image) return;
+
+    const formData = new FormData();
+    formData.append("image", image);
+
+    const uploadUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMG_UPLOAD_KEY}`;
+
+    try {
+      setUploading(true);
+      const res = await axios.post(uploadUrl, formData);
+      setProfilePic(res.data.data.url);
+      toast.success("Image uploaded successfully!");
+    } catch (err) {
+      console.error(err);
+      toast.error("Image upload failed.");
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  return (
+    <div className="card max-w-md mx-auto px-4 py-6 shadow-md bg-white">
+      <h1 className="text-3xl text-center font-bold mb-4 text-primary">Join MealGiver</h1>
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        {/* Name */}
+        <div>
+          <label className="label">Full Name</label>
+          <input
+            type="text"
+            {...register("name", { required: true })}
+            className="input input-bordered w-full"
+            placeholder="Enter your full name"
+          />
+          {errors.name && (
+            <p className="text-red-500 text-sm">Name is required</p>
+          )}
+        </div>
+
+        {/* Profile Picture */}
+        <div>
+          <label className="label">Profile Picture</label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            className="file-input file-input-bordered w-full"
+          />
+          {profilePic && (
+            <img
+              src={profilePic}
+              alt="Profile"
+              className="w-20 h-20 rounded-full mt-2 object-cover border"
+            />
+          )}
+        </div>
+
+        {/* Email */}
+        <div>
+          <label className="label">Email</label>
+          <input
+            type="email"
+            {...register("email", { required: true })}
+            className="input input-bordered w-full"
+            placeholder="Enter your email"
+          />
+          {errors.email && (
+            <p className="text-red-500 text-sm">Email is required</p>
+          )}
+        </div>
+
+        {/* Password */}
+        <div>
+          <label className="label">Password</label>
+          <input
+            type="password"
+            {...register("password", { required: true, minLength: 6 })}
+            className="input input-bordered w-full"
+            placeholder="Choose a secure password"
+          />
+          {errors.password?.type === "required" && (
+            <p className="text-red-500 text-sm">Password is required</p>
+          )}
+          {errors.password?.type === "minLength" && (
+            <p className="text-red-500 text-sm">
+              Password must be at least 6 characters
+            </p>
+          )}
+        </div>
+
+        {/* Submit */}
+        <button
+          type="submit"
+          className="btn btn-primary text-black w-full"
+          disabled={uploading}
+        >
+          {uploading ? "Uploading image..." : "Register"}
+        </button>
+
+        <p className="text-center text-sm mt-4">
+          Already have an account?{" "}
+          <Link to="/login" className="text-blue-600 underline">
+            Login
+          </Link>
+        </p>
+      </form>
+
+      {/* Social login */}
+      <div className="mt-6">
+        <SocialLogin />
+      </div>
+    </div>
+  );
+};
+
+export default Register;
