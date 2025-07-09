@@ -6,10 +6,10 @@ import { toast } from "react-hot-toast";
 
 
 import { useNavigate } from "react-router";
-import useAuth from "../../../../../hooks/useAuth";
-import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
+import useAuth from "../../../../../../hooks/useAuth";
+import useAxiosSecure from "../../../../../../hooks/useAxiosSecure";
 
-const EditProfile = () => {
+const EditRestaurant = () => {
   const { user, updateProfile } = useAuth();
   const axiosSecure = useAxiosSecure();
 
@@ -78,9 +78,9 @@ const EditProfile = () => {
 
   return (
     <div className="card max-w-md mx-auto px-4 py-6 bg-base-100 shadow">
-      <h2 className="text-2xl font-bold mb-4 text-center">Edit Profile</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">Edit Restaurant</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label className="label">Name</label>
+        <label className="label">Restaurant name</label>
         <input
           type="text"
           {...register("name", { required: true })}
@@ -101,7 +101,7 @@ const EditProfile = () => {
           <p className="text-red-500 text-sm">Email is required</p>
         )}
 
-        <label className="label mt-2">Profile Picture</label>
+        <label className="label mt-2">Restaurant logo</label>
         <input
           type="file"
           onChange={handleImageUpload}
@@ -117,7 +117,7 @@ const EditProfile = () => {
 
         <button
           type="submit"
-          className="btn btn-primary text-black mt-4 w-full"
+          className="btn btn-primary text-white mt-4 w-full"
           disabled={uploading}
         >
           {uploading ? "Uploading..." : "Save Changes"}
@@ -127,4 +127,4 @@ const EditProfile = () => {
   );
 };
 
-export default EditProfile;
+export default EditRestaurant;

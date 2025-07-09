@@ -8,10 +8,13 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import PrivateRoute from "../routes/PrivateRoute";
 import AllDonations from "../pages/AllDonations/AllDonations";
 import DashboardHome from "../pages/home/Home/Dashboard/DashboardHome";
-import EditProfile from "../pages/home/Home/Dashboard/profile/EditProfile";
 import AddDonation from "../pages/home/Home/Dashboard/RestaurantDonations/AddDonation";
 import MyDonations from "../pages/home/Home/Dashboard/RestaurantDonations/MyDonations";
 import UpdateDonationForm from "../pages/home/Home/Dashboard/RestaurantDonations/UpdateDonationForm";
+import RestaurantProfile from "../pages/home/Home/Dashboard/RestaurantDonations/profile/RestaurantProfile";
+import RequestedDonations from "../pages/home/Home/Dashboard/RestaurantDonations/RequestedDonations";
+
+
 
 export const router = createBrowserRouter([
   {
@@ -40,7 +43,7 @@ export const router = createBrowserRouter([
   children: [
     // Common for all roles
     { index: true, element: <DashboardHome /> },
-    { path: "edit-profile", element: <EditProfile /> },
+  
 
    
     // User Routes
@@ -58,9 +61,11 @@ export const router = createBrowserRouter([
 
     // Restaurant Routes
     // { path: "restaurant-dashboard", element: <RestaurantDashboard /> },
+      { path: "restaurant-profile", element: <RestaurantProfile/>},
     { path: "add-donation", element: <AddDonation /> },
     { path: "my-donations", element: <MyDonations /> },
     { path: "edit-donation/:id", element: <UpdateDonationForm/>}, 
+    { path: "requested-donations", element: <RequestedDonations/>}, 
 
 
     // Admin Routes

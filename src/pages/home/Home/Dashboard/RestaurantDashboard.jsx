@@ -1,9 +1,8 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-
 import {
-  FaUtensils,
   FaCheckCircle,
+  FaUtensils,
   FaHourglassHalf,
   FaHandHoldingHeart,
 } from "react-icons/fa";
@@ -17,7 +16,6 @@ import {
 } from "recharts";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../hooks/useAuth";
-
 
 const COLORS = {
   available: "#34D399",
@@ -33,38 +31,24 @@ const statusIcons = {
   expired: <FaHandHoldingHeart className="text-4xl text-error" />,
 };
 
-const statusLabels = {
-  available: "Available",
-  requested: "Requested",
-  picked_up: "Picked Up",
-  expired: "Expired",
-};
-
 const RestaurantDashboard = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
-  const {
-    data: donationStatus = [],
-    isLoading,
-    isError,
-    error,
-  } = useQuery({
-    queryKey: ["restaurantDonationStatus", user?.email],
+  const { data: stats = {}, isLoading, isError, error } = useQuery({
+    queryKey: ["restaurantStats", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axiosSecure.get(`/donations/restaurant/status-count?email=${user.email}`);
+      const res = await axiosSecure.get("/restaurant/stats");
       return res.data;
     },
-    staleTime: 5 * 60 * 1000,
-    retry: 1,
   });
 
-  const pieData = donationStatus.map((item) => ({
-    name: statusLabels[item.status] || item.status,
-    value: item.count,
-    status: item.status,
-  }));
+  const pieData = [
+    { name: "Approved", value: stats.approved || 0, status: "approved" },
+    { name: "Available", value: stats.available || 0, status: "available" },
+    { name: "Requested", value: stats.requested || 0, status: "requested" },
+  ];
 
   if (isLoading)
     return (
@@ -84,23 +68,26 @@ const RestaurantDashboard = () => {
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6">Your Donation Overview</h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-        {donationStatus.map(({ count, status }) => (
-          <div
-            key={status}
-            className="card bg-base-100 shadow-md border border-base-200 flex flex-col items-center justify-center p-6"
-          >
-            {statusIcons[status] || <FaUtensils className="text-4xl" />}
-            <h2 className="text-lg font-semibold mt-3 text-center">
-              {statusLabels[status] || status}
-            </h2>
-            <p className="text-4xl font-extrabold text-primary mt-2">{count}</p>
-          </div>
-        ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+        <div className="card bg-base-100 shadow-md p-6 text-center">
+          <FaCheckCircle className="text-4xl text-info mx-auto" />
+          <h2 className="text-lg font-semibold mt-2">Approved</h2>
+          <p className="text-4xl font-bold text-primary">{stats.approved}</p>
+        </div>
+        <div className="card bg-base-100 shadow-md p-6 text-center">
+          <FaUtensils className="text-4xl text-success mx-auto" />
+          <h2 className="text-lg font-semibold mt-2">Available</h2>
+          <p className="text-4xl font-bold text-primary">{stats.available}</p>
+        </div>
+        <div className="card bg-base-100 shadow-md p-6 text-center">
+          <FaHourglassHalf className="text-4xl text-warning mx-auto" />
+          <h2 className="text-lg font-semibold mt-2">Requested</h2>
+          <p className="text-4xl font-bold text-primary">{stats.requested}</p>
+        </div>
       </div>
 
       <div className="card bg-base-100 shadow-md p-4">
-        <h2 className="text-xl font-bold mb-4">Donation Status Breakdown</h2>
+        <h2 className="text-xl font-bold mb-4">Donation Breakdown</h2>
         <ResponsiveContainer width="100%" height={300}>
           <PieChart>
             <Pie
@@ -116,7 +103,7 @@ const RestaurantDashboard = () => {
             >
               {pieData.map((entry) => (
                 <Cell
-                  key={`cell-${entry.status}`}
+                  key={entry.name}
                   fill={COLORS[entry.status] || "#A78BFA"}
                 />
               ))}
