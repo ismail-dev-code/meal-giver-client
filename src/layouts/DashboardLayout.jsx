@@ -11,6 +11,11 @@ import {
   FaListAlt,
   FaMoneyCheckAlt,
   FaClipboardList,
+  FaHeart,
+  FaStar,
+  FaUsersCog,
+  FaUserCircle,
+  FaHandshake,
 } from "react-icons/fa";
 
 import useUserRole from "../hooks/useUserRole";
@@ -74,20 +79,37 @@ const DashboardLayout = () => {
                   <FaEdit /> Edit Profile
                 </NavLink>
               </li>
-              <li>
-                <NavLink
-                  to="/dashboard/my-requests"
-                  className="flex items-center gap-2"
-                >
-                  <FaHandsHelping /> My Requests
-                </NavLink>
-              </li>
+
               <li>
                 <NavLink
                   to="/dashboard/request-charity"
                   className="flex items-center gap-2"
                 >
                   <FaUserCheck /> Request Charity Role
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/favorites"
+                  className="flex items-center gap-2"
+                >
+                  <FaHeart /> Favorites
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/my-reviews"
+                  className="flex items-center gap-2"
+                >
+                  <FaStar /> My Reviews
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/transaction-history"
+                  className="flex items-center gap-2"
+                >
+                  <FaMoneyCheckAlt /> Transaction History
                 </NavLink>
               </li>
             </>
@@ -159,18 +181,10 @@ const DashboardLayout = () => {
             <>
               <li>
                 <NavLink
-                  to="/dashboard/manage-users"
+                  to="/dashboard/admin-profile"
                   className="flex items-center gap-2"
                 >
-                  <FaUsers /> Manage Users
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/dashboard/manage-requests"
-                  className="flex items-center gap-2"
-                >
-                  <FaUserCheck /> Role Requests
+                  <FaUserCircle /> Admin Profile
                 </NavLink>
               </li>
               <li>
@@ -178,23 +192,39 @@ const DashboardLayout = () => {
                   to="/dashboard/manage-donations"
                   className="flex items-center gap-2"
                 >
-                  <FaListAlt /> All Donations
+                  <FaListAlt /> Manage Donations
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/dashboard/payments"
+                  to="/dashboard/manage-users"
                   className="flex items-center gap-2"
                 >
-                  <FaMoneyCheckAlt /> Payments
+                  <FaUsersCog /> Manage Users
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/dashboard/make-admin"
+                  to="/dashboard/manage-role-requests"
                   className="flex items-center gap-2"
                 >
-                  <FaUserShield /> Make Admin
+                  <FaUserCheck /> Manage Role Requests
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/manage-requests"
+                  className="flex items-center gap-2"
+                >
+                  <FaHandshake /> Manage Requests
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/feature-donations"
+                  className="flex items-center gap-2"
+                >
+                  <FaStar /> Feature Donations
                 </NavLink>
               </li>
             </>

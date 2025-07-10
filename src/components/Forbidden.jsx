@@ -11,7 +11,7 @@ const Forbidden = () => {
       </p>
 
       <Link to="/" className="mt-6">
-        <button className="btn btn-error btn-outline px-6 py-2 rounded-md">
+        <button className="btn btn-error hover:bg-primary hover:text-white hover:border-none btn-outline px-6 py-2 rounded-md">
           Return to Home
         </button>
       </Link>

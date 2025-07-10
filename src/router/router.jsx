@@ -13,8 +13,15 @@ import MyDonations from "../pages/home/Home/Dashboard/RestaurantDonations/MyDona
 import UpdateDonationForm from "../pages/home/Home/Dashboard/RestaurantDonations/UpdateDonationForm";
 import RestaurantProfile from "../pages/home/Home/Dashboard/RestaurantDonations/profile/RestaurantProfile";
 import RequestedDonations from "../pages/home/Home/Dashboard/RestaurantDonations/RequestedDonations";
-
-
+import Forbidden from "../components/Forbidden";
+import RequestCharity from "../pages/home/Home/Dashboard/UserDashboard/RequestCharity";
+import NotFound from "../components/NotFound";
+import AdminProfile from "../pages/home/Home/Dashboard/AdminDashboard/AdminProfile";
+import AdminManageDonations from "../pages/home/Home/Dashboard/AdminDashboard/AdminManageDonations";
+import AdminManageUsers from "../pages/home/Home/Dashboard/AdminDashboard/AdminManageUsers";
+import ManageRoleRequests from "../pages/home/Home/Dashboard/AdminDashboard/ManageRoleRequests";
+import ManageRequests from "../pages/home/Home/Dashboard/AdminDashboard/ManageRequests ";
+import FeatureDonations from "../pages/home/Home/Dashboard/AdminDashboard/FeatureDonations ";
 
 export const router = createBrowserRouter([
   {
@@ -24,12 +31,16 @@ export const router = createBrowserRouter([
       { index: true, Component: Home },
       {
         path: "all-donations",
-        element: <PrivateRoute>
-          <AllDonations/>
-        </PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <AllDonations />
+          </PrivateRoute>
+        ),
       },
-     
-     
+      {
+        path: "forbidden",
+        Component: Forbidden,
+      },
     ],
   },
   {
@@ -40,48 +51,46 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
 
-  children: [
-    // Common for all roles
-    { index: true, element: <DashboardHome /> },
-  
+    children: [
+      // Common for all roles
+      { index: true, element: <DashboardHome /> },
 
-   
-    // User Routes
-    // { path: "my-favorites", element: <UserFavorites /> },
-    // { path: "my-requests", element: <UserDonationRequests /> },
-    // { path: "user-dashboard", element: <UserDashboard /> },
+      // User Routes
+      // { path: "my-favorites", element: <UserFavorites /> },
+      { path: "request-charity", element: <RequestCharity /> },
+      // { path: "user-dashboard", element: <UserDashboard /> },
 
-  
-    // Charity Routes
-    // { path: "charity-dashboard", element: <CharityDashboard /> },
-    // { path: "request-history", element: <CharityRequestHistory /> },
-    // { path: "requested-donations", element: <CharityRequestedDonations /> },
-    // { path: "picked-up-donations", element: <CharityPickedUpDonations /> },
-    // { path: "add-review", element: <AddReview /> },
+      // Charity Routes
+      // { path: "charity-dashboard", element: <CharityDashboard /> },
+      // { path: "request-history", element: <CharityRequestHistory /> },
+      // { path: "requested-donations", element: <CharityRequestedDonations /> },
+      // { path: "picked-up-donations", element: <CharityPickedUpDonations /> },
+      // { path: "add-review", element: <AddReview /> },
 
-    // Restaurant Routes
-    // { path: "restaurant-dashboard", element: <RestaurantDashboard /> },
-      { path: "restaurant-profile", element: <RestaurantProfile/>},
-    { path: "add-donation", element: <AddDonation /> },
-    { path: "my-donations", element: <MyDonations /> },
-    { path: "edit-donation/:id", element: <UpdateDonationForm/>}, 
-    { path: "requested-donations", element: <RequestedDonations/>}, 
+      // Restaurant Routes
+      // { path: "restaurant-dashboard", element: <RestaurantDashboard /> },
+      { path: "restaurant-profile", element: <RestaurantProfile /> },
+      { path: "add-donation", element: <AddDonation /> },
+      { path: "my-donations", element: <MyDonations /> },
+      { path: "edit-donation/:id", element: <UpdateDonationForm /> },
+      { path: "requested-donations", element: <RequestedDonations /> },
 
+      // Admin Routes
+      // { path: "admin-dashboard", element: <AdminDashboard /> },
+      {path: 'admin-profile', element: <AdminProfile/>},
+      { path: "manage-users", element: <AdminManageUsers/> },
+      { path: "manage-donations", element:  <AdminManageDonations/>},
+      { path: "manage-role-requests", element: <ManageRoleRequests/>},
+      {path: 'manage-requests', element: <ManageRequests/>},
+      { path: "feature-donations", element: <FeatureDonations/> },
 
-    // Admin Routes
-    // { path: "admin-dashboard", element: <AdminDashboard /> },
-    // { path: "manage-users", element: <ManageUsers /> },
-    // { path: "manage-donations", element: <ManageDonations /> },
-    // { path: "role-requests", element: <ManageRoleRequests /> },
-    // { path: "all-payments", element: <AllPayments /> },
+      // Shared Secure Routes
+      // { path: "donation-details/:id", element: <DonationDetails /> },
+      // { path: "request-donation/:id", element: <RequestDonationModal /> },
+      // { path: "reviews/:id", element: <ReviewsSection /> },
+    ],
+  },
 
-  
-    // Shared Secure Routes
-    // { path: "donation-details/:id", element: <DonationDetails /> },
-    // { path: "request-donation/:id", element: <RequestDonationModal /> },
-    // { path: "reviews/:id", element: <ReviewsSection /> },
-  ],
-},
   {
     path: "/",
     Component: AuthLayout,
@@ -96,5 +105,8 @@ export const router = createBrowserRouter([
       },
     ],
   },
-  
+  {
+    path: "*",
+    Component: NotFound,
+  },
 ]);
