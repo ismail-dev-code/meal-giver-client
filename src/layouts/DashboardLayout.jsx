@@ -16,6 +16,8 @@ import {
   FaUsersCog,
   FaUserCircle,
   FaHandshake,
+  FaTruck,
+  FaReceipt,
 } from "react-icons/fa";
 
 import useUserRole from "../hooks/useUserRole";
@@ -106,7 +108,7 @@ const DashboardLayout = () => {
               </li>
               <li>
                 <NavLink
-                  to="/dashboard/transaction-history"
+                  to="/dashboard/charity-transactions"
                   className="flex items-center gap-2"
                 >
                   <FaMoneyCheckAlt /> Transaction History
@@ -159,10 +161,26 @@ const DashboardLayout = () => {
             <>
               <li>
                 <NavLink
-                  to="/dashboard/available-donations"
+                  to="/dashboard/charity-profile"
                   className="flex items-center gap-2"
                 >
-                  <FaHandsHelping /> Available Donations
+                  <FaUserCircle /> Charity Profile
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/my-requests"
+                  className="flex items-center gap-2"
+                >
+                  <FaClipboardList /> My Requests
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/my-pickups"
+                  className="flex items-center gap-2"
+                >
+                  <FaTruck /> My Pickups
                 </NavLink>
               </li>
               <li>
@@ -171,6 +189,14 @@ const DashboardLayout = () => {
                   className="flex items-center gap-2"
                 >
                   <FaDonate /> Received Donations
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/transaction-history"
+                  className="flex items-center gap-2"
+                >
+                  <FaReceipt /> Transaction History
                 </NavLink>
               </li>
             </>

@@ -4,13 +4,12 @@ import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 
-
 const ManageRequests = () => {
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
 
-  // Fetch all charity requests
-  const { data: requests = [], isLoading } = useQuery({
+  // Fetch all charity requests with donation info
+  const { data: requests = [], isLoading, isError } = useQuery({
     queryKey: ["charityRequests"],
     queryFn: async () => {
       const res = await axiosSecure.get("/charity-requests");
@@ -27,8 +26,9 @@ const ManageRequests = () => {
       queryClient.invalidateQueries(["charityRequests"]);
       Swal.fire("Deleted!", "Request has been deleted.", "success");
     },
-    onError: () => {
-      Swal.fire("Error!", "Failed to delete request.", "error");
+    onError: (err) => {
+      const msg = err.response?.data?.message || "Failed to delete request.";
+      Swal.fire("Error!", msg, "error");
     },
   });
 
@@ -55,6 +55,14 @@ const ManageRequests = () => {
     );
   }
 
+  if (isError) {
+    return (
+      <div className="text-center text-red-500 mt-8">
+        Failed to load charity requests.
+      </div>
+    );
+  }
+
   return (
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-4">Manage Charity Requests</h2>
@@ -71,30 +79,31 @@ const ManageRequests = () => {
             </tr>
           </thead>
           <tbody>
-            {requests.length === 0 && (
+            {requests.length === 0 ? (
               <tr>
                 <td colSpan={6} className="text-center py-6 text-gray-500">
                   No charity requests found.
                 </td>
               </tr>
+            ) : (
+              requests.map((req, idx) => (
+                <tr key={req._id}>
+                  <td>{idx + 1}</td>
+                  <td>{req.donation?.title || "N/A"}</td>
+                  <td>{req.charityName}</td>
+                  <td>{req.charityEmail}</td>
+                  <td className="max-w-xs truncate">{req.description}</td>
+                  <td>
+                    <button
+                      className="btn btn-xs btn-error flex items-center gap-1"
+                      onClick={() => handleDelete(req._id)}
+                    >
+                      <FaTrash /> Delete
+                    </button>
+                  </td>
+                </tr>
+              ))
             )}
-            {requests.map((req, idx) => (
-              <tr key={req._id}>
-                <td>{idx + 1}</td>
-                <td>{req.donation?.title || "N/A"}</td>
-                <td>{req.charityName}</td>
-                <td>{req.charityEmail}</td>
-                <td className="max-w-xs truncate">{req.description}</td>
-                <td>
-                  <button
-                    className="btn btn-xs btn-error flex items-center gap-1"
-                    onClick={() => handleDelete(req._id)}
-                  >
-                    <FaTrash /> Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
           </tbody>
         </table>
       </div>

@@ -14,7 +14,7 @@ import UpdateDonationForm from "../pages/home/Home/Dashboard/RestaurantDonations
 import RestaurantProfile from "../pages/home/Home/Dashboard/RestaurantDonations/profile/RestaurantProfile";
 import RequestedDonations from "../pages/home/Home/Dashboard/RestaurantDonations/RequestedDonations";
 import Forbidden from "../components/Forbidden";
-import RequestCharity from "../pages/home/Home/Dashboard/UserDashboard/RequestCharity";
+
 import NotFound from "../components/NotFound";
 import AdminProfile from "../pages/home/Home/Dashboard/AdminDashboard/AdminProfile";
 import AdminManageDonations from "../pages/home/Home/Dashboard/AdminDashboard/AdminManageDonations";
@@ -22,6 +22,13 @@ import AdminManageUsers from "../pages/home/Home/Dashboard/AdminDashboard/AdminM
 import ManageRoleRequests from "../pages/home/Home/Dashboard/AdminDashboard/ManageRoleRequests";
 import ManageRequests from "../pages/home/Home/Dashboard/AdminDashboard/ManageRequests ";
 import FeatureDonations from "../pages/home/Home/Dashboard/AdminDashboard/FeatureDonations ";
+import CharityProfile from "../pages/home/Home/Dashboard/CharityDashboard/CharityProfile";
+import MyRequests from "../pages/home/Home/Dashboard/CharityDashboard/MyRequests";
+import MyPickups from "../pages/home/Home/Dashboard/CharityDashboard/MyPickups";
+import ReceivedDonations from "../pages/home/Home/Dashboard/CharityDashboard/ReceivedDonations";
+import RequestCharity from "../pages/home/Home/Dashboard/CharityDashboard/RequestCharity";
+import TransactionHistory from "../pages/home/Home/Dashboard/CharityDashboard/TransactionHistory";
+import DonationDetails from "../pages/DonationDetails/DonationDetails";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +41,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AllDonations />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "donation-details/:id",
+        element: (
+          <PrivateRoute>
+            <DonationDetails />
           </PrivateRoute>
         ),
       },
@@ -58,13 +73,13 @@ export const router = createBrowserRouter([
       // User Routes
       // { path: "my-favorites", element: <UserFavorites /> },
       { path: "request-charity", element: <RequestCharity /> },
-      // { path: "user-dashboard", element: <UserDashboard /> },
+      { path: "charity-transactions", element: <TransactionHistory /> },
 
       // Charity Routes
-      // { path: "charity-dashboard", element: <CharityDashboard /> },
-      // { path: "request-history", element: <CharityRequestHistory /> },
-      // { path: "requested-donations", element: <CharityRequestedDonations /> },
-      // { path: "picked-up-donations", element: <CharityPickedUpDonations /> },
+      { path: "charity-profile", element: <CharityProfile /> },
+      { path: "my-requests", element: <MyRequests /> },
+      { path: "my-pickups", element: <MyPickups /> },
+      { path: "received-donations", element: <ReceivedDonations /> },
       // { path: "add-review", element: <AddReview /> },
 
       // Restaurant Routes
@@ -77,15 +92,15 @@ export const router = createBrowserRouter([
 
       // Admin Routes
       // { path: "admin-dashboard", element: <AdminDashboard /> },
-      {path: 'admin-profile', element: <AdminProfile/>},
-      { path: "manage-users", element: <AdminManageUsers/> },
-      { path: "manage-donations", element:  <AdminManageDonations/>},
-      { path: "manage-role-requests", element: <ManageRoleRequests/>},
-      {path: 'manage-requests', element: <ManageRequests/>},
-      { path: "feature-donations", element: <FeatureDonations/> },
+      { path: "admin-profile", element: <AdminProfile /> },
+      { path: "manage-users", element: <AdminManageUsers /> },
+      { path: "manage-donations", element: <AdminManageDonations /> },
+      { path: "manage-role-requests", element: <ManageRoleRequests /> },
+      { path: "manage-requests", element: <ManageRequests /> },
+      { path: "feature-donations", element: <FeatureDonations /> },
 
       // Shared Secure Routes
-      // { path: "donation-details/:id", element: <DonationDetails /> },
+
       // { path: "request-donation/:id", element: <RequestDonationModal /> },
       // { path: "reviews/:id", element: <ReviewsSection /> },
     ],

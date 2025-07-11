@@ -4,7 +4,6 @@ import { FaUserShield, FaUtensils, FaHandHoldingHeart, FaTrash } from "react-ico
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 
-
 const AdminManageUsers = () => {
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
@@ -18,10 +17,10 @@ const AdminManageUsers = () => {
     },
   });
 
-  // Update role mutation
+  // Update role mutation using email
   const updateRoleMutation = useMutation({
-    mutationFn: async ({ id, role }) => {
-      return await axiosSecure.patch(`/users/${id}/role`, { role });
+    mutationFn: async ({ email, role }) => {
+      return await axiosSecure.patch(`/users/${email}/role`, { role });
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["allUsers"]);
@@ -46,8 +45,8 @@ const AdminManageUsers = () => {
     },
   });
 
-  // Handle role assignment
-  const handleRoleChange = (id, role) => {
+  // Handle role assignment by email
+  const handleRoleChange = (email, role) => {
     Swal.fire({
       title: "Are you sure?",
       text: `Assign role "${role}" to this user?`,
@@ -56,7 +55,7 @@ const AdminManageUsers = () => {
       confirmButtonText: "Yes, assign",
     }).then((result) => {
       if (result.isConfirmed) {
-        updateRoleMutation.mutate({ id, role });
+        updateRoleMutation.mutate({ email, role });
       }
     });
   };
@@ -110,21 +109,21 @@ const AdminManageUsers = () => {
                   <button
                     className="btn btn-xs btn-success flex items-center gap-1"
                     disabled={user.role === "admin" || updateRoleMutation.isLoading}
-                    onClick={() => handleRoleChange(user._id, "admin")}
+                    onClick={() => handleRoleChange(user.email, "admin")}
                   >
                     <FaUserShield /> Admin
                   </button>
                   <button
                     className="btn btn-xs btn-warning flex items-center gap-1"
                     disabled={user.role === "restaurant" || updateRoleMutation.isLoading}
-                    onClick={() => handleRoleChange(user._id, "restaurant")}
+                    onClick={() => handleRoleChange(user.email, "restaurant")}
                   >
                     <FaUtensils /> Restaurant
                   </button>
                   <button
                     className="btn btn-xs btn-info flex items-center gap-1"
                     disabled={user.role === "charity" || updateRoleMutation.isLoading}
-                    onClick={() => handleRoleChange(user._id, "charity")}
+                    onClick={() => handleRoleChange(user.email, "charity")}
                   >
                     <FaHandHoldingHeart /> Charity
                   </button>
