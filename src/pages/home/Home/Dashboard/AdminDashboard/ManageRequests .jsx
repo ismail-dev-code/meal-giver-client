@@ -74,7 +74,6 @@ const ManageRequests = () => {
               <th>Donation Title</th>
               <th>Charity Name</th>
               <th>Charity Email</th>
-              <th>Description</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -92,7 +91,6 @@ const ManageRequests = () => {
                   <td>{req.donation?.title || "N/A"}</td>
                   <td>{req.charityName}</td>
                   <td>{req.charityEmail}</td>
-                  <td className="max-w-xs truncate">{req.description}</td>
                   <td>
                     <button
                       className="btn btn-xs btn-error flex items-center gap-1"

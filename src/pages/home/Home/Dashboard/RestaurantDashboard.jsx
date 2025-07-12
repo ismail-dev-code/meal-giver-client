@@ -13,6 +13,11 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
 } from "recharts";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../hooks/useAuth";
@@ -35,11 +40,24 @@ const RestaurantDashboard = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
-  const { data: stats = {}, isLoading, isError, error } = useQuery({
+  // Main stats
+  const { data: stats = {}, isLoading: loadingStats } = useQuery({
     queryKey: ["restaurantStats", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
       const res = await axiosSecure.get("/restaurant/stats");
+      return res.data;
+    },
+  });
+
+  // Type-based stats
+  const { data: typeStats = [], isLoading: loadingTypes } = useQuery({
+    queryKey: ["donationTypes", user?.email],
+    enabled: !!user?.email,
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        `/restaurant/donation-types-stats?email=${user.email}`
+      );
       return res.data;
     },
   });
@@ -50,24 +68,19 @@ const RestaurantDashboard = () => {
     { name: "Requested", value: stats.requested || 0, status: "requested" },
   ];
 
-  if (isLoading)
+  if (loadingStats || loadingTypes) {
     return (
       <div className="flex justify-center items-center min-h-[70vh]">
         <span className="loading loading-spinner loading-lg text-primary"></span>
       </div>
     );
-
-  if (isError)
-    return (
-      <div className="text-center text-red-600 mt-10">
-        Error loading data: {error.message}
-      </div>
-    );
+  }
 
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6">Your Donation Overview</h1>
 
+      {/* Status Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
         <div className="card bg-base-100 shadow-md p-6 text-center">
           <FaCheckCircle className="text-4xl text-info mx-auto" />
@@ -86,8 +99,9 @@ const RestaurantDashboard = () => {
         </div>
       </div>
 
-      <div className="card bg-base-100 shadow-md p-4">
-        <h2 className="text-xl font-bold mb-4">Donation Breakdown</h2>
+      {/* Pie Chart: Status Breakdown */}
+      <div className="card bg-base-100 shadow-md p-4 mb-8">
+        <h2 className="text-xl font-bold mb-4">Donation Breakdown by Status</h2>
         <ResponsiveContainer width="100%" height={300}>
           <PieChart>
             <Pie
@@ -111,6 +125,23 @@ const RestaurantDashboard = () => {
             <Tooltip />
             <Legend verticalAlign="bottom" height={36} />
           </PieChart>
+        </ResponsiveContainer>
+      </div>
+
+      {/* Bar Chart: Types vs Quantities */}
+      <div className="card bg-base-100 shadow-md p-4">
+        <h2 className="text-xl font-bold mb-4">
+          Donation Statistics by Type & Quantity
+        </h2>
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={typeStats}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="type" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="quantity" fill="#34D399" />
+          </BarChart>
         </ResponsiveContainer>
       </div>
     </div>

@@ -18,10 +18,10 @@ import {
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const COLORS = {
-  pending: "#FBBF24", // yellow
-  accepted: "#34D399", // green
-  picked_up: "#60A5FA", // blue
-  rejected: "#F87171", // red
+  pending: "#FBBF24", 
+  accepted: "#34D399", 
+  picked_up: "#60A5FA", 
+  rejected: "#F87171", 
 };
 
 const statusIcons = {

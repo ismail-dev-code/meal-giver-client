@@ -33,7 +33,7 @@ const AddDonation = () => {
     const donation = {
       title: data.title,
       type: data.type,
-      quantity: data.quantity,
+      quantity: Number(data.quantity), 
       pickupWindow: data.pickupWindow,
       restaurant: {
         name: user.displayName,

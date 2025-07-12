@@ -4,27 +4,22 @@ import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 
-
 const ManageRoleRequests = () => {
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
 
-  // Fetch all charity role requests
   const { data: requests = [], isLoading } = useQuery({
     queryKey: ["charityRoleRequests"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/role-requests/charity");
+      const res = await axiosSecure.get("/charity-role-request");
       return res.data;
     },
   });
 
-  // Mutation to update role request status and assign role if approved
   const mutation = useMutation({
     mutationFn: async ({ id, email, status }) => {
-      // Update the role request status first
       await axiosSecure.patch(`/role-requests/${id}`, { status });
 
-      // If approved, update user role to 'charity'
       if (status === "approved") {
         await axiosSecure.patch(`/users/${email}/role`, { role: "charity" });
       }
@@ -35,7 +30,7 @@ const ManageRoleRequests = () => {
       queryClient.invalidateQueries(["charityRoleRequests"]);
       Swal.fire(
         "Success!",
-        `Role request ${status === "approved" ? "approved" : "rejected"} successfully`,
+        `Request ${status === "approved" ? "approved" : "rejected"} successfully.`,
         "success"
       );
     },
@@ -86,49 +81,53 @@ const ManageRoleRequests = () => {
             </tr>
           </thead>
           <tbody>
-            {requests.map((req, idx) => (
-              <tr key={req._id}>
-                <td>{idx + 1}</td>
-                <td>{req.email}</td> {/* If you have name, replace this */}
-                <td>{req.email}</td>
-                <td>{req.organizationName}</td>
-                <td className="max-w-xs truncate">{req.mission}</td>
-                <td>{req.transactionId}</td>
-                <td>
-                  <span
-                    className={`badge ${
-                      req.status === "approved"
-                        ? "badge-success"
-                        : req.status === "rejected"
-                        ? "badge-error"
-                        : "badge-warning"
-                    } capitalize`}
-                  >
-                    {req.status}
-                  </span>
-                </td>
-                <td className="flex gap-2">
-                  {req.status === "pending" ? (
-                    <>
-                      <button
-                        className="btn btn-xs btn-success flex items-center gap-1"
-                        onClick={() => handleAction(req._id, req.email, "approved")}
-                      >
-                        <FaCheckCircle /> Approve
-                      </button>
-                      <button
-                        className="btn btn-xs btn-error flex items-center gap-1"
-                        onClick={() => handleAction(req._id, req.email, "rejected")}
-                      >
-                        <FaTimesCircle /> Reject
-                      </button>
-                    </>
-                  ) : (
-                    <span className="text-gray-400 italic">No action</span>
-                  )}
-                </td>
-              </tr>
-            ))}
+            {requests.map((req, idx) => {
+              const status = req.status?.toLowerCase() || "pending";
+
+              return (
+                <tr key={req._id}>
+                  <td>{idx + 1}</td>
+                  <td>{req.name || "N/A"}</td>
+                  <td>{req.email}</td>
+                  <td>{req.organization || "N/A"}</td>
+                  <td className="max-w-xs truncate">{req.mission}</td>
+                  <td>{req.transactionId}</td>
+                  <td>
+                    <span
+                      className={`badge ${
+                        status === "approved"
+                          ? "badge-success"
+                          : status === "rejected"
+                          ? "badge-error"
+                          : "badge-warning"
+                      } capitalize`}
+                    >
+                      {status}
+                    </span>
+                  </td>
+                  <td className="flex gap-2">
+                    {status === "pending" ? (
+                      <>
+                        <button
+                          className="btn btn-xs btn-success flex items-center gap-1"
+                          onClick={() => handleAction(req._id, req.email, "approved")}
+                        >
+                          <FaCheckCircle /> Approve
+                        </button>
+                        <button
+                          className="btn btn-xs btn-error flex items-center gap-1"
+                          onClick={() => handleAction(req._id, req.email, "rejected")}
+                        >
+                          <FaTimesCircle /> Reject
+                        </button>
+                      </>
+                    ) : (
+                      <span className="text-gray-400 italic">No action</span>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
             {requests.length === 0 && (
               <tr>
                 <td colSpan={8} className="text-center py-6 text-gray-500">
