@@ -1,26 +1,28 @@
 import { useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
-
-
 import { useState } from "react";
+import { toast } from "react-hot-toast";
+
 import RequestDonationModal from "../../components/Modal/RequestDonationModal";
 import ReviewModal from "../../components/Modal/ReviewModal";
-import { toast } from "react-hot-toast";
 
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useUserRole from "../../hooks/useUserRole";
 
 const DonationDetails = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
-  const { user, role } = useAuth();
+  const { user } = useAuth();
+
+  const { role, isLoading: roleLoading } = useUserRole();
 
   const [showRequestModal, setShowRequestModal] = useState(false);
   const [showReviewModal, setShowReviewModal] = useState(false);
 
   const {
     data: donation,
-    isLoading,
+    isLoading: donationLoading,
     refetch,
   } = useQuery({
     queryKey: ["donationDetails", id],
@@ -28,17 +30,16 @@ const DonationDetails = () => {
       const res = await axiosSecure.get(`/donations/${id}`);
       return res.data;
     },
+    enabled: !!id,
   });
 
-  const {
-    data: reviews = [],
-    refetch: refetchReviews,
-  } = useQuery({
+  const { data: reviews = [], refetch: refetchReviews } = useQuery({
     queryKey: ["donationReviews", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/reviews?donationId=${id}`);
       return res.data;
     },
+    enabled: !!id,
   });
 
   const handleSaveToFavorites = async () => {
@@ -56,7 +57,7 @@ const DonationDetails = () => {
 
   const handleConfirmPickup = async () => {
     try {
-      await axiosSecure.patch(`/charity/pickup-confirm/${donation.requestId}`);
+      await axiosSecure.patch(`/charity/pickup-confirm/${donation?.requestId}`);
       toast.success("Pickup confirmed!");
       refetch();
     } catch (err) {
@@ -64,7 +65,9 @@ const DonationDetails = () => {
     }
   };
 
-  if (isLoading) return <div className="text-center mt-20">Loading...</div>;
+  if (donationLoading || roleLoading) {
+    return <div className="text-center mt-20">Loading...</div>;
+  }
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
@@ -95,6 +98,7 @@ const DonationDetails = () => {
           <strong>Status:</strong> {donation?.status}
         </p>
 
+        {/* Action Buttons */}
         <div className="mt-4 flex gap-3 flex-wrap">
           {(role === "user" || role === "charity") && (
             <button
@@ -105,7 +109,7 @@ const DonationDetails = () => {
             </button>
           )}
 
-          {role === "charity" && donation?.status === "available" && (
+          {role === "charity" && donation?.status === "verified" && (
             <button
               onClick={() => setShowRequestModal(true)}
               className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
@@ -134,7 +138,7 @@ const DonationDetails = () => {
         </div>
       </div>
 
-      {/* Reviews */}
+      {/* Reviews Section */}
       <div className="mt-10">
         <h3 className="text-xl font-semibold mb-4">Reviews</h3>
         {reviews.length ? (

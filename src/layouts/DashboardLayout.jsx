@@ -193,7 +193,7 @@ const DashboardLayout = () => {
               </li>
               <li>
                 <NavLink
-                  to="/dashboard/transaction-history"
+                  to="/dashboard/charity-transactions"
                   className="flex items-center gap-2"
                 >
                   <FaReceipt /> Transaction History

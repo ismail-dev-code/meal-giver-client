@@ -29,6 +29,7 @@ import ReceivedDonations from "../pages/home/Home/Dashboard/CharityDashboard/Rec
 import RequestCharity from "../pages/home/Home/Dashboard/CharityDashboard/RequestCharity";
 import TransactionHistory from "../pages/home/Home/Dashboard/CharityDashboard/TransactionHistory";
 import DonationDetails from "../pages/DonationDetails/DonationDetails";
+import Favorites from "../pages/home/Home/Dashboard/UserDashboard/Favorites";
 
 export const router = createBrowserRouter([
   {
@@ -74,6 +75,7 @@ export const router = createBrowserRouter([
       // { path: "my-favorites", element: <UserFavorites /> },
       { path: "request-charity", element: <RequestCharity /> },
       { path: "charity-transactions", element: <TransactionHistory /> },
+      { path: "favorites", element: <Favorites/>},
 
       // Charity Routes
       { path: "charity-profile", element: <CharityProfile /> },

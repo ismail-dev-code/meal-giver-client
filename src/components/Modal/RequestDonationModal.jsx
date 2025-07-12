@@ -15,30 +15,38 @@ const RequestDonationModal = ({ donation, onClose, refetch }) => {
     formState: { errors, isSubmitting },
   } = useForm();
 
-  const onSubmit = async (data) => {
-    try {
-      const payload = {
-        donationId: donation._id,
-        restaurantId: donation.restaurant._id,
-        restaurantName: donation.restaurant.name,
-        restaurantEmail: donation.restaurant.email,
-        charityEmail: user.email,
-        charityName: user.displayName,
-        donationTitle: donation.title,
-        requestDescription: data.requestDescription,
-        pickupTime: data.pickupTime,
-      };
+ const onSubmit = async (data) => {
+  try {
+    const payload = {
+      donationId: donation._id,
+      donationTitle: donation.title,
+      restaurantId: donation.restaurant._id,
+      restaurantName: donation.restaurant.name,
+      restaurantEmail: donation.restaurant.email,
+      charityEmail: user.email,
+      charityName: user.displayName,
+      requestDescription: data.requestDescription,
+      pickupTime: data.pickupTime,
+    };
 
-      await axiosSecure.post("/donation-requests", payload);
+
+
+    const res = await axiosSecure.post(`/donations/${donation._id}/requests`, payload);
+
+    if (res.data.insertedId) {
       toast.success("Donation request submitted");
       refetch();
       reset();
       onClose();
-    } catch (err) {
-      console.error(err);
-      toast.error(err?.response?.data?.message || "Failed to request donation");
+    } else {
+      toast.error("Failed to submit request");
     }
-  };
+  } catch (err) {
+    console.error(" Error response:", err.response?.data);
+    toast.error(err?.response?.data?.message || "Failed to request donation");
+  }
+};
+
 
   return (
     <Dialog open={true} onClose={onClose} className="relative z-50">
@@ -97,7 +105,7 @@ const RequestDonationModal = ({ donation, onClose, refetch }) => {
             <div>
               <label className="block text-sm font-medium">Pickup Time</label>
               <input
-                type="time"
+                type="datetime-local"
                 {...register("pickupTime", { required: true })}
                 className="input input-bordered w-full"
               />
