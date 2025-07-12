@@ -1,88 +1,97 @@
+import { useState } from "react";
 import { Dialog } from "@headlessui/react";
-import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
-const ReviewModal = ({ donationId, user, onClose, refetchReviews }) => {
+const ReviewModal = ({ donationId, donation, user, onClose, refetchReviews }) => {
   const axiosSecure = useAxiosSecure();
+  const [submitting, setSubmitting] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitting(true);
 
-  const onSubmit = async (data) => {
+    const form = e.target;
+    const comment = form.comment.value;
+    const rating = parseInt(form.rating.value);
+
+    const reviewData = {
+      donationId,
+      reviewer: user?.displayName,
+      userEmail: user?.email,
+      donationTitle: donation?.title,
+      restaurantName: donation?.restaurant?.name,
+      comment,
+      rating,
+      createdAt: new Date(),
+    };
+
     try {
-      const review = {
-        donationId,
-        restaurantEmail: data.restaurantEmail, // If you want to include this
-        charityEmail: user.email,
-        reviewer: user.displayName || user.email,
-        comment: data.comment,
-        rating: parseInt(data.rating),
-      };
-
-      await axiosSecure.post("/charity/submit-review", review);
-      toast.success("Review submitted successfully");
-      reset();
-      refetchReviews();
+      await axiosSecure.post("/reviews", reviewData);
+      toast.success("Review submitted!");
+      refetchReviews(); // Refresh reviews in DonationDetails
       onClose();
     } catch (err) {
-      console.error(err);
       toast.error("Failed to submit review");
+      console.error(err);
+    } finally {
+      setSubmitting(false);
     }
   };
 
   return (
     <Dialog open={true} onClose={onClose} className="relative z-50">
-      <div className="fixed inset-0 bg-black/40" aria-hidden="true" />
+      <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
+
       <div className="fixed inset-0 flex items-center justify-center p-4">
-        <Dialog.Panel className="bg-white rounded-lg p-6 max-w-md w-full space-y-4">
-          <Dialog.Title className="text-lg font-semibold">
-            Submit a Review
-          </Dialog.Title>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <Dialog.Panel className="w-full max-w-md rounded bg-white p-6 shadow-lg">
+          <Dialog.Title className="text-xl font-bold mb-4">Submit a Review</Dialog.Title>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium">Your Name</label>
-              <input
-                type="text"
-                value={user?.displayName || user?.email}
-                disabled
-                className="input input-bordered w-full"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium">Comment</label>
+              <label className="block text-sm font-medium mb-1">Your Comment</label>
               <textarea
-                {...register("comment", { required: true })}
-                className="textarea textarea-bordered w-full"
-                rows={3}
-              />
-              {errors.comment && <p className="text-red-500 text-sm">Comment is required</p>}
+                name="comment"
+                required
+                className="w-full textarea textarea-bordered"
+                placeholder="Write your experience..."
+              ></textarea>
             </div>
+
             <div>
-              <label className="block text-sm font-medium">Rating</label>
+              <label className="block text-sm font-medium mb-1">Rating (1 to 5)</label>
               <select
-                {...register("rating", { required: true })}
+                name="rating"
+                required
                 className="select select-bordered w-full"
+                defaultValue=""
               >
-                <option value="">Select</option>
+                <option value="" disabled>
+                  Select rating
+                </option>
                 {[1, 2, 3, 4, 5].map((num) => (
                   <option key={num} value={num}>
-                    {num} Star{num > 1 ? "s" : ""}
+                    {num}
                   </option>
                 ))}
               </select>
-              {errors.rating && <p className="text-red-500 text-sm">Rating is required</p>}
             </div>
-            <div className="flex justify-end gap-3">
-              <button type="button" onClick={onClose} className="btn btn-outline">
+
+            <div className="flex justify-end gap-2">
+              <button
+                type="button"
+                onClick={onClose}
+                className="btn btn-ghost"
+                disabled={submitting}
+              >
                 Cancel
               </button>
-              <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
-                {isSubmitting ? "Submitting..." : "Submit Review"}
+              <button
+                type="submit"
+                className="btn btn-primary"
+                disabled={submitting}
+              >
+                {submitting ? "Submitting..." : "Submit Review"}
               </button>
             </div>
           </form>

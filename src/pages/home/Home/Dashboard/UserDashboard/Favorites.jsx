@@ -106,7 +106,7 @@ const Favorites = () => {
 
                 <div className="flex gap-2 mt-3">
                   <Link
-                    to={`/donations/${fav.donation?._id}`}
+                    to={`/donation-details/${fav.donation?._id}`}
                     className="btn btn-sm btn-outline"
                   >
                     <FaExternalLinkAlt /> Details

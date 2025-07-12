@@ -30,6 +30,8 @@ import RequestCharity from "../pages/home/Home/Dashboard/CharityDashboard/Reques
 import TransactionHistory from "../pages/home/Home/Dashboard/CharityDashboard/TransactionHistory";
 import DonationDetails from "../pages/DonationDetails/DonationDetails";
 import Favorites from "../pages/home/Home/Dashboard/UserDashboard/Favorites";
+import MyReviews from "../pages/home/Home/Dashboard/UserDashboard/MyReviews";
+import MyProfile from "../pages/home/Home/Dashboard/UserDashboard/MyProfile";
 
 export const router = createBrowserRouter([
   {
@@ -72,10 +74,11 @@ export const router = createBrowserRouter([
       { index: true, element: <DashboardHome /> },
 
       // User Routes
-      // { path: "my-favorites", element: <UserFavorites /> },
+      { path: "my-profile", element: <MyProfile/>},
       { path: "request-charity", element: <RequestCharity /> },
       { path: "charity-transactions", element: <TransactionHistory /> },
       { path: "favorites", element: <Favorites/>},
+      { path: "my-reviews", element: <MyReviews/>},
 
       // Charity Routes
       { path: "charity-profile", element: <CharityProfile /> },

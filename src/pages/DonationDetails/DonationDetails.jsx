@@ -168,14 +168,16 @@ const DonationDetails = () => {
         />
       )}
 
-      {showReviewModal && (
-        <ReviewModal
-          donationId={id}
-          user={user}
-          onClose={() => setShowReviewModal(false)}
-          refetchReviews={refetchReviews}
-        />
-      )}
+    {showReviewModal && (
+  <ReviewModal
+    donationId={id}
+    donation={donation}
+    user={user}
+    onClose={() => setShowReviewModal(false)}
+    refetchReviews={refetchReviews}
+  />
+)}
+
     </div>
   );
 };
