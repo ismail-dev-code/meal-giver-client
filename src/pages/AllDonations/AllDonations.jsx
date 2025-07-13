@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Loading from "../../components/MealGiver/Loading";
+import "aos/dist/aos.css";
 
 const AllDonations = () => {
   const axiosSecure = useAxiosSecure();
-
-  const [searchTerm, setSearchTerm] = useState("");
-  const [sortOption, setSortOption] = useState("");
-
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const [sortOption, setSortOption] = React.useState("");
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   const { data: donations = [], isLoading } = useQuery({
     queryKey: ["allDonations"],
     queryFn: async () => {
@@ -34,16 +36,14 @@ const AllDonations = () => {
       return 0;
     });
 
-  if (isLoading)
-    return <Loading/>;
+  if (isLoading) return <Loading />;
 
   return (
-    <div className="max-w-7xl mx-auto p-4">
+    <div className="max-w-6xl mx-auto p-4">
       <h1 className="text-3xl font-bold mb-6">All Donations</h1>
 
       {/* Search & Sort */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-        {/* Search Input */}
         <input
           type="text"
           placeholder="Search by location..."
@@ -51,8 +51,6 @@ const AllDonations = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-
-        {/* Sort Dropdown */}
         <select
           value={sortOption}
           onChange={(e) => setSortOption(e.target.value)}
@@ -68,10 +66,13 @@ const AllDonations = () => {
 
       {/* Donation Cards */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {filteredDonations.map((d) => (
+        {filteredDonations.map((d, index) => (
           <div
             key={d._id}
-            className="bg-white shadow-md rounded-lg overflow-hidden relative"
+            data-aos="fade-up"
+            data-aos-delay={index * 100}
+            data-aos-duration="800"
+            className="bg-white shadow-md rounded-lg overflow-hidden relative flex flex-col min-h-[450px]"
           >
             {d.featured && (
               <span className="absolute top-2 left-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded-full z-10">
@@ -79,16 +80,20 @@ const AllDonations = () => {
               </span>
             )}
 
-            <img
-              src={d.image}
-              alt={d.title}
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-4">
+            <div className="overflow-hidden">
+              <img
+                src={d.image}
+                alt={d.title}
+                className="w-full h-48 object-cover transition-transform duration-500 ease-in-out hover:scale-110"
+              />
+            </div>
+
+            <div className="p-4 flex flex-col flex-grow">
               <h2 className="text-xl font-semibold mb-1">{d.title}</h2>
               <p className="text-sm text-gray-600">
-                {d.restaurant.name} — {d.restaurant.location}
+                {d.restaurant.name} 
               </p>
+              <p className="text-sm">{d.restaurant.location}</p>
               {d.charity && (
                 <p className="text-sm text-gray-600 mt-1">
                   Assigned to: {d.charity.name}
@@ -113,16 +118,22 @@ const AllDonations = () => {
               <p className="text-sm text-gray-600">Quantity: {d.quantity}</p>
               <p className="text-sm mt-1">
                 <strong>Approved:</strong>{" "}
-                <span className={d.approved ? "text-green-500" : "text-red-500"}>
+                <span
+                  className={d.approved ? "text-green-500" : "text-red-500"}
+                >
                   {d.approved ? "Yes" : "No"}
                 </span>
               </p>
-              <Link
-                to={`/donation-details/${d._id}`}
-                className="mt-3 inline-block bg-accent hover:bg-primary text-white px-4 py-2 rounded-full transition"
-              >
-                View Details
-              </Link>
+
+              {/* Push button to bottom */}
+              <div className="mt-auto">
+                <Link
+                  to={`/donation-details/${d._id}`}
+                  className="inline-block mt-3 bg-accent hover:bg-primary text-white px-4 py-2 rounded-full transition-transform duration-300 transform hover:scale-105"
+                >
+                  View Details
+                </Link>
+              </div>
             </div>
           </div>
         ))}

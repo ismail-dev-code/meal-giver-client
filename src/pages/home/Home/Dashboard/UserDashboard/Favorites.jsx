@@ -70,9 +70,9 @@ const Favorites = () => {
       {favorites.length === 0 ? (
         <p className="text-center text-gray-500">No favorite donations yet.</p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {favorites.map((fav) => (
-            <div key={fav._id} className="card bg-base-100 shadow border">
+            <div key={fav._id} className="card bg-base-100 shadow">
               <img
                 src={fav.donation?.image || "/placeholder.jpg"}
                 alt={fav.donation?.title}

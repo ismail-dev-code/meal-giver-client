@@ -1,7 +1,8 @@
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
 import { toast } from "react-hot-toast";
+import "aos/dist/aos.css";
 
 import RequestDonationModal from "../../components/Modal/RequestDonationModal";
 import ReviewModal from "../../components/Modal/ReviewModal";
@@ -15,11 +16,14 @@ const DonationDetails = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-
   const { role, isLoading: roleLoading } = useUserRole();
 
   const [showRequestModal, setShowRequestModal] = useState(false);
   const [showReviewModal, setShowReviewModal] = useState(false);
+
+   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   const {
     data: donation,
@@ -68,95 +72,124 @@ const DonationDetails = () => {
   };
 
   if (donationLoading || roleLoading) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <img
-          src={donation?.image}
-          alt={donation?.title}
-          className="rounded-md mb-4 max-h-64 object-cover w-full"
-        />
-        <h2 className="text-2xl font-semibold mb-2">{donation?.title}</h2>
-        <p className="text-gray-700 mb-2">
-          <strong>Type:</strong> {donation?.type}
-        </p>
-        <p className="text-gray-700 mb-2">
-          <strong>Quantity:</strong> {donation?.quantity}
-        </p>
-       
-        <p className="text-gray-700 mb-2">
-          <strong>Restaurant:</strong> {donation?.restaurant?.name} 
-        </p>
-        <p className="text-gray-700 mb-2">
-          <strong>Location:</strong>   {donation?.restaurant?.location} </p>
-        <p className="text-gray-700 mb-2">
-          <strong>Pickup Window:</strong> {donation?.pickupWindow}
-        </p>
-        <p className="text-gray-700 mb-2">
-          <strong>Status:</strong> {donation?.status}
-        </p>
+      {/* Main container with image left, content right */}
+      <div
+        className="p-6 rounded-lg flex flex-col md:flex-row gap-8"
+      >
+        {/* Image container */}
+        <div
+          data-aos="fade-right"
+          className="flex-shrink-0 md:w-96 w-full rounded-md overflow-hidden shadow-sm"
+        >
+          <img
+            src={donation?.image}
+            alt={donation?.title}
+            className="w-full h-64 object-cover"
+          />
+        </div>
 
-        {/* Action Buttons */}
-        <div className="mt-4 flex gap-3 flex-wrap">
-          {(role === "user" || role === "charity") && (
-            <button
-              onClick={handleSaveToFavorites}
-              className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded"
-            >
-              Save to Favorites
-            </button>
-          )}
+        {/* Content container */}
+        <div data-aos="fade-left" className="flex flex-col flex-grow">
+          <h2 className="text-3xl font-semibold mb-4">{donation?.title}</h2>
 
-          {role === "charity" && donation?.status === "verified" && (
-            <button
-              onClick={() => setShowRequestModal(true)}
-              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-            >
-              Request Donation
-            </button>
-          )}
+          <div className="space-y-2 text-gray-700 text-base">
+            <p>
+              <strong>Type:</strong> {donation?.type}
+            </p>
+            <p>
+              <strong>Quantity:</strong> {donation?.quantity}
+            </p>
+            <p>
+              <strong>Restaurant:</strong> {donation?.restaurant?.name}
+            </p>
+            <p>
+              <strong>Location:</strong> {donation?.restaurant?.location}
+            </p>
+            <p>
+              <strong>Pickup Window:</strong> {donation?.pickupWindow}
+            </p>
+            <p>
+              <strong>Status:</strong>{" "}
+              <span
+                className={`capitalize font-medium ${
+                  donation?.status === "available"
+                    ? "text-green-600"
+                    : donation?.status === "requested"
+                    ? "text-yellow-600"
+                    : donation?.status === "picked_up"
+                    ? "text-blue-600"
+                    : "text-gray-600"
+                }`}
+              >
+                {donation?.status}
+              </span>
+            </p>
+          </div>
 
-          {role === "charity" && donation?.status === "accepted" && (
-            <button
-              onClick={handleConfirmPickup}
-              className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
-            >
-              Confirm Pickup
-            </button>
-          )}
+          {/* Action Buttons */}
+          <div className="mt-6 flex flex-wrap gap-4">
+            {(role === "user" || role === "charity") && (
+              <button
+                onClick={handleSaveToFavorites}
+                className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded transition"
+              >
+                Save to Favorites
+              </button>
+            )}
 
-          {(role === "charity" || role === "user") && (
-            <button
-              onClick={() => setShowReviewModal(true)}
-              className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded"
-            >
-              Add Review
-            </button>
-          )}
+            {role === "charity" && donation?.status === "verified" && (
+              <button
+                onClick={() => setShowRequestModal(true)}
+                className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded transition"
+              >
+                Request Donation
+              </button>
+            )}
+
+            {role === "charity" && donation?.status === "accepted" && (
+              <button
+                onClick={handleConfirmPickup}
+                className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded transition"
+              >
+                Confirm Pickup
+              </button>
+            )}
+
+            {(role === "charity" || role === "user") && (
+              <button
+                onClick={() => setShowReviewModal(true)}
+                className="bg-purple-500 hover:bg-purple-600 text-white px-6 py-2 rounded transition"
+              >
+                Add Review
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
       {/* Reviews Section */}
-      <div className="mt-10">
-        <h3 className="text-xl font-semibold mb-4">Reviews</h3>
+      <div data-aos="fade-up" className="mt-12">
+        <h3 className="text-2xl font-semibold mb-6">Reviews</h3>
         {reviews.length ? (
           <div className="space-y-4">
             {reviews.map((rev) => (
               <div
                 key={rev._id}
-                className="bg-gray-50 p-4 border rounded shadow-sm"
+                className="p-5 rounded shadow-sm"
               >
                 <p className="font-semibold">{rev.reviewer}</p>
-                <p className="text-sm">{rev.comment}</p>
-                <p className="text-yellow-500">⭐ {rev.rating}/5</p>
+                <p className="text-gray-700">{rev.comment}</p>
+                <p className="text-yellow-500 mt-1">⭐ {rev.rating}/5</p>
               </div>
             ))}
           </div>
         ) : (
-          <p>No reviews yet.</p>
+          <p className="text-gray-500">No reviews yet.</p>
         )}
       </div>
 
@@ -169,16 +202,15 @@ const DonationDetails = () => {
         />
       )}
 
-    {showReviewModal && (
-  <ReviewModal
-    donationId={id}
-    donation={donation}
-    user={user}
-    onClose={() => setShowReviewModal(false)}
-    refetchReviews={refetchReviews}
-  />
-)}
-
+      {showReviewModal && (
+        <ReviewModal
+          donationId={id}
+          donation={donation}
+          user={user}
+          onClose={() => setShowReviewModal(false)}
+          refetchReviews={refetchReviews}
+        />
+      )}
     </div>
   );
 };

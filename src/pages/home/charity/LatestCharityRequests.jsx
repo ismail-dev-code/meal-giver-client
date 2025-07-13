@@ -32,10 +32,12 @@ const LatestCharityRequests = () => {
           <p className="text-center text-gray-500">No recent requests found.</p>
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {requests.map((req) => (
+            {requests.map((req, index) => (
               <div
                 key={req._id}
-                className="bg-gray-50 rounded-lg p-6 hover:shadow-md transition"
+                className="rounded-lg p-6 hover:shadow-md transition"
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
               >
                 <div className="flex items-center gap-4 mb-4">
                   <img

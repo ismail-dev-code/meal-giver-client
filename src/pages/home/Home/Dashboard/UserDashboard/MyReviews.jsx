@@ -57,7 +57,7 @@ const MyReviews = () => {
           {reviews.map((review) => (
             <div
               key={review._id}
-              className="card bg-base-100 shadow border p-4 space-y-2"
+              className="card max-w-sm bg-base-100 shadow p-4 space-y-2"
             >
               <h3 className="text-lg font-semibold">{review.donationTitle || "Untitled Donation"}</h3>
               <p className="text-sm text-gray-600">
@@ -69,12 +69,14 @@ const MyReviews = () => {
               </p>
               <p className="text-gray-700">{review.comment}</p>
 
-              <button
+              <div>
+                <button
                 onClick={() => handleDelete(review._id)}
                 className="btn btn-sm btn-error mt-2 text-white"
               >
                 <FaTrash /> Delete Review
               </button>
+              </div>
             </div>
           ))}
         </div>
