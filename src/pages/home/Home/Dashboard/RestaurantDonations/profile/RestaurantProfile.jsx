@@ -2,6 +2,7 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../../../hooks/useAxiosSecure";
+import Loading from "../../../../../../components/MealGiver/Loading";
 
 const RestaurantProfile = () => {
   const { user } = useAuth();
@@ -17,11 +18,7 @@ const RestaurantProfile = () => {
   });
 
   if (isLoading) {
-    return (
-      <div className="text-center py-20 text-lg text-gray-600 font-medium">
-        Loading restaurant profile...
-      </div>
-    );
+    return <Loading/>
   }
 
   return (
@@ -34,13 +31,13 @@ const RestaurantProfile = () => {
         />
 
         <h2 className="text-2xl font-bold mt-4">{profile?.name}</h2>
-        <span className="badge badge-primary mt-1 capitalize">{profile?.role}</span>
+        <p className="flex items-center gap-2 justify-center"><strong>Role:</strong> <span className="badge badge-primary mt-1 capitalize">{profile?.role}</span></p>
 
         <div className="mt-4 w-full space-y-2 text-center text-sm text-gray-700">
           <p><strong>Email:</strong> {profile?.email}</p>
           {/* Optional if stored in DB */}
-          <p><strong>Contact:</strong> {profile?.contact || "+8801XXXXXXXXX"}</p>
-          <p><strong>Address:</strong> {profile?.location || "N/A"}</p>
+          <p><strong>Contact:</strong> {profile?.contact || "+8801812345678"}</p>
+          <p><strong>Address:</strong> {profile?.location || "Noakhali, Bangladesh"}</p>
           <p>
             <strong>Joined:</strong>{" "}
             {new Date(profile?.created_at).toLocaleDateString("en-BD", {

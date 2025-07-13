@@ -1,30 +1,33 @@
-import { useEffect, useState } from "react";
-
+import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../../hooks/useAuth";
-
-
+import Loading from "../../../../../components/MealGiver/Loading";
 
 const AdminProfile = () => {
-  const { user } = useAuth(); 
+  const { user, loading: authLoading } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const [profile, setProfile] = useState(null);
 
-  useEffect(() => {
-    if (user?.email) {
-      axiosSecure
-        .get(`/users/profile?email=${user.email}`)
-        .then((res) => setProfile(res.data))
-        .catch((err) => {
-          console.error("Failed to load admin profile:", err);
-        });
-    }
-  }, [user, axiosSecure]);
+  const { data: profile = {}, isLoading, isError, error } = useQuery({
+    queryKey: ["admin-profile", user?.email],
+    enabled: !authLoading && !!user?.email,
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/admin/email/${user.email}`);
+      return res.data;
+    },
+  });
 
-  if (!profile) {
+  if (authLoading || isLoading) {
     return (
-      <div className="min-h-[60vh] flex justify-center items-center">
-        <span className="loading loading-spinner loading-lg text-primary"></span>
+      <div className="flex justify-center items-center min-h-[70vh]">
+        <Loading />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="max-w-xl mx-auto p-6 text-center text-red-600">
+        Failed to load admin profile: {error?.response?.data?.message || error.message}
       </div>
     );
   }
@@ -33,7 +36,7 @@ const AdminProfile = () => {
     <div className="max-w-xl mx-auto bg-white shadow rounded-lg p-6 mt-6">
       <div className="flex flex-col items-center text-center">
         <img
-          src={user.photoURL || "/avatar.png"}
+          src={profile.photo || user?.photoURL || "/avatar.png"}
           alt="Admin"
           className="w-28 h-28 rounded-full border-4 border-primary object-cover"
         />
@@ -43,17 +46,17 @@ const AdminProfile = () => {
           Role: {profile.role || "user"}
         </p>
         {profile.last_log_in && (
-        <p className="text-sm text-gray-500 mt-2">
-  Last Login: {new Date(profile.last_log_in).toLocaleString("en-US", {
-    hour12: true,
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-  })}
-</p>
-
+          <p className="text-sm text-gray-500 mt-2">
+            Last Login:{" "}
+            {new Date(profile.last_log_in).toLocaleString("en-US", {
+              hour12: true,
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+              hour: "numeric",
+              minute: "numeric",
+            })}
+          </p>
         )}
       </div>
     </div>

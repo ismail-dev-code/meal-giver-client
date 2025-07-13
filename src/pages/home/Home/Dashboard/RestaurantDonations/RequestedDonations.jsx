@@ -51,7 +51,6 @@ const RequestedDonations = () => {
             <th>Type</th>
             <th>Charity Name</th>
             <th>Charity Email</th>
-            <th>Description</th>
             <th>Pickup Time</th>
             <th>Status</th>
             <th>Actions</th>
@@ -64,7 +63,6 @@ const RequestedDonations = () => {
               <td>{req.donation.type}</td>
               <td>{req.charityName}</td>
               <td>{req.charityEmail}</td>
-              <td>{req.description}</td>
               <td>{req.pickupTime}</td>
               <td className="capitalize">{req.status}</td>
               <td>

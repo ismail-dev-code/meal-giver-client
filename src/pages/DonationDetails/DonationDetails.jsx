@@ -62,6 +62,7 @@ const DonationDetails = () => {
       toast.success("Pickup confirmed!");
       refetch();
     } catch (err) {
+      console.log(err);
       toast.error("Failed to confirm pickup");
     }
   };
