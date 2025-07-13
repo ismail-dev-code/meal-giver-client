@@ -2,12 +2,8 @@ import React from "react";
 import { Link, NavLink, Outlet } from "react-router";
 import {
   FaHome,
-  FaHandsHelping,
-  FaEdit,
   FaDonate,
-  FaUsers,
   FaUserCheck,
-  FaUserShield,
   FaListAlt,
   FaMoneyCheckAlt,
   FaClipboardList,
@@ -18,6 +14,7 @@ import {
   FaHandshake,
   FaTruck,
   FaReceipt,
+  FaUser,
 } from "react-icons/fa";
 
 import useUserRole from "../hooks/useUserRole";
@@ -78,7 +75,7 @@ const DashboardLayout = () => {
                   to="/dashboard/my-profile"
                   className="flex items-center gap-2"
                 >
-                  <FaEdit /> My Profile
+                  <FaUser /> My Profile
                 </NavLink>
               </li>
 

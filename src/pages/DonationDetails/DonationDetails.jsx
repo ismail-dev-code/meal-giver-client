@@ -9,6 +9,7 @@ import ReviewModal from "../../components/Modal/ReviewModal";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useUserRole from "../../hooks/useUserRole";
+import Loading from "../../components/MealGiver/Loading";
 
 const DonationDetails = () => {
   const { id } = useParams();
@@ -66,7 +67,7 @@ const DonationDetails = () => {
   };
 
   if (donationLoading || roleLoading) {
-    return <div className="text-center mt-20">Loading...</div>;
+    return <Loading/>;
   }
 
   return (
@@ -84,13 +85,12 @@ const DonationDetails = () => {
         <p className="text-gray-700 mb-2">
           <strong>Quantity:</strong> {donation?.quantity}
         </p>
+       
         <p className="text-gray-700 mb-2">
-          <strong>Description:</strong> {donation?.description}
+          <strong>Restaurant:</strong> {donation?.restaurant?.name} 
         </p>
         <p className="text-gray-700 mb-2">
-          <strong>Restaurant:</strong> {donation?.restaurant?.name} -{" "}
-          {donation?.restaurant?.location}
-        </p>
+          <strong>Location:</strong>   {donation?.restaurant?.location} </p>
         <p className="text-gray-700 mb-2">
           <strong>Pickup Window:</strong> {donation?.pickupWindow}
         </p>

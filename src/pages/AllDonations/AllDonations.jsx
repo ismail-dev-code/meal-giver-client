@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Loading from "../../components/MealGiver/Loading";
 
 const AllDonations = () => {
   const axiosSecure = useAxiosSecure();
@@ -34,7 +35,7 @@ const AllDonations = () => {
     });
 
   if (isLoading)
-    return <div className="text-center py-10">Loading donations...</div>;
+    return <Loading/>;
 
   return (
     <div className="max-w-7xl mx-auto p-4">

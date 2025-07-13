@@ -11,6 +11,7 @@ import {
 import moment from "moment";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../hooks/useAuth";
+import Loading from "../../../../components/MealGiver/Loading";
 
 const statusIcons = {
   available: <FaUtensils className="text-4xl text-success" />,
@@ -53,7 +54,7 @@ const UserDashboard = () => {
     enabled: !!user?.email,
     queryFn: async () => {
       const res = await axiosSecure.get(`/reviews/user/${user.email}`);
-      return res.data.slice(0, 5); // Show latest 5
+      return res.data.slice(0, 5);
     },
   });
 
@@ -78,11 +79,7 @@ const UserDashboard = () => {
   });
 
   if (isUserLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-[70vh]">
-        <span className="loading loading-spinner loading-lg text-primary"></span>
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
@@ -135,7 +132,9 @@ const UserDashboard = () => {
           <FaStar className="text-yellow-500" /> Recent Reviews
         </h2>
         {myRecentReviews.length === 0 ? (
-          <p className="text-gray-500">You haven't submitted any reviews yet.</p>
+          <p className="text-gray-500">
+            You haven't submitted any reviews yet.
+          </p>
         ) : (
           <div className="overflow-x-auto">
             <table className="table">
