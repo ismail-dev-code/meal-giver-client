@@ -1,11 +1,5 @@
-import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import {
-  FaCheckCircle,
-  FaUtensils,
-  FaHourglassHalf,
-  FaHandHoldingHeart,
-} from "react-icons/fa";
+import { FaCheckCircle, FaUtensils, FaHourglassHalf } from "react-icons/fa";
 import {
   PieChart,
   Pie,
@@ -27,13 +21,6 @@ const COLORS = {
   requested: "#FBBF24",
   picked_up: "#60A5FA",
   expired: "#F87171",
-};
-
-const statusIcons = {
-  available: <FaUtensils className="text-4xl text-success" />,
-  requested: <FaHourglassHalf className="text-4xl text-warning" />,
-  picked_up: <FaCheckCircle className="text-4xl text-info" />,
-  expired: <FaHandHoldingHeart className="text-4xl text-error" />,
 };
 
 const RestaurantDashboard = () => {
@@ -65,7 +52,6 @@ const RestaurantDashboard = () => {
   const pieData = [
     { name: "Approved", value: stats.approved || 0, status: "approved" },
     { name: "Available", value: stats.available || 0, status: "available" },
-    { name: "Requested", value: stats.requested || 0, status: "requested" },
   ];
 
   if (loadingStats || loadingTypes) {
@@ -91,11 +77,6 @@ const RestaurantDashboard = () => {
           <FaUtensils className="text-4xl text-success mx-auto" />
           <h2 className="text-lg font-semibold mt-2">Available</h2>
           <p className="text-4xl font-bold text-primary">{stats.available}</p>
-        </div>
-        <div className="card bg-base-100 shadow-md p-6 text-center">
-          <FaHourglassHalf className="text-4xl text-warning mx-auto" />
-          <h2 className="text-lg font-semibold mt-2">Requested</h2>
-          <p className="text-4xl font-bold text-primary">{stats.requested}</p>
         </div>
       </div>
 

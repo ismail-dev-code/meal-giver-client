@@ -18,10 +18,10 @@ import {
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const COLORS = {
-  available: "#34D399", // green
-  requested: "#FBBF24", // yellow
-  picked_up: "#60A5FA", // blue
-  expired: "#F87171", // red
+  available: "#34D399", 
+  requested: "#FBBF24", 
+  picked_up: "#60A5FA", 
+  expired: "#F87171", 
 };
 
 const statusIcons = {

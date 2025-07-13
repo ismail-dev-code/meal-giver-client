@@ -8,7 +8,7 @@ const LatestCharityRequests = () => {
   const { data: requests = [], isLoading } = useQuery({
     queryKey: ["latestCharityRequests"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/charity/latest-requests"); // update to your correct API
+      const res = await axiosSecure.get("/charity/latest-requests/recent");
       return res.data;
     },
   });
@@ -24,7 +24,7 @@ const LatestCharityRequests = () => {
   return (
     <section className="py-12 bg-white">
       <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-2xl md:text-3xl font-bold text-secondary text-center mb-10">
+        <h2 className="md:text-3xl font-bold text-secondary text-center mb-10">
           Latest Charity Requests
         </h2>
 
@@ -35,21 +35,23 @@ const LatestCharityRequests = () => {
             {requests.map((req) => (
               <div
                 key={req._id}
-                className="bg-gray-50 border rounded-lg p-6 hover:shadow-md transition"
+                className="bg-gray-50 rounded-lg p-6 hover:shadow-md transition"
               >
                 <div className="flex items-center gap-4 mb-4">
                   <img
                     src={req.charityLogo || "/default-logo.png"}
-                    alt={req.charityName}
+                    alt={req.charityName || "Charity"}
                     className="w-12 h-12 rounded-full object-cover border"
                   />
                   <h3 className="text-lg font-semibold text-gray-800">
-                    {req.charityName}
+                    {req.charityName || "Unknown Charity"}
                   </h3>
                 </div>
-                <p className="text-sm text-gray-600 mb-3">{req.description}</p>
+                <p className="text-sm text-gray-600 mb-3">
+                  {req.description?.slice(0, 120) || "No description available"}...
+                </p>
                 <p className="text-sm text-primary font-medium">
-                  📦 {req.donationTitle}
+                  📦 {req.donationTitle || "No Title"}
                 </p>
               </div>
             ))}

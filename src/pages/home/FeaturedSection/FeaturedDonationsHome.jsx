@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router"; 
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../../../hooks/useAxios";
+import Loading from "../../../components/MealGiver/Loading";
 
 const FeaturedDonationsHome = () => {
   const axiosPublic = useAxios();
@@ -15,17 +16,13 @@ const FeaturedDonationsHome = () => {
   });
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-[40vh]">
-        <span className="loading loading-spinner text-secondary"></span>
-      </div>
-    );
+    return <Loading/>
   }
 
   return (
     <section className="pb-12 pt-5 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-2xl md:text-3xl font-bold text-center text-secondary mb-8">
+        <h2 className="md:text-3xl font-bold text-center text-secondary mb-8">
           Featured Donations
         </h2>
 
@@ -51,8 +48,9 @@ const FeaturedDonationsHome = () => {
                     <span className="font-medium">
                       {donation.restaurant?.name || "Unknown Restaurant"}
                     </span>{" "}
-                    — {donation.restaurant?.location || "Unknown Location"}
+                    
                   </p>
+                  <p className="text-xs"><strong>Location: </strong><span>{donation.restaurant?.location || "Unknown Location"}</span></p>
                   <span
                     className={`inline-block text-xs font-semibold px-3 py-1 rounded-full ${
                       donation.status?.toLowerCase() === "available"

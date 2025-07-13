@@ -29,7 +29,7 @@ const UserDashboard = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
-  const { data: userProfile, isLoading: isUserLoading } = useQuery({
+  const { isLoading: isUserLoading } = useQuery({
     queryKey: ["userProfile", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
@@ -87,7 +87,6 @@ const UserDashboard = () => {
       <h1 className="text-3xl font-bold mb-6">
         Welcome, {user?.displayName || user?.email}
       </h1>
-
       {/* User Info */}
       <div className="card bg-base-100 shadow-md p-6 border border-base-200 mb-6">
         <h2 className="text-lg font-semibold flex items-center gap-2 mb-2">
@@ -95,18 +94,6 @@ const UserDashboard = () => {
         </h2>
         <p>
           <strong>Email:</strong> {user?.email}
-        </p>
-        <p>
-          <strong>Created:</strong>{" "}
-          {userProfile?.created_at
-            ? moment(userProfile.created_at).format("MMMM Do YYYY, h:mm:ss a")
-            : "No account creation date available"}
-        </p>
-        <p>
-          <strong>Last Login:</strong>{" "}
-          {userProfile?.last_log_in
-            ? moment(userProfile.last_log_in).format("MMMM Do YYYY, h:mm:ss a")
-            : "No login info available"}
         </p>
       </div>
 
