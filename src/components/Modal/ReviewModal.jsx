@@ -29,7 +29,7 @@ const ReviewModal = ({ donationId, donation, user, onClose, refetchReviews }) =>
     try {
       await axiosSecure.post("/reviews", reviewData);
       toast.success("Review submitted!");
-      refetchReviews(); // Refresh reviews in DonationDetails
+      refetchReviews(); 
       onClose();
     } catch (err) {
       toast.error("Failed to submit review");

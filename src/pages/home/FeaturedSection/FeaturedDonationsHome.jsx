@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Link } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../../../hooks/useAxios";
@@ -33,9 +33,9 @@ const FeaturedDonationsHome = () => {
               <div
                 key={donation._id}
                 className="bg-white shadow rounded-xl overflow-hidden transition hover:shadow-lg border border-gray-100"
-                data-aos="fade-up"
+                data-aos="fade-left"
                 data-aos-delay={index * 100}
-                data-aos-duration="400"
+               
               >
                 <div className="relative group">
                   <img
@@ -80,7 +80,7 @@ const FeaturedDonationsHome = () => {
                   <div>
                     <Link
                       to={`/donation-details/${donation._id}`}
-                      className="mt-2 inline-block text-sm text-white bg-accent hover:bg-primary px-4 hover:scale-105 py-2 rounded-full"
+                      className="mt-2 btn-xs inline-block text-sm text-white bg-accent hover:bg-primary px-4 hover:scale-105 py-2 rounded-full"
                     >
                       View Details
                     </Link>

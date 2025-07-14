@@ -25,7 +25,8 @@ const ReviewModal = ({ donation, onClose, refetchReviews }) => {
     setLoading(true);
 
     const review = {
-      donationId: donation._id,
+      reviewId: donation?._id,
+      donationId: donation?.donationId,
       donationTitle: donation?.title || donation?.donationTitle || "Untitled",
       restaurantEmail:
         donation?.restaurantEmail || donation?.restaurant?.email || "",
@@ -44,9 +45,9 @@ const ReviewModal = ({ donation, onClose, refetchReviews }) => {
 
       if (res.data?.insertedId || res.data?.acknowledged) {
         toast.success("Review submitted successfully.");
-        await refetchReviews?.(); // Make sure reviews are reloaded
-        onClose(); // Close modal
-        navigate(`/donation-details/${donation._id}`); // Redirect back to details
+        await refetchReviews?.(); 
+        onClose(); 
+        navigate(`/donation-details/${donation?.donationId}`); 
       } else {
         toast.error("Failed to submit review.");
       }

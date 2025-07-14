@@ -21,6 +21,9 @@ const LatestCharityRequests = () => {
     );
   }
 
+  
+  const latestThree = requests.slice(0, 3);
+
   return (
     <section className="pt-12">
       <div className="max-w-6xl mx-auto px-4">
@@ -28,30 +31,32 @@ const LatestCharityRequests = () => {
           Latest Charity Requests
         </h2>
 
-        {requests.length === 0 ? (
+        {latestThree.length === 0 ? (
           <p className="text-center text-gray-500">No recent requests found.</p>
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {requests.map((req, index) => (
+            {latestThree.map((req, index) => (
               <div
                 key={req._id}
-                className="rounded-lg p-6 hover:shadow-md transition"
+                className="rounded-lg p-6 shadow bg-white h-[320px] flex flex-col justify-between transition hover:shadow-md"
                 data-aos="fade-up"
                 data-aos-delay={index * 100}
               >
-                <div className="flex items-center gap-4 mb-4">
-                  <img
-                    src={req.charityLogo || "/default-logo.png"}
-                    alt={req.charityName || "Charity"}
-                    className="w-12 h-12 rounded-full object-cover border"
-                  />
-                  <h3 className="text-lg font-semibold text-gray-800">
-                    {req.charityName || "Unknown Charity"}
-                  </h3>
+                <div>
+                  <div className="flex items-center gap-4 mb-4">
+                    <img
+                      src={req.charityLogo || "/default-logo.png"}
+                      alt={req.charityName || "Charity"}
+                      className="w-12 h-12 rounded-full object-cover border"
+                    />
+                    <h3 className="text-lg font-semibold text-gray-800">
+                      {req.charityName || "Unknown Charity"}
+                    </h3>
+                  </div>
+                  <p className="text-sm text-gray-600 mb-3 line-clamp-3">
+                    {req.description || "No description available"}
+                  </p>
                 </div>
-                <p className="text-sm text-gray-600 mb-3">
-                  {req.description?.slice(0, 120) || "No description available"}...
-                </p>
                 <p className="text-sm text-primary font-medium">
                   📦 {req.donationTitle || "No Title"}
                 </p>

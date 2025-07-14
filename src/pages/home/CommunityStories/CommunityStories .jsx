@@ -33,7 +33,7 @@ const CommunityStories = () => {
   const shuffledStories = shuffleArray(stories);
 
   return (
-    <section className="pb-12">
+    <section className="pb-32">
       <div className="max-w-6xl mx-auto px-4 text-center">
         <h2 className="md:text-3xl text-xl font-bold text-center text-secondary mb-4 md:mb-10">Community Stories</h2>
 
@@ -57,7 +57,8 @@ const CommunityStories = () => {
           >
             {shuffledStories.map((story) => (
               <SwiperSlide key={story._id}>
-                <div className="bg-white p-6 rounded-2xl shadow-lg h-[300px] flex flex-col justify-between transition duration-300 hover:shadow-xl border border-gray-100">
+                <div data-aos="fade-left" className=" p-6 rounded-2xl  h-[300px] flex flex-col justify-between transition duration-300 hover:shadow-xl">
+                  
                   <div className="flex items-center gap-4">
                     <img
                       src={story.image || "/default-logo.png"}
@@ -81,7 +82,7 @@ const CommunityStories = () => {
                   </div>
 
                   <p
-                    className="text-gray-700 text-[15px] italic text-left py-2 leading-relaxed relative line-clamp-5"
+                    className="text-gray-700 text-[15px] overflow-hidden italic text-left py-2  relative "
                     title={story.comment || story.quote || "No feedback provided."}
                   >
                     “{story.comment || story.quote || "No feedback provided."}”

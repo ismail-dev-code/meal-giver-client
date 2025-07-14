@@ -18,7 +18,7 @@ const Banner = () => {
       buttonLink: "/register?role=charity",
     },
     {
-      title: "Empowering Communities Through Food",
+      title: "Supporting communities through food.",
       description:
         "Be part of the solution. Every meal counts for someone in need. Your contribution through MealGiver directly supports families and individuals in need.",
       image: slider2,

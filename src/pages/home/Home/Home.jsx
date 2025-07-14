@@ -11,9 +11,11 @@ const Home = () => {
   }, []);
   return (
     <>
-      <Banner />
+      <div className="font-montserrat">
+        <Banner />
+      </div>
       <div className="max-w-6xl mx-auto">
-        <FeaturedDonationsHome/>
+        <FeaturedDonationsHome />
         <LatestCharityRequests />
         <ImpactStats />
         <CommunityStories />

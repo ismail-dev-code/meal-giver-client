@@ -76,8 +76,8 @@ const DonationDetails = () => {
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-10">
-      {/* Main container with image left, content right */}
+    <div className="max-w-5xl mx-auto px-4 py-10 font-montserrat">
+      {/* Main container */}
       <div
         className="p-6 rounded-lg flex flex-col md:flex-row gap-8"
       >
@@ -136,7 +136,7 @@ const DonationDetails = () => {
             {(role === "user" || role === "charity") && (
               <button
                 onClick={handleSaveToFavorites}
-                className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded transition"
+                className="bg-yellow-500 cursor-pointer hover:bg-yellow-600 text-white px-6 py-2 rounded transition"
               >
                 Save to Favorites
               </button>
@@ -145,7 +145,7 @@ const DonationDetails = () => {
             {role === "charity" && donation?.status === "verified" && (
               <button
                 onClick={() => setShowRequestModal(true)}
-                className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded transition"
+                className="bg-blue-500 cursor-pointer hover:bg-blue-600 text-white px-6 py-2 rounded transition"
               >
                 Request Donation
               </button>
@@ -163,7 +163,7 @@ const DonationDetails = () => {
             {(role === "charity" || role === "user") && (
               <button
                 onClick={() => setShowReviewModal(true)}
-                className="bg-purple-500 hover:bg-purple-600 text-white px-6 py-2 rounded transition"
+                className="bg-purple-500 cursor-pointer hover:bg-purple-600 text-white px-6 py-2 rounded transition"
               >
                 Add Review
               </button>
@@ -173,7 +173,7 @@ const DonationDetails = () => {
       </div>
 
       {/* Reviews Section */}
-      <div data-aos="fade-up" className="mt-12">
+      <div className="mt-12">
         <h3 className="text-2xl font-semibold mb-6">Reviews</h3>
         {reviews.length ? (
           <div className="space-y-4">
