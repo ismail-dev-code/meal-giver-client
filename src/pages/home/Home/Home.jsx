@@ -4,6 +4,7 @@ import ImpactStats from "../imapactStats/ImpactStats";
 import CommunityStories from "../CommunityStories/CommunityStories ";
 import Banner from "../banner/Banner";
 import FeaturedDonationsHome from "../FeaturedSection/FeaturedDonationsHome";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   useEffect(() => {
@@ -11,6 +12,9 @@ const Home = () => {
   }, []);
   return (
     <>
+    <Helmet>
+        <title>MealGiver | Home</title>
+      </Helmet>
       <div className="font-montserrat">
         <Banner />
       </div>

@@ -4,6 +4,7 @@ import { FaTrash } from "react-icons/fa";
 import moment from "moment";
 import useAuth from "../../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const MyReviews = () => {
   const { user } = useAuth();
@@ -47,6 +48,10 @@ const MyReviews = () => {
   }
 
   return (
+     <> 
+    <Helmet>
+        <title>MealGive | My Reviews</title>
+      </Helmet> 
     <div className="p-6 max-w-5xl mx-auto">
       <h2 className="text-2xl font-bold mb-6">My Reviews</h2>
 
@@ -82,6 +87,7 @@ const MyReviews = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

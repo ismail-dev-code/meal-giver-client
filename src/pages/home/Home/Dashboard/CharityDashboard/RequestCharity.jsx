@@ -7,6 +7,7 @@ import { toast } from "react-hot-toast";
 import moment from "moment";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
+import { Helmet } from "react-helmet-async";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
@@ -110,6 +111,10 @@ const CheckoutForm = () => {
   };
 
   return (
+     <> 
+    <Helmet>
+        <title>MealGiver | Request Charity Role</title>
+      </Helmet> 
     <div className="max-w-xl mx-auto bg-white p-6 shadow rounded space-y-4">
       <h2 className="text-xl font-semibold mb-4">Request Charity Role</h2>
 
@@ -153,6 +158,7 @@ const CheckoutForm = () => {
         </form>
       )}
     </div>
+    </>
   );
 };
 

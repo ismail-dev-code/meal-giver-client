@@ -4,6 +4,7 @@ import useAuth from "../../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 import moment from "moment";
 import Loading from "../../../../../components/MealGiver/Loading";
+import { Helmet } from "react-helmet-async";
 
 const MyProfile = () => {
   const { user, loading: authLoading } = useAuth();
@@ -36,6 +37,10 @@ const MyProfile = () => {
   }
 
   return (
+    <> 
+    <Helmet>
+        <title>MealGiver | My Profile</title>
+      </Helmet>
     <div className="p-6 max-w-4xl mx-auto">
       <div className="card">
         <div className="flex flex-col md:flex-row items-center gap-6">
@@ -74,6 +79,7 @@ const MyProfile = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

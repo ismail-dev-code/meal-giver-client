@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../../../hooks/useAxiosSecure";
 import Loading from "../../../../../../components/MealGiver/Loading";
+import { Helmet } from "react-helmet-async";
 
 const RestaurantProfile = () => {
   const { user } = useAuth();
@@ -22,6 +23,10 @@ const RestaurantProfile = () => {
   }
 
   return (
+      <> 
+    <Helmet>
+        <title>MealGiver | Restaurant Profile</title>
+      </Helmet> 
     <div className="card max-w-md mx-auto p-6 bg-white shadow-md rounded-lg">
       <div className="flex flex-col items-center">
         <img
@@ -49,6 +54,7 @@ const RestaurantProfile = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

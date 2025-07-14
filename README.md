@@ -12,6 +12,23 @@
 
 ---
 
+
+## 🔐 Demo Login Credentials
+
+### 🔑 Admin
+- **Email:** `admin@gmail.com`
+- **Password:** `123456`
+
+### 🍴 Restaurant
+- **Email:** `restaurant@gmail.com`
+- **Password:** `123456`
+
+### ❤️ Charity
+- **Email:** `charity@gmail.com`
+- **Password:** `123456`
+
+---
+
 ## ✨ Features
 
 ### 👩‍🍳 For Restaurants
@@ -22,7 +39,8 @@
 
 ### 🏥 For Charities
 - Request donations  
-- Track pickup status  
+- Track pickup status 
+- Add to favorites 
 - Submit reviews  
 - Role upgrade via Stripe payment  
 
@@ -30,6 +48,7 @@
 - View verified donations  
 - Save donations to favorites  
 - Submit role upgrade request  
+- Submit reviews  
 
 ### 🛠 Admin Dashboard
 - Manage users and roles  

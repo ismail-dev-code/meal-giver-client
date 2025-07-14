@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../../hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const TransactionHistory = () => {
   const { user } = useAuth();
@@ -18,6 +19,10 @@ const TransactionHistory = () => {
   if (isLoading) return <div className="text-center py-10">Loading...</div>;
 
   return (
+      <> 
+        <Helmet>
+            <title>MealGiver | Transaction History</title>
+          </Helmet> 
     <div className="max-w-6xl mx-auto p-6 bg-white shadow rounded">
       <h2 className="text-xl font-semibold mb-4">Charity Role Transaction History</h2>
       {transactions.length === 0 ? (
@@ -65,6 +70,7 @@ const TransactionHistory = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

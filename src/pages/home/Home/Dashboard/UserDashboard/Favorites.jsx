@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import { FaTrash, FaExternalLinkAlt } from "react-icons/fa";
 import useAuth from "../../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const Favorites = () => {
   const { user } = useAuth();
@@ -64,6 +65,10 @@ const Favorites = () => {
   }
 
   return (
+     <> 
+    <Helmet>
+        <title>MealGive | My Favorites</title>
+      </Helmet>
     <div className="p-6 max-w-6xl mx-auto">
       <h2 className="text-2xl font-bold mb-6">My Favorite Donations</h2>
 
@@ -124,6 +129,7 @@ const Favorites = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

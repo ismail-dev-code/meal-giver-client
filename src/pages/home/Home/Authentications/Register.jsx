@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 import SocialLogin from "./Login/SocialLogin";
 import useAuth from "../../../../hooks/useAuth";
 import useImageUploader from "../../../../hooks/useImageLoader";
-
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
   const {
@@ -67,119 +67,127 @@ const Register = () => {
   };
 
   return (
-    <div data-aos="fade-up" className="card max-w-md mx-auto md:px-4 py-6 md:shadow-md bg-white">
-      <h1 className="md:text-2xl text-xl text-center font-bold mb-4 text-primary">
-        Join MealGiver
-      </h1>
+    <>
+      <Helmet>
+        <title>MealGiver | Register</title>
+      </Helmet>
+      <div
+        data-aos="fade-up"
+        className="card max-w-md mx-auto md:px-4 py-6 md:shadow-md bg-white"
+      >
+        <h1 className="md:text-2xl text-xl text-center font-bold mb-4 text-primary">
+          Join MealGiver
+        </h1>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
-        {/* Name */}
-        <div>
-          <label className="label">Full Name</label>
-          <input
-            type="text"
-            {...register("name", { required: true })}
-            className="input input-bordered w-full"
-            placeholder="Enter your full name"
-          />
-          {errors.name && (
-            <p className="text-red-500 text-sm">Name is required</p>
-          )}
-        </div>
-
-        {/* Profile Picture */}
-        <div>
-          <label className="label">Profile Picture</label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            className="file-input file-input-bordered w-full"
-          />
-          {uploadedUrl && (
-            <img
-              src={uploadedUrl}
-              alt="Profile"
-              className="w-20 h-20 rounded-full mt-2 object-cover border"
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
+          {/* Name */}
+          <div>
+            <label className="label">Full Name</label>
+            <input
+              type="text"
+              {...register("name", { required: true })}
+              className="input input-bordered w-full"
+              placeholder="Enter your full name"
             />
-          )}
+            {errors.name && (
+              <p className="text-red-500 text-sm">Name is required</p>
+            )}
+          </div>
+
+          {/* Profile Picture */}
+          <div>
+            <label className="label">Profile Picture</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="file-input file-input-bordered w-full"
+            />
+            {uploadedUrl && (
+              <img
+                src={uploadedUrl}
+                alt="Profile"
+                className="w-20 h-20 rounded-full mt-2 object-cover border"
+              />
+            )}
+          </div>
+
+          {/* Email */}
+          <div>
+            <label className="label">Email</label>
+            <input
+              type="email"
+              {...register("email", { required: true })}
+              className="input input-bordered w-full"
+              placeholder="Enter your email"
+            />
+            {errors.email && (
+              <p className="text-red-500 text-sm">Email is required</p>
+            )}
+          </div>
+
+          {/* Password */}
+          <div>
+            <label className="label">Password</label>
+            <input
+              type="password"
+              {...register("password", { required: true, minLength: 6 })}
+              className="input input-bordered w-full"
+              placeholder="Choose a secure password"
+            />
+            {errors.password?.type === "required" && (
+              <p className="text-red-500 text-sm">Password is required</p>
+            )}
+            {errors.password?.type === "minLength" && (
+              <p className="text-red-500 text-sm">
+                Password must be at least 6 characters
+              </p>
+            )}
+          </div>
+
+          {/* Confirm Password */}
+          <div>
+            <label className="label">Confirm Password</label>
+            <input
+              type="password"
+              {...register("confirmPassword", {
+                required: "Please confirm your password",
+                validate: (value) =>
+                  value === password || "Passwords do not match",
+              })}
+              className="input input-bordered w-full mb-2"
+              placeholder="Re-type your password"
+            />
+            {errors.confirmPassword && (
+              <p className="text-red-500 text-sm">
+                {errors.confirmPassword.message}
+              </p>
+            )}
+          </div>
+
+          {/* Submit */}
+          <button
+            type="submit"
+            className="btn btn-primary text-white w-full"
+            disabled={uploading}
+          >
+            {uploading ? "Uploading image..." : "Register"}
+          </button>
+
+          <p className="text-center text-sm mt-4">
+            Already have an account?{" "}
+            <Link to="/login" className="text-primary hover:underline">
+              Login
+            </Link>
+          </p>
+        </form>
+
+        {/* Social login */}
+        <div className="md:mt-2">
+          <SocialLogin />
         </div>
-
-        {/* Email */}
-        <div>
-          <label className="label">Email</label>
-          <input
-            type="email"
-            {...register("email", { required: true })}
-            className="input input-bordered w-full"
-            placeholder="Enter your email"
-          />
-          {errors.email && (
-            <p className="text-red-500 text-sm">Email is required</p>
-          )}
-        </div>
-
-        {/* Password */}
-        <div>
-          <label className="label">Password</label>
-          <input
-            type="password"
-            {...register("password", { required: true, minLength: 6 })}
-            className="input input-bordered w-full"
-            placeholder="Choose a secure password"
-          />
-          {errors.password?.type === "required" && (
-            <p className="text-red-500 text-sm">Password is required</p>
-          )}
-          {errors.password?.type === "minLength" && (
-            <p className="text-red-500 text-sm">
-              Password must be at least 6 characters
-            </p>
-          )}
-        </div>
-
-        {/* Confirm Password */}
-        <div>
-          <label className="label">Confirm Password</label>
-          <input
-            type="password"
-            {...register("confirmPassword", {
-              required: "Please confirm your password",
-              validate: (value) =>
-                value === password || "Passwords do not match",
-            })}
-            className="input input-bordered w-full mb-2"
-            placeholder="Re-type your password"
-          />
-          {errors.confirmPassword && (
-            <p className="text-red-500 text-sm">
-              {errors.confirmPassword.message}
-            </p>
-          )}
-        </div>
-
-        {/* Submit */}
-        <button
-          type="submit"
-          className="btn btn-primary text-white w-full"
-          disabled={uploading}
-        >
-          {uploading ? "Uploading image..." : "Register"}
-        </button>
-
-        <p className="text-center text-sm mt-4">
-          Already have an account?{" "}
-          <Link to="/login" className="text-primary hover:underline">
-            Login
-          </Link>
-        </p>
-      </form>
-
-      {/* Social login */}
-      <div className="md:mt-2">
-        <SocialLogin />
       </div>
-    </div>
+    </>
   );
 };
 
