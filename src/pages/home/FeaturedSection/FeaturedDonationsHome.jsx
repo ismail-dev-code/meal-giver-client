@@ -33,7 +33,7 @@ const FeaturedDonationsHome = () => {
               <div
                 key={donation._id}
                 className="bg-white shadow rounded-xl overflow-hidden transition hover:shadow-lg border border-gray-100"
-                data-aos="fade-left"
+                data-aos="flip-down"
                 data-aos-delay={index * 100}
                
               >

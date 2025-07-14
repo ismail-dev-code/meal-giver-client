@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -26,25 +26,28 @@ const CommunityStories = () => {
     },
   });
 
+  const shuffledStories = useMemo(() => shuffleArray(stories), [stories]);
+
   if (isLoading) {
     return <Loading />;
   }
 
-  const shuffledStories = shuffleArray(stories);
-
   return (
     <section className="pb-32">
       <div className="max-w-6xl mx-auto px-4 text-center">
-        <h2 className="md:text-3xl text-xl font-bold text-center text-secondary mb-4 md:mb-10">Community Stories</h2>
+        <h2 className="md:text-3xl text-xl font-bold text-center text-secondary mb-4 md:mb-10">
+          Community Stories
+        </h2>
 
         {shuffledStories.length === 0 ? (
-          <p className="text-center text-gray-500 text-lg">No community reviews found.</p>
+          <p className="text-center text-gray-500 text-lg">
+            No community reviews found.
+          </p>
         ) : (
           <Swiper
             modules={[Autoplay]}
             loop={true}
             grabCursor={true}
-            pagination={{ clickable: true }}
             autoplay={{ delay: 4000, disableOnInteraction: false }}
             spaceBetween={30}
             slidesPerView={3}
@@ -57,9 +60,11 @@ const CommunityStories = () => {
           >
             {shuffledStories.map((story) => (
               <SwiperSlide key={story._id}>
-                <div data-aos="fade-left" className=" p-6 rounded-2xl  h-[300px] flex flex-col justify-between transition duration-300 hover:shadow-xl">
-                  
-                  <div className="flex items-center gap-4">
+                <div
+                  data-aos="fade-down"
+                  className="p-6 bg-white rounded-2xl h-[300px] shadow-sm border border-gray-100 flex flex-col justify-between hover:shadow-lg transition duration-300"
+                >
+                  <div className="flex items-center gap-4 mb-2">
                     <img
                       src={story.image || "/default-logo.png"}
                       alt={story.name || "Charity"}
@@ -74,15 +79,21 @@ const CommunityStories = () => {
                       </p>
                       <p
                         className="text-sm text-gray-500 truncate max-w-[160px]"
-                        title={story.role || story.restaurantName || "Community Member"}
+                        title={
+                          story.role ||
+                          story.restaurantName ||
+                          "Community Member"
+                        }
                       >
-                        {story.role || story.restaurantName || "Community Member"}
+                        {story.role ||
+                          story.restaurantName ||
+                          "Community Member"}
                       </p>
                     </div>
                   </div>
 
                   <p
-                    className="text-gray-700 text-[15px] overflow-hidden italic text-left py-2  relative "
+                    className="text-gray-700 text-[15px] overflow-hidden italic text-left py-2 relative"
                     title={story.comment || story.quote || "No feedback provided."}
                   >
                     “{story.comment || story.quote || "No feedback provided."}”

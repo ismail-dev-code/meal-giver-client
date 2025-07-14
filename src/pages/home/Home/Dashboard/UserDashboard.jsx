@@ -153,7 +153,7 @@ const UserDashboard = () => {
       {/* Favorite Donations */}
       <div className="card bg-base-100 shadow-md p-6">
         <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-          <FaHeart /> Favorite Donations
+          <FaHeart className="text-orange-600" /> Favorite Donations
         </h2>
         {favorites.length === 0 ? (
           <p className="text-gray-500">No favorite donations saved.</p>
