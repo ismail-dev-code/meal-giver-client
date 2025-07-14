@@ -32,7 +32,7 @@ const CheckoutForm = () => {
         .get(`/charity-role-transactions?email=${user.email}`)
         .then((res) => {
           if (res.data?.length) {
-            const latest = res.data[0]; // latest based on descending date
+            const latest = res.data[0]; 
             if (["Pending", "Approved"].includes(latest.status)) {
               setExistingStatus(latest.status);
             }

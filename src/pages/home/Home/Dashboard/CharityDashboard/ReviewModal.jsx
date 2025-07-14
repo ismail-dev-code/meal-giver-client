@@ -6,7 +6,7 @@ import useAuth from "../../../../../hooks/useAuth";
 import { useNavigate } from "react-router";
 
 const ReviewModal = ({ donation, onClose, refetchReviews }) => {
-  console.log(donation);
+  
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const navigate = useNavigate();
