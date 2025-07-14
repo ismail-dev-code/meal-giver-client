@@ -33,9 +33,9 @@ const CommunityStories = () => {
   const shuffledStories = shuffleArray(stories);
 
   return (
-    <section className="py-20">
+    <section className="pb-12">
       <div className="max-w-6xl mx-auto px-4 text-center">
-        <h2 className="md:text-3xl font-bold text-gray-800 mb-12">Community Stories</h2>
+        <h2 className="md:text-3xl text-xl font-bold text-center text-secondary mb-4 md:mb-10">Community Stories</h2>
 
         {shuffledStories.length === 0 ? (
           <p className="text-center text-gray-500 text-lg">No community reviews found.</p>

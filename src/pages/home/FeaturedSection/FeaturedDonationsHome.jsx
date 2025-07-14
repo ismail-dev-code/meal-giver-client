@@ -21,7 +21,7 @@ const FeaturedDonationsHome = () => {
   return (
     <section className="pb-12 pt-5">
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="md:text-3xl font-bold text-center text-secondary mb-10">
+        <h2 className="md:text-3xl text-xl font-bold text-center text-secondary mb-4 md:mb-10">
           Featured Donations
         </h2>
 
@@ -35,7 +35,7 @@ const FeaturedDonationsHome = () => {
                 className="bg-white shadow rounded-xl overflow-hidden transition hover:shadow-lg border border-gray-100"
                 data-aos="fade-up"
                 data-aos-delay={index * 100}
-                data-aos-duration="600"
+                data-aos-duration="400"
               >
                 <div className="relative group">
                   <img

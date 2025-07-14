@@ -1,10 +1,7 @@
-
 import { useLocation, useNavigate } from "react-router";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import useAuth from "../../../../../hooks/useAuth";
-
-
 
 
 const SocialLogin = () => {
@@ -23,6 +20,7 @@ const SocialLogin = () => {
           email: user.email,
           name: user.displayName,
           role: "user",
+          photo: user.photoURL,
           created_at: new Date().toISOString(),
           last_log_in: new Date().toISOString(),
         };
