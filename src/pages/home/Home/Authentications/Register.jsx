@@ -68,7 +68,7 @@ const Register = () => {
 
   return (
     <div data-aos="fade-up" className="card max-w-md mx-auto md:px-4 py-6 md:shadow-md bg-white">
-      <h1 className="md:text-2xl text-center font-bold mb-4 text-primary">
+      <h1 className="md:text-2xl text-xl text-center font-bold mb-4 text-primary">
         Join MealGiver
       </h1>
 

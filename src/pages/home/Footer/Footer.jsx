@@ -4,8 +4,8 @@ import MealGiverLogo from "../../../components/MealGiver/MealGiverLogo";
 
 const Footer = () => {
   return (
-    <footer className="bg-secondary text-white pt-10 pb-6 px-6 md:px-16">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 border-b border-white/20 pb-6">
+    <footer className="bg-secondary text-white pt-10 pb-6">
+      <div className="md:w-11/12 mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 border-b border-white/20 pb-6">
         {/* Column 1 */}
         <div>
           <h2 className="text-xl font-bold mb-3"><MealGiverLogo/></h2>

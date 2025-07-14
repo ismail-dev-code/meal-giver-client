@@ -39,7 +39,7 @@ const AllDonations = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="max-w-6xl mx-auto p-4 mb-40 ">
+    <div className="md:w-11/12 mx-auto p-4 mb-40 ">
       <h1 className="text-3xl font-bold mb-6">All Donations</h1>
 
       {/* Search & Sort */}

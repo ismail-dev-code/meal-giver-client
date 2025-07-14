@@ -59,8 +59,8 @@ const Login = () => {
   };
 
   return (
-    <div data-aos="fade-up" className="card max-w-md mx-auto md:px-4 py-6 md:shadow-md bg-white">
-      <h2 className="md:text-2xl font-bold text-center mb-4 text-primary">
+    <div data-aos="fade-up" className="card max-w-md mx-auto md:px-4 pb-3 md:shadow-md bg-white">
+      <h2 className="md:text-2xl text-xl text-nowrap font-bold text-center mb-4 text-primary">
         {forgotMode ? "Reset Your Password" : "Access your account"}
       </h2>
 

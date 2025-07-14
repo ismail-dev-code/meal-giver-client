@@ -1,12 +1,72 @@
-# React + Vite
+# 🥗 MealGiver — Food Donation Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**MealGiver** is a MERN stack-based food donation and redistribution platform that connects restaurants with verified charities and individuals to reduce food waste and support communities.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌍 Project Links
 
-## Expanding the ESLint configuration
+- 🔗 **Live Site**: [https://meal-giver-web.app](https://meal-giver-web.app)
+- 🔗 **Frontend Repository**: [https://github.com/meal-giver-client.come](https://github.com/meal-giver-client.come)
+- 🔗 **Backend API Repository**: [https://github.com/meal-giver-server.come](https://github.com/meal-giver-server.come)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## ✨ Features
+
+### 👩‍🍳 For Restaurants
+- Add new food donations  
+- View donation request details  
+- Track donation status and history  
+- View and manage donation requests  
+
+### 🏥 For Charities
+- Request donations  
+- Track pickup status  
+- Submit reviews  
+- Role upgrade via Stripe payment  
+
+### 👤 For Users
+- View verified donations  
+- Save donations to favorites  
+- Submit role upgrade request  
+
+### 🛠 Admin Dashboard
+- Manage users and roles  
+- Approve donations and role requests  
+- Monitor platform activity  
+
+---
+
+## ⚙️ Tech Stack
+
+| Frontend                          | Backend                          |
+| --------------------------------- | -------------------------------- |
+| React, TailwindCSS, SwiperJS     | Express.js, MongoDB, Firebase    |
+| React Router DOM                 | Firebase Admin SDK               |
+| Axios, React Query, TanStack     | Stripe API (Payments)            |
+| DaisyUI, Headless UI, Toastify   | Decoded, dotenv, CORS            |
+
+---
+
+## 🔑 Roles and Permissions
+
+| Role         | Description                            |
+| ------------ | -------------------------------------- |
+| `User`       | Default user. Can browse and favorite  |
+| `Charity`    | Can request donations, review, pickup  |
+| `Restaurant` | Can post donations and manage requests |
+| `Admin`      | Full control over platform             |
+
+---
+
+## 🧑‍💻 Developer
+
+**Ismail Hossain**  
+📧 hm.ismail772@gmail.com  
+🌍 Noakhali, Bangladesh  
+🔗 [GitHub](https://github.com/ismail-dev-code) | [LinkedIn](https://www.linkedin.com/in/ismail-hossain24)
+
+---
+
+> Feel free to fork the project, open issues, or contribute via pull requests!
