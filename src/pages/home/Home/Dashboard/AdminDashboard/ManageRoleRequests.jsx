@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const ManageRoleRequests = () => {
   const axiosSecure = useAxiosSecure();
@@ -63,6 +64,10 @@ const ManageRoleRequests = () => {
   }
 
   return (
+     <>
+      <Helmet>
+        <title>MealGiver | Charity Role Requests Manage</title>
+      </Helmet>
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-4">Manage Charity Role Requests</h2>
 
@@ -139,6 +144,7 @@ const ManageRoleRequests = () => {
         </table>
       </div>
     </div>
+    </>
   );
 };
 

@@ -1,8 +1,14 @@
 import React from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { FaUserShield, FaUtensils, FaHandHoldingHeart, FaTrash } from "react-icons/fa";
+import {
+  FaUserShield,
+  FaUtensils,
+  FaHandHoldingHeart,
+  FaTrash,
+} from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const AdminManageUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -85,69 +91,81 @@ const AdminManageUsers = () => {
   }
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-6">Manage Users</h2>
-      <div className="overflow-x-auto">
-        <table className="table table-zebra w-full text-sm">
-          <thead className="bg-base-200 text-gray-600 uppercase text-xs">
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th className="text-center">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user, idx) => (
-              <tr key={user._id}>
-                <td>{idx + 1}</td>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td className="capitalize">{user.role || "user"}</td>
-                <td className="flex flex-wrap gap-2 justify-center">
-                  <button
-                    className="btn btn-xs btn-success flex items-center gap-1"
-                    disabled={user.role === "admin" || updateRoleMutation.isLoading}
-                    onClick={() => handleRoleChange(user.email, "admin")}
-                  >
-                    <FaUserShield /> Admin
-                  </button>
-                  <button
-                    className="btn btn-xs btn-warning flex items-center gap-1"
-                    disabled={user.role === "restaurant" || updateRoleMutation.isLoading}
-                    onClick={() => handleRoleChange(user.email, "restaurant")}
-                  >
-                    <FaUtensils /> Restaurant
-                  </button>
-                  <button
-                    className="btn btn-xs btn-info flex items-center gap-1"
-                    disabled={user.role === "charity" || updateRoleMutation.isLoading}
-                    onClick={() => handleRoleChange(user.email, "charity")}
-                  >
-                    <FaHandHoldingHeart /> Charity
-                  </button>
-                  <button
-                    className="btn btn-xs btn-error flex items-center gap-1"
-                    disabled={deleteUserMutation.isLoading}
-                    onClick={() => handleDeleteUser(user._id)}
-                  >
-                    <FaTrash /> Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-            {users.length === 0 && (
+    <>
+      <Helmet>
+        <title>MealGiver | Users Manage</title>
+      </Helmet>
+      <div className="p-6">
+        <h2 className="text-2xl font-bold mb-6">Manage Users</h2>
+        <div className="overflow-x-auto">
+          <table className="table table-zebra w-full text-sm">
+            <thead className="bg-base-200 text-gray-600 uppercase text-xs">
               <tr>
-                <td colSpan={5} className="text-center py-6 text-gray-500">
-                  No users found.
-                </td>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th className="text-center">Actions</th>
               </tr>
-            )}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {users.map((user, idx) => (
+                <tr key={user._id}>
+                  <td>{idx + 1}</td>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td className="capitalize">{user.role || "user"}</td>
+                  <td className="flex flex-wrap gap-2 justify-center">
+                    <button
+                      className="btn btn-xs btn-success flex items-center gap-1"
+                      disabled={
+                        user.role === "admin" || updateRoleMutation.isLoading
+                      }
+                      onClick={() => handleRoleChange(user.email, "admin")}
+                    >
+                      <FaUserShield /> Admin
+                    </button>
+                    <button
+                      className="btn btn-xs btn-warning flex items-center gap-1"
+                      disabled={
+                        user.role === "restaurant" ||
+                        updateRoleMutation.isLoading
+                      }
+                      onClick={() => handleRoleChange(user.email, "restaurant")}
+                    >
+                      <FaUtensils /> Restaurant
+                    </button>
+                    <button
+                      className="btn btn-xs btn-info flex items-center gap-1"
+                      disabled={
+                        user.role === "charity" || updateRoleMutation.isLoading
+                      }
+                      onClick={() => handleRoleChange(user.email, "charity")}
+                    >
+                      <FaHandHoldingHeart /> Charity
+                    </button>
+                    <button
+                      className="btn btn-xs btn-error flex items-center gap-1"
+                      disabled={deleteUserMutation.isLoading}
+                      onClick={() => handleDeleteUser(user._id)}
+                    >
+                      <FaTrash /> Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+              {users.length === 0 && (
+                <tr>
+                  <td colSpan={5} className="text-center py-6 text-gray-500">
+                    No users found.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -3,13 +3,18 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const ManageRequests = () => {
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
 
   // Fetch all charity requests with donation info
-  const { data: requests = [], isLoading, isError } = useQuery({
+  const {
+    data: requests = [],
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["charityRequests"],
     queryFn: async () => {
       const res = await axiosSecure.get("/charity-requests");
@@ -64,48 +69,53 @@ const ManageRequests = () => {
   }
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Manage Charity Requests</h2>
-      <div className="overflow-x-auto">
-        <table className="table table-zebra w-full text-sm">
-          <thead className="bg-base-200 text-gray-600 uppercase text-xs">
-            <tr>
-              <th>#</th>
-              <th>Donation Title</th>
-              <th>Charity Name</th>
-              <th>Charity Email</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {requests.length === 0 ? (
+    <>
+      <Helmet>
+        <title>MealGiver | Requests Manage</title>
+      </Helmet>
+      <div className="p-6">
+        <h2 className="text-2xl font-bold mb-4">Manage Charity Requests</h2>
+        <div className="overflow-x-auto">
+          <table className="table table-zebra w-full text-sm">
+            <thead className="bg-base-200 text-gray-600 uppercase text-xs">
               <tr>
-                <td colSpan={6} className="text-center py-6 text-gray-500">
-                  No charity requests found.
-                </td>
+                <th>#</th>
+                <th>Donation Title</th>
+                <th>Charity Name</th>
+                <th>Charity Email</th>
+                <th>Actions</th>
               </tr>
-            ) : (
-              requests.map((req, idx) => (
-                <tr key={req._id}>
-                  <td>{idx + 1}</td>
-                  <td>{req.donation?.title || "N/A"}</td>
-                  <td>{req.charityName}</td>
-                  <td>{req.charityEmail}</td>
-                  <td>
-                    <button
-                      className="btn btn-xs btn-error flex items-center gap-1"
-                      onClick={() => handleDelete(req._id)}
-                    >
-                      <FaTrash /> Delete
-                    </button>
+            </thead>
+            <tbody>
+              {requests.length === 0 ? (
+                <tr>
+                  <td colSpan={6} className="text-center py-6 text-gray-500">
+                    No charity requests found.
                   </td>
                 </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+              ) : (
+                requests.map((req, idx) => (
+                  <tr key={req._id}>
+                    <td>{idx + 1}</td>
+                    <td>{req.donation?.title || "N/A"}</td>
+                    <td>{req.charityName}</td>
+                    <td>{req.charityEmail}</td>
+                    <td>
+                      <button
+                        className="btn btn-xs btn-error flex items-center gap-1"
+                        onClick={() => handleDelete(req._id)}
+                      >
+                        <FaTrash /> Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -50,7 +50,7 @@ const MyReviews = () => {
   return (
      <> 
     <Helmet>
-        <title>MealGive | My Reviews</title>
+        <title>MealGiver | My Reviews</title>
       </Helmet> 
     <div className="p-6 max-w-5xl mx-auto">
       <h2 className="text-2xl font-bold mb-6">My Reviews</h2>

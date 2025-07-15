@@ -67,7 +67,7 @@ const Favorites = () => {
   return (
      <> 
     <Helmet>
-        <title>MealGive | My Favorites</title>
+        <title>MealGiver | My Favorites</title>
       </Helmet>
     <div className="p-6 max-w-6xl mx-auto">
       <h2 className="text-2xl font-bold mb-6">My Favorite Donations</h2>
