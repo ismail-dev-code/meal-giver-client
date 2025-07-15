@@ -13,9 +13,11 @@ const Footer = () => {
       <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 border-b border-white/20 pb-6">
         {/* Column 1 */}
         <div>
-          <h2 className="text-xl font-bold mb-3">
-            <MealGiverLogo />
-          </h2>
+          <div className="text-xl font-bold mb-3">
+            <Link to={"/"}>
+              <MealGiverLogo />
+            </Link>
+          </div>
           <p className="text-sm text-white/80">
             Reducing food waste and nourishing communities — through every
             meaningful donation.
