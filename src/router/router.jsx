@@ -95,10 +95,8 @@ export const router = createBrowserRouter([
       { path: "my-requests", element: <MyRequests /> },
       { path: "my-pickups", element: <MyPickups /> },
       { path: "received-donations", element: <ReceivedDonations /> },
-      // { path: "add-review", element: <AddReview /> },
 
       // Restaurant Routes
-      // { path: "restaurant-dashboard", element: <RestaurantDashboard /> },
       { path: "restaurant-profile", element: <RestaurantProfile /> },
       { path: "add-donation", element: <AddDonation /> },
       { path: "my-donations", element: <MyDonations /> },
@@ -106,18 +104,12 @@ export const router = createBrowserRouter([
       { path: "requested-donations", element: <RequestedDonations /> },
 
       // Admin Routes
-      // { path: "admin-dashboard", element: <AdminDashboard /> },
       { path: "admin-profile", element: <AdminProfile /> },
       { path: "manage-users", element: <AdminManageUsers /> },
       { path: "manage-donations", element: <AdminManageDonations /> },
       { path: "manage-role-requests", element: <ManageRoleRequests /> },
       { path: "manage-requests", element: <ManageRequests /> },
       { path: "feature-donations", element: <FeatureDonations /> },
-
-      // Shared Secure Routes
-
-      // { path: "request-donation/:id", element: <RequestDonationModal /> },
-      // { path: "reviews/:id", element: <ReviewsSection /> },
     ],
   },
 

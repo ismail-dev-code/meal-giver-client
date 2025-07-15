@@ -14,8 +14,8 @@ const Banner = () => {
       description:
         "MealGiver connects restaurants with charities to reduce food waste and fight hunger. Join our mission to reduce food waste and uplift communities.",
       image: slider1,
-      buttonText: "Join as Charity",
-      buttonLink: "/dashboard/request-charity",
+      buttonText: "Contact Us",
+      buttonLink: "/contact-us",
     },
     {
       title: "Supporting communities through food.",
@@ -30,8 +30,8 @@ const Banner = () => {
       description:
         "Every meal saved is a step toward a better world. Whether you're donating surplus food from your restaurant or volunteering your time — your actions can change lives.",
       image: slider3,
-      buttonText: "Become a Volunteer",
-      buttonLink: "/dashboard",
+      buttonText: "Learn More",
+      buttonLink: "/about-us",
     },
   ];
 
