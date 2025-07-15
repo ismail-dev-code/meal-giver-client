@@ -84,7 +84,7 @@ const UserDashboard = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6">
+      <h1 className="md:text-3xl text-xl font-bold capitalize text-nowrap mb-6">
         Welcome, {user?.displayName || user?.email}
       </h1>
       {/* User Info */}
@@ -92,7 +92,7 @@ const UserDashboard = () => {
         <h2 className="text-lg font-semibold flex items-center gap-2 mb-2">
           <FaUserAlt className="text-info" /> Your Info
         </h2>
-        <p>
+        <p className="md:text-xl text-xs">
           <strong>Email:</strong> {user?.email}
         </p>
       </div>

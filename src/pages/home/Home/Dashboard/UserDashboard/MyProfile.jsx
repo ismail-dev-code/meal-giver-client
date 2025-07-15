@@ -61,7 +61,7 @@ const MyProfile = () => {
 
           {/* Profile Info */}
           <div className="flex-1">
-            <h2 className="text-2xl font-bold flex items-center gap-2">
+            <h2 className="text-2xl font-bold capitalize flex items-center gap-2">
               {userData.name || "User Name"}
             </h2>
             <p className="text-sm text-gray-500 mt-1 flex items-center gap-2">

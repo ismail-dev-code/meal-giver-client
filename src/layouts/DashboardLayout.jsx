@@ -277,7 +277,7 @@ const DashboardLayout = () => {
             )}
 
             {/* Logout */}
-            <li className="border-t-1 border-gray-300 mt-24 md:mt-44">
+            <li className="border-t-1 border-gray-300 md:mt-44">
               <button
                 onClick={() => setShowModal(true)}
                 className="flex items-center gap-2"

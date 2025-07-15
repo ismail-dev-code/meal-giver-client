@@ -1,4 +1,3 @@
-
 import { Link } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../../../hooks/useAxios";
@@ -26,16 +25,16 @@ const FeaturedDonationsHome = () => {
         </h2>
 
         {featuredDonations.length === 0 ? (
-          <p className="text-center text-gray-500">No featured donations yet.</p>
+          <p className="text-center text-gray-500">
+            No featured donations yet.
+          </p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {featuredDonations.slice(0, 4).map((donation, index) => (
               <div
                 key={donation._id}
                 className="bg-white shadow rounded-xl overflow-hidden transition hover:shadow-lg border border-gray-100"
-                data-aos="flip-down"
                 data-aos-delay={index * 100}
-               
               >
                 <div className="relative group">
                   <img
@@ -54,7 +53,9 @@ const FeaturedDonationsHome = () => {
                 </div>
 
                 <div className="p-4 space-y-2">
-                  <h3 className="font-semibold text-lg text-gray-800">{donation.type}</h3>
+                  <h3 className="font-semibold text-lg text-gray-800">
+                    {donation.type}
+                  </h3>
 
                   <p className="text-sm text-gray-600">
                     <span className="font-medium">

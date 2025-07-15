@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import SocialLogin from "./Login/SocialLogin";
 import useAuth from "../../../../hooks/useAuth";
@@ -19,6 +21,9 @@ const Register = () => {
   const password = watch("password");
   const { createUser, updateProfile } = useAuth();
   const { uploadImage, uploading, uploadedUrl } = useImageUploader();
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -85,12 +90,18 @@ const Register = () => {
             <label className="label">Full Name</label>
             <input
               type="text"
-              {...register("name", { required: true })}
+              {...register("name", {
+                required: "Full name is required",
+                pattern: {
+                  value: /^[A-Za-z]+(?:\s[A-Za-z]+)+$/,
+                  message: "Enter at least two words (first and last name)",
+                },
+              })}
               className="input input-bordered w-full"
               placeholder="Enter your full name"
             />
             {errors.name && (
-              <p className="text-red-500 text-sm">Name is required</p>
+              <p className="text-red-500 text-sm">{errors.name.message}</p>
             )}
           </div>
 
@@ -129,12 +140,20 @@ const Register = () => {
           {/* Password */}
           <div>
             <label className="label">Password</label>
-            <input
-              type="password"
-              {...register("password", { required: true, minLength: 6 })}
-              className="input input-bordered w-full"
-              placeholder="Choose a secure password"
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                {...register("password", { required: true, minLength: 6 })}
+                className="input input-bordered w-full pr-10"
+                placeholder="Enter your password"
+              />
+              <span
+                className="absolute right-3 top-3 cursor-pointer text-gray-600"
+                onClick={() => setShowPassword((prev) => !prev)}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div>
             {errors.password?.type === "required" && (
               <p className="text-red-500 text-sm">Password is required</p>
             )}
@@ -148,16 +167,24 @@ const Register = () => {
           {/* Confirm Password */}
           <div>
             <label className="label">Confirm Password</label>
-            <input
-              type="password"
-              {...register("confirmPassword", {
-                required: "Please confirm your password",
-                validate: (value) =>
-                  value === password || "Passwords do not match",
-              })}
-              className="input input-bordered w-full mb-2"
-              placeholder="Re-type your password"
-            />
+            <div className="relative">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                {...register("confirmPassword", {
+                  required: "Please confirm your password",
+                  validate: (value) =>
+                    value === password || "Passwords do not match",
+                })}
+                className="input input-bordered w-full pr-10 mb-2"
+                placeholder="Re-type your password"
+              />
+              <span
+                className="absolute right-3 top-3 cursor-pointer text-gray-600"
+                onClick={() => setShowConfirmPassword((prev) => !prev)}
+              >
+                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div>
             {errors.confirmPassword && (
               <p className="text-red-500 text-sm">
                 {errors.confirmPassword.message}
