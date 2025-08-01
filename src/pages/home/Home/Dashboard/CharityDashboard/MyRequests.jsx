@@ -73,20 +73,20 @@ const MyRequests = () => {
           {requests.map((req) => (
             <div key={req._id} className="card bg-base-100 shadow border p-4">
               <img
-                src={req.donation.image}
+                src={req.donation?.image}
                 alt="Donation"
                 className="h-40 object-cover rounded"
               />
               <div className="mt-4 space-y-2">
-                <h3 className="text-lg font-bold">{req.donation.title}</h3>
+                <h3 className="text-lg font-bold">{req.donation?.title}</h3>
                 <p className="text-sm text-gray-500">
-                  <strong>Restaurant:</strong> {req.donation.restaurant.name}
+                  <strong>Restaurant:</strong> {req.donation?.restaurant?.name}
                 </p>
                 <p className="text-sm text-gray-500">
-                  <strong>Type:</strong> {req.donation.type}
+                  <strong>Type:</strong> {req.donation?.type}
                 </p>
                 <p className="text-sm text-gray-500">
-                  <strong>Quantity:</strong> {req.donation.quantity}
+                  <strong>Quantity:</strong> {req.donation?.quantity}
                 </p>
                 <p>
                   <span

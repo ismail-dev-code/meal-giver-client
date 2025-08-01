@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
+import Swal from "sweetalert2";
 import "aos/dist/aos.css";
 
 import RequestDonationModal from "../../components/Modal/RequestDonationModal";
@@ -18,6 +19,7 @@ const DonationDetails = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const { role, isLoading: roleLoading } = useUserRole();
+  const queryClient = useQueryClient();
 
   const [showRequestModal, setShowRequestModal] = useState(false);
   const [showReviewModal, setShowReviewModal] = useState(false);
@@ -61,20 +63,26 @@ const DonationDetails = () => {
     }
   };
 
-  const handleConfirmPickup = async () => {
-    try {
-      await axiosSecure.patch(`/charity/pickup-confirm/${donation?.requestId}`);
-      toast.success("Pickup confirmed!");
-      refetch();
-    } catch (err) {
-      console.log(err);
-      toast.error("Failed to confirm pickup");
-    }
-  };
+   const confirmPickup = useMutation({
+      mutationFn: async (donationId) => {
+        const res = await axiosSecure.patch(
+          `/donations/${donationId}`,{ status: "picked_up"}
+        );
+        return res.data;
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries(["myPickups"]);
+        Swal.fire("Confirmed!", "Pickup confirmed.", "success");
+      },
+      onError: () => {
+        Swal.fire("Error", "Could not confirm pickup.", "error");
+      },
+    });
 
   if (donationLoading || roleLoading) {
     return <Loading />;
   }
+  console.log(donation);
 
   return (
     <>
@@ -82,9 +90,8 @@ const DonationDetails = () => {
         <title>MealGiver | Donation Details</title>
       </Helmet>
       <div className="max-w-5xl mx-auto px-4 py-10 font-montserrat">
-        {/* Main container */}
         <div className="p-6 rounded-lg flex flex-col md:flex-row gap-8">
-          {/* Image container */}
+          {/* Image */}
           <div
             data-aos="fade-right"
             className="flex-shrink-0 md:w-96 w-full rounded-md overflow-hidden shadow-sm"
@@ -96,26 +103,15 @@ const DonationDetails = () => {
             />
           </div>
 
-          {/* Content container */}
+          {/* Content */}
           <div data-aos="fade-left" className="flex flex-col flex-grow">
             <h2 className="text-3xl font-semibold mb-4">{donation?.title}</h2>
-
             <div className="space-y-2 text-gray-700 text-base">
-              <p>
-                <strong>Type:</strong> {donation?.type}
-              </p>
-              <p>
-                <strong>Quantity:</strong> {donation?.quantity}
-              </p>
-              <p>
-                <strong>Restaurant:</strong> {donation?.restaurant?.name}
-              </p>
-              <p>
-                <strong>Location:</strong> {donation?.restaurant?.location}
-              </p>
-              <p>
-                <strong>Pickup Window:</strong> {donation?.pickupWindow}
-              </p>
+              <p><strong>Type:</strong> {donation?.type}</p>
+              <p><strong>Quantity:</strong> {donation?.quantity} KG</p>
+              <p><strong>Restaurant:</strong> {donation?.restaurant?.name}</p>
+              <p><strong>Location:</strong> {donation?.restaurant?.location}</p>
+              <p><strong>Pickup Window:</strong> {donation?.pickupWindow}</p>
               <p>
                 <strong>Status:</strong>{" "}
                 <span
@@ -145,19 +141,19 @@ const DonationDetails = () => {
                 </button>
               )}
 
-              {role === "charity" && donation?.status === "verified" && (
+              {role === "charity" && donation?.status !== "picked_up" && (
                 <button
                   onClick={() => setShowRequestModal(true)}
-                  className="bg-blue-500 cursor-pointer hover:bg-blue-600 text-white px-6 py-2 rounded transition"
+                  className="bg-blue-500 hover:bg-blue-600 cursor-pointer text-white px-6 py-2 rounded transition"
                 >
                   Request Donation
                 </button>
               )}
 
-              {role === "charity" && donation?.status === "accepted" && (
+              {role === "charity" && donation?.status !== "picked_up" && (
                 <button
-                  onClick={handleConfirmPickup}
-                  className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded transition"
+                  onClick={() => confirmPickup.mutate(donation?._id)}
+                  className="bg-green-500 hover:bg-green-600 cursor-pointer text-white px-6 py-2 rounded transition"
                 >
                   Confirm Pickup
                 </button>
@@ -166,7 +162,7 @@ const DonationDetails = () => {
               {(role === "charity" || role === "user") && (
                 <button
                   onClick={() => setShowReviewModal(true)}
-                  className="bg-purple-500 cursor-pointer hover:bg-purple-600 text-white px-6 py-2 rounded transition"
+                  className="bg-purple-500 hover:bg-purple-600 cursor-pointer text-white px-6 py-2 rounded transition"
                 >
                   Add Review
                 </button>
@@ -175,7 +171,7 @@ const DonationDetails = () => {
           </div>
         </div>
 
-        {/* Reviews Section */}
+        {/* Reviews */}
         <div className="mt-12">
           <h3 className="text-2xl font-semibold mb-6">Reviews</h3>
           {reviews.length ? (

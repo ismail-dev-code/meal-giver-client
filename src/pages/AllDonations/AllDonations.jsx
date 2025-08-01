@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -8,11 +8,13 @@ import { Helmet } from "react-helmet-async";
 
 const AllDonations = () => {
   const axiosSecure = useAxiosSecure();
-  const [searchTerm, setSearchTerm] = React.useState("");
-  const [sortOption, setSortOption] = React.useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortOption, setSortOption] = useState("");
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
+
   const { data: donations = [], isLoading } = useQuery({
     queryKey: ["allDonations"],
     queryFn: async () => {
@@ -22,6 +24,7 @@ const AllDonations = () => {
   });
 
   const filteredDonations = donations
+    .filter((d) => d.approved) 
     .filter((d) =>
       d?.restaurant?.location
         ?.toLowerCase()
@@ -44,7 +47,7 @@ const AllDonations = () => {
       <Helmet>
         <title>MealGiver | All Donations</title>
       </Helmet>
-      <div className="md:w-11/12 mx-auto p-4 mb-40 ">
+      <div className="md:w-11/12 mx-auto p-4 mb-40">
         <h1 className="text-3xl font-bold mb-6">All Donations</h1>
 
         {/* Search & Sort */}
@@ -65,7 +68,7 @@ const AllDonations = () => {
             <option value="quantity-asc">Quantity (Low to High)</option>
             <option value="quantity-desc">Quantity (High to Low)</option>
             <option value="pickup-asc">Pickup Time (Earliest)</option>
-            <option value="pickup-desc">Pickup Time (Latest)</option>
+            {/* <option value="pickup-desc">Pickup Time (Latest)</option> */}
           </select>
         </div>
 
@@ -118,14 +121,10 @@ const AllDonations = () => {
                     {d.status}
                   </span>
                 </p>
-                <p className="text-sm text-gray-600">Quantity: {d.quantity}</p>
+                <p className="text-sm text-gray-600">Quantity: {d.quantity} KG</p>
                 <p className="text-sm mt-1">
                   <strong>Approved:</strong>{" "}
-                  <span
-                    className={d.approved ? "text-green-500" : "text-red-500"}
-                  >
-                    {d.approved ? "Yes" : "No"}
-                  </span>
+                  <span className="text-green-500">Yes</span>
                 </p>
 
                 {/* Push button to bottom */}

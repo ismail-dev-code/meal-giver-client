@@ -30,7 +30,7 @@ const Banner = () => {
       description:
         "Every meal saved is a step toward a better world. Whether you're donating surplus food from your restaurant or volunteering your time — your actions can change lives.",
       image: slider3,
-      buttonText: "Learn More",
+      buttonText: "Read More",
       buttonLink: "/about-us",
     },
   ];
