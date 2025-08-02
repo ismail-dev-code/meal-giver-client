@@ -7,13 +7,13 @@
 ## 🌍 Project Links
 
 - 🔗 **Live Site**: [https://meal-giver-web.app](https://meal-giver-web.app)
-- 🔗 **Frontend Repository**: [https://github.com/meal-giver-client.come](https://github.com/meal-giver-client.come)
-- 🔗 **Backend API Repository**: [https://github.com/meal-giver-server.come](https://github.com/meal-giver-server.come)
+- 🔗 **Frontend Repository**: [https://github.com/meal-giver-client](https://github.com/meal-giver-client.come)
+- 🔗 **Backend API Repository**: [https://github.com/meal-giver-server](https://github.com/meal-giver-server.come)
 
 ---
 
 
-## 🔐 Demo Login Credentials
+<!-- ## 🔐 Demo Login Credentials
 
 ### 🔑 Admin
 - **Email:** `admin@gmail.com`
@@ -27,7 +27,7 @@
 - **Email:** `charity@gmail.com`
 - **Password:** `123456`
 
----
+--- -->
 
 ## ✨ Features
 
