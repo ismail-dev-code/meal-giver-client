@@ -7,8 +7,8 @@
 ## 🌍 Project Links
 
 - 🔗 **Live Site**: [https://meal-giver-web.app](https://meal-giver-web.app)
-- 🔗 **Frontend Repository**: [https://github.com/meal-giver-client](https://github.com/meal-giver-client.come)
-- 🔗 **Backend API Repository**: [https://github.com/meal-giver-server](https://github.com/meal-giver-server.come)
+- 🔗 **Frontend Repository**: [https://github.com/meal-giver-client](https://github.com/meal-giver-client)
+- 🔗 **Backend API Repository**: [https://github.com/meal-giver-server](https://github.com/meal-giver-server)
 
 ---
 
@@ -61,10 +61,10 @@
 
 | Frontend                          | Backend                          |
 | --------------------------------- | -------------------------------- |
-| React, TailwindCSS, SwiperJS     | Express.js, MongoDB, Firebase    |
-| React Router DOM                 | Firebase Admin SDK               |
-| Axios, React Query, TanStack     | Stripe API (Payments)            |
-| DaisyUI, Headless UI, Toastify   | Decoded, dotenv, CORS            |
+| React, TailwindCSS, SwiperJS      | Express.js, MongoDB, Firebase    |
+| React Router, DOM                 | Firebase Admin SDK               |
+| Axios, React Query, TanStack      | Stripe API (Payments)            |
+| DaisyUI, Headless UI, Toastify    | Decoded, dotenv, CORS            |
 
 ---
 
