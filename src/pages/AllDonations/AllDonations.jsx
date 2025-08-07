@@ -131,7 +131,7 @@ const AllDonations = () => {
                 <div className="mt-auto">
                   <Link
                     to={`/donation-details/${d._id}`}
-                    className="inline-block mt-3 bg-accent hover:bg-primary text-white px-4 py-2 rounded-full transition-transform duration-300 transform hover:scale-105"
+                    className="inline-block mt-3 bg-accent hover:bg-primary text-white px-4 py-2 rounded-full transition hover:scale-105 text-sm font-medium"
                   >
                     View Details
                   </Link>

@@ -7,8 +7,8 @@
 ## 🌍 Project Links
 
 - 🔗 **Live Site**: [https://meal-giver-web.app](https://meal-giver-web.app)
-- 🔗 **Frontend Repository**: [https://github.com/meal-giver-client](https://github.com/meal-giver-client)
-- 🔗 **Backend API Repository**: [https://github.com/meal-giver-server](https://github.com/meal-giver-server)
+- 🔗 **Frontend Repository**: [https://github.com/meal-giver-client](https://github.com/ismail-dev-code/meal-giver-client)
+- 🔗 **Backend API Repository**: [https://github.com/meal-giver-server](https://github.com/ismail-dev-code/meal-giver-server)
 
 ---
 

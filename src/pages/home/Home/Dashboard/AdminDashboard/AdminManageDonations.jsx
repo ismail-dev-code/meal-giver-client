@@ -90,7 +90,7 @@ const AdminManageDonations = () => {
                   <td>{donation.type}</td>
                   <td>{donation.restaurant?.name}</td>
                   <td>{donation.restaurant?.email}</td>
-                  <td>{donation.quantity}</td>
+                  <td>{donation.quantity} KG</td>
                   <td>
                     <span
                       className={`badge ${

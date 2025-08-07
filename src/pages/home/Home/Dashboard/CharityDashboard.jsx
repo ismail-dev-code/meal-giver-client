@@ -18,10 +18,10 @@ import {
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const COLORS = {
-  pending: "#FBBF24", 
-  accepted: "#34D399", 
-  picked_up: "#60A5FA", 
-  rejected: "#F87171", 
+  pending: "#FBBF24",
+  accepted: "#34D399",
+  picked_up: "#60A5FA",
+  rejected: "#F87171",
 };
 
 const statusIcons = {
@@ -74,9 +74,26 @@ const CharityDashboard = () => {
       </div>
     );
 
+  if (!requestStatus.length) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center text-gray-600 px-4">
+        <h2 className="text-2xl font-semibold mb-2">
+          No Donation Requests Yet
+        </h2>
+        <p className="max-w-md text-sm">
+          You haven't made any donation requests yet. Once you start requesting
+          donations, your summary and status breakdown will appear here. Keep an
+          eye on this page to track your progress.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6">Your Donation Requests Summary</h1>
+      <h1 className="text-3xl font-bold mb-6">
+        Your Donation Requests Summary
+      </h1>
 
       {/* Status Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
@@ -106,7 +123,9 @@ const CharityDashboard = () => {
               cx="50%"
               cy="50%"
               outerRadius={100}
-              label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
+              label={({ name, percent }) =>
+                `${name} (${(percent * 100).toFixed(0)}%)`
+              }
             >
               {chartData.map((entry) => (
                 <Cell

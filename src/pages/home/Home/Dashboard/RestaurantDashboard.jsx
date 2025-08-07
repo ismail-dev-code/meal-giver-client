@@ -79,7 +79,22 @@ const RestaurantDashboard = () => {
           <p className="text-4xl font-bold text-primary">{stats.available}</p>
         </div>
       </div>
-
+  {/* Bar Chart: Types vs Quantities */}
+      <div className="card bg-base-100 shadow-md p-4 mb-4">
+        <h2 className="text-xl font-bold mb-4">
+          Donation Statistics by Type & Quantity
+        </h2>
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={typeStats}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="type" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="quantity" fill="#34D399" />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
       {/* Pie Chart: Status Breakdown */}
       <div className="card bg-base-100 shadow-md p-4 mb-8">
         <h2 className="text-xl font-bold mb-4">Donation Breakdown by Status</h2>
@@ -109,22 +124,7 @@ const RestaurantDashboard = () => {
         </ResponsiveContainer>
       </div>
 
-      {/* Bar Chart: Types vs Quantities */}
-      <div className="card bg-base-100 shadow-md p-4">
-        <h2 className="text-xl font-bold mb-4">
-          Donation Statistics by Type & Quantity
-        </h2>
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={typeStats}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="type" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="quantity" fill="#34D399" />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+    
     </div>
   );
 };

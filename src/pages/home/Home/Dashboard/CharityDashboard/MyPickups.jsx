@@ -47,8 +47,8 @@ const MyPickups = () => {
           <div className="text-center py-24 text-gray-500">
             <h3 className="text-lg font-medium mb-2">No pickups available</h3>
             <p>
-              You haven’t confirmed any food pickups yet. Once a restaurant
-              approves your donation request, it will appear here.
+              Once a restaurant approves your donation request, the details will
+              appear here.
             </p>
           </div>
         ) : (
