@@ -25,7 +25,7 @@ const LatestCharityRequests = () => {
   const latestThree = requests.slice(0, 3);
 
   return (
-    <section className="pt-12">
+    <section className="py-12">
       <div className="max-w-6xl mx-auto px-4">
         <h2 className="md:text-3xl text-xl font-bold text-center text-secondary mb-4 md:mb-10">
           Latest Charity Requests
