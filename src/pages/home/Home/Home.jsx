@@ -7,6 +7,7 @@ import FeaturedDonationsHome from "../FeaturedSection/FeaturedDonationsHome";
 import { Helmet } from "react-helmet-async";
 import Faq from "../../../components/Faq";
 import OurServices from "../../../components/OurServices";
+import NewsLetter from "../../../components/NewsLetter";
 
 const Home = () => {
   useEffect(() => {
@@ -27,6 +28,7 @@ const Home = () => {
         <CommunityStories />
         <OurServices/>
         <Faq/>
+        <NewsLetter/>
       </div>
     </>
   );
