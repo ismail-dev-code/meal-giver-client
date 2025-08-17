@@ -6,6 +6,8 @@ import {
   FaLeaf,
   FaHeartbeat,
   FaHandHoldingHeart,
+  FaUsers,
+  FaGlobe,
 } from "react-icons/fa";
 
 const services = [
@@ -28,38 +30,50 @@ const services = [
       "Volunteers help transport and distribute food from donors to charities, building a bridge of kindness in every city.",
   },
   {
-    icon: <FaLeaf className="text-4xl " />,
+    icon: <FaLeaf className="text-4xl" />,
     title: "Zero Food Waste",
     description:
       "By redistributing surplus meals, we actively reduce food waste while fighting hunger across communities.",
   },
   {
-    icon: <FaHeartbeat className="text-4xl " />,
+    icon: <FaHeartbeat className="text-4xl" />,
     title: "Impact Tracking",
     description:
       "Donors and charities receive real-time updates, proof of delivery, and impact reports to build transparency and trust.",
   },
   {
-    icon: <FaHandHoldingHeart className="text-4xl " />,
+    icon: <FaHandHoldingHeart className="text-4xl" />,
     title: "Community Empowerment",
     description:
       "MealGiver fosters a culture of sharing and compassion, empowering communities to take part in solving hunger together.",
+  },
+  {
+    icon: <FaUsers className="text-4xl" />,
+    title: "Collaborative Projects",
+    description:
+      "We partner with local organizations and communities to implement projects that tackle food insecurity effectively.",
+  },
+  {
+    icon: <FaGlobe className="text-4xl" />,
+    title: "Global Reach",
+    description:
+      "MealGiver aims to expand our platform globally, connecting donors and charities across borders for greater impact.",
   },
 ];
 
 const OurServices = () => {
   return (
-    <section className="py-12 px-4 md:px-8 lg:px-16 bg-base-100 text-base-content">
+    <section className="py-12 px-4 md:px-8 bg-base-100 text-base-content">
       <div className="text-center mb-10" data-aos="fade-up">
         <h2 className="md:text-3xl text-xl font-bold mb-4">Our Services</h2>
         <p className="max-w-3xl mx-auto text-lg">
-          MealGiver is more than a platform — it’s a movement. From donating surplus food 
+          MealGiver is more than a platform it’s a movement. From donating surplus food 
           to supporting charities and empowering volunteers, we work together to 
           fight hunger and reduce waste.
         </p>
       </div>
 
-      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         {services.map((service, idx) => (
           <div
             key={idx}

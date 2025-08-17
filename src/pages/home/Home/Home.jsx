@@ -26,10 +26,10 @@ const Home = () => {
         <FeaturedDonationsHome />
         <LatestCharityRequests />
         <ImpactStats />
+        <TrustedPartners/>
         <CommunityStories />
         <OurServices/>
         <Faq/>
-        <TrustedPartners/>
         <NewsLetter/>
       </div>
     </>
