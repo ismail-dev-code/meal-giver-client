@@ -11,7 +11,7 @@ const AboutPage = () => {
         <title>MealGiver | About</title>
       </Helmet>
       <div className="max-w-5xl mx-auto px-4 py-12">
-        <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+        <p className="text-lg  mb-6 leading-relaxed">
           <strong>MealGiver</strong> is a nonprofit initiative committed to
           reducing food waste and combating hunger across communities. Every
           year, tons of perfectly good food go to waste while thousands of
@@ -20,10 +20,10 @@ const AboutPage = () => {
           should be discarded while others are in need.
         </p>
 
-        <h2 className="text-2xl font-semibold text-secondary mb-4">
+        <h2 className="text-2xl font-semibold  mb-4">
           Our Mission
         </h2>
-        <p className="text-gray-700 mb-6 leading-relaxed">
+        <p className=" mb-6 leading-relaxed">
           We aim to bridge the gap between food surplus and food insecurity by
           enabling restaurants, bakeries, and food service providers to share
           excess meals with verified charities and humanitarian organizations.
@@ -32,10 +32,10 @@ const AboutPage = () => {
           with dignity.
         </p>
 
-        <h2 className="text-2xl font-semibold text-secondary mb-4">
+        <h2 className="text-2xl font-semibold  mb-4">
           What We Do
         </h2>
-        <ul className="list-disc list-inside text-gray-700 space-y-2 mb-6">
+        <ul className="list-disc list-inside  space-y-2 mb-6">
           <li>
             Coordinate timely food donations from local restaurants and food
             vendors.
@@ -52,10 +52,10 @@ const AboutPage = () => {
           </li>
         </ul>
 
-        <h2 className="text-2xl font-semibold text-secondary mb-4">
+        <h2 className="text-2xl font-semibold  mb-4">
           Our Impact
         </h2>
-        <p className="text-gray-700 mb-6 leading-relaxed">
+        <p className=" mb-6 leading-relaxed">
           Since launching in early 2023, MealGiver has helped redistribute over{" "}
           <strong> 18,400+ meals </strong>
           across 64 districts, prevented an estimated <strong>25 tons</strong> of
@@ -65,10 +65,10 @@ const AboutPage = () => {
           of a mother supported, of a community uplifted.
         </p>
 
-        <h2 className="text-2xl font-semibold text-secondary mb-4">
+        <h2 className="text-2xl font-semibold  mb-4">
           Our Values
         </h2>
-        <ul className="list-disc list-inside text-gray-700 space-y-2 mb-6">
+        <ul className="list-disc list-inside  space-y-2 mb-6">
           <li>
             <strong>Compassion:</strong> We put people first — every decision
             starts with empathy.
@@ -87,10 +87,10 @@ const AboutPage = () => {
           </li>
         </ul>
 
-        <h2 className="text-2xl font-semibold text-secondary mb-4">
+        <h2 className="text-2xl font-semibold  mb-4">
           Who We Serve
         </h2>
-        <p className="text-gray-700 mb-6 leading-relaxed">
+        <p className=" mb-6 leading-relaxed">
           MealGiver supports a wide range of beneficiaries — from shelters,
           orphanages, and community kitchens to rural outreach programs and
           crisis relief efforts. Our network of partners includes certified
@@ -98,10 +98,10 @@ const AboutPage = () => {
           equitable food distribution every day.
         </p>
 
-        <h2 className="text-2xl font-semibold text-secondary mb-4">
+        <h2 className="text-2xl font-semibold  mb-4">
           Get Involved
         </h2>
-        <p className="text-gray-700 leading-relaxed">
+        <p className=" leading-relaxed">
           Whether you're a restaurant with surplus meals, a charity looking to
           expand outreach, or an individual who believes in the power of giving
           — there's a place for you at MealGiver. Together, we can transform the

@@ -9,6 +9,7 @@ const ManageRoleRequests = () => {
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
 
+  // Fetch requests
   const { data: requests = [], isLoading } = useQuery({
     queryKey: ["charityRoleRequests"],
     queryFn: async () => {
@@ -17,6 +18,7 @@ const ManageRoleRequests = () => {
     },
   });
 
+  // Mutation to approve/reject
   const mutation = useMutation({
     mutationFn: async ({ id, email, status }) => {
       await axiosSecure.patch(`/role-requests/${id}`, { status });
@@ -64,86 +66,96 @@ const ManageRoleRequests = () => {
   }
 
   return (
-     <>
+    <>
       <Helmet>
         <title>MealGiver | Charity Role Requests Manage</title>
       </Helmet>
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Manage Charity Role Requests</h2>
 
-      <div className="overflow-x-auto">
-        <table className="table table-zebra w-full text-sm">
-          <thead className="bg-base-200 text-gray-600 uppercase text-xs">
-            <tr>
-              <th>#</th>
-              <th>User Name</th>
-              <th>Email</th>
-              <th>Organization</th>
-              <th>Mission</th>
-              <th>Transaction ID</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {requests.map((req, idx) => {
-              const status = req.status?.toLowerCase() || "pending";
+      <div className="p-6">
+        <h2 className="text-2xl font-bold mb-4">Manage Charity Role Requests</h2>
 
-              return (
-                <tr key={req._id}>
-                  <td>{idx + 1}</td>
-                  <td>{req.name || "N/A"}</td>
-                  <td>{req.email}</td>
-                  <td>{req.organization || "N/A"}</td>
-                  <td className="max-w-xs truncate">{req.mission}</td>
-                  <td>{req.transactionId}</td>
-                  <td>
-                    <span
-                      className={`badge ${
-                        status === "approved"
-                          ? "badge-success"
-                          : status === "rejected"
-                          ? "badge-error"
-                          : "badge-warning"
-                      } capitalize`}
-                    >
-                      {status}
-                    </span>
-                  </td>
-                  <td className="flex gap-2">
-                    {status === "pending" ? (
-                      <>
-                        <button
-                          className="btn btn-xs btn-success flex items-center gap-1"
-                          onClick={() => handleAction(req._id, req.email, "approved")}
-                        >
-                          <FaCheckCircle /> Approve
-                        </button>
-                        <button
-                          className="btn btn-xs btn-error flex items-center gap-1"
-                          onClick={() => handleAction(req._id, req.email, "rejected")}
-                        >
-                          <FaTimesCircle /> Reject
-                        </button>
-                      </>
-                    ) : (
-                      <span className="text-gray-400 italic">No action</span>
-                    )}
+        <div className="overflow-x-auto">
+          <table className="table table-zebra w-full text-sm">
+            <thead className="bg-base-200 text-gray-600 uppercase text-xs">
+              <tr>
+                <th>#</th>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Organization</th>
+                <th>Mission</th>
+                <th>Transaction ID</th>
+                <th>Status</th>
+                <th className="text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {requests.map((req, idx) => {
+                const status = req.status?.toLowerCase() || "pending";
+
+                return (
+                  <tr key={req._id}>
+                    <td>{idx + 1}</td>
+                    <td>{req.name || "N/A"}</td>
+                    <td>{req.email}</td>
+                    <td>{req.organization || "N/A"}</td>
+                    <td className="max-w-xs truncate">{req.mission}</td>
+                    <td>{req.transactionId}</td>
+                    <td>
+                      <span
+                        className={`badge ${
+                          status === "approved"
+                            ? "badge-success"
+                            : status === "rejected"
+                            ? "badge-error"
+                            : "badge-warning"
+                        } capitalize`}
+                      >
+                        {status}
+                      </span>
+                    </td>
+                    <td className="flex gap-2 justify-center">
+                      {status === "pending" ? (
+                        <>
+                          {/* Approve button */}
+                          <button
+                            title="Approve Request"
+                            className="btn btn-xs btn-circle btn-success"
+                            onClick={() =>
+                              handleAction(req._id, req.email, "approved")
+                            }
+                          >
+                            <FaCheckCircle className="text-white text-sm" />
+                          </button>
+
+                          {/* Reject button */}
+                          <button
+                            title="Reject Request"
+                            className="btn btn-xs btn-circle btn-error"
+                            onClick={() =>
+                              handleAction(req._id, req.email, "rejected")
+                            }
+                          >
+                            <FaTimesCircle className="text-white text-sm" />
+                          </button>
+                        </>
+                      ) : (
+                        <span className="text-gray-400 italic">No action</span>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+              {requests.length === 0 && (
+                <tr>
+                  <td colSpan={8} className="text-center py-6 text-gray-500">
+                    No charity role requests found.
                   </td>
                 </tr>
-              );
-            })}
-            {requests.length === 0 && (
-              <tr>
-                <td colSpan={8} className="text-center py-6 text-gray-500">
-                  No charity role requests found.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
     </>
   );
 };

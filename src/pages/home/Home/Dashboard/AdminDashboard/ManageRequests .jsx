@@ -9,7 +9,7 @@ const ManageRequests = () => {
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
 
-  // Fetch all charity requests with donation info
+  // Fetch all charity requests
   const {
     data: requests = [],
     isLoading,
@@ -83,13 +83,13 @@ const ManageRequests = () => {
                 <th>Donation Title</th>
                 <th>Charity Name</th>
                 <th>Charity Email</th>
-                <th>Actions</th>
+                <th className="text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
               {requests.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="text-center py-6 text-gray-500">
+                  <td colSpan={5} className="text-center py-6 text-gray-500">
                     No charity requests found.
                   </td>
                 </tr>
@@ -100,12 +100,13 @@ const ManageRequests = () => {
                     <td>{req.donation?.title || "N/A"}</td>
                     <td>{req.charityName}</td>
                     <td>{req.charityEmail}</td>
-                    <td>
+                    <td className="text-center">
                       <button
-                        className="btn btn-xs btn-error flex items-center gap-1"
+                        title="Delete Request"
+                        className="btn btn-xs btn-circle btn-error"
                         onClick={() => handleDelete(req._id)}
                       >
-                        <FaTrash /> Delete
+                        <FaTrash className="text-white text-sm" />
                       </button>
                     </td>
                   </tr>

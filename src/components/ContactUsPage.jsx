@@ -28,7 +28,7 @@ const ContactUsPage = () => {
         <title>MealGiver | Contact</title>
       </Helmet>
       <div className="max-w-5xl mx-auto px-4 py-12">
-        <p className="text-lg text-gray-700 mb-10 leading-relaxed">
+        <p className="text-lg  mb-10 leading-relaxed">
           We’d love to hear from you! Whether you’re a restaurant looking to
           donate, a charity interested in partnering, a volunteer ready to help,
           or just someone with a question — MealGiver is always here for you.
@@ -40,12 +40,12 @@ const ContactUsPage = () => {
             <h2 className="text-2xl font-semibold text-secondary mb-4">
               Our Office
             </h2>
-            <p className="text-gray-700 mb-3">
+            <p className=" mb-3">
               📍 House #12, Road #7, Block A <br />
               Maijdee, Noakhali, Bangladesh
             </p>
 
-            <p className="text-gray-700 mb-3">
+            <p className=" mb-3">
               📞 Phone:{" "}
               <a
                 href="tel:+8801234567890"
@@ -55,7 +55,7 @@ const ContactUsPage = () => {
               </a>
             </p>
 
-            <p className="text-gray-700 mb-3">
+            <p className=" mb-3">
               ✉️ Email:{" "}
               <a
                 href="mailto:support@mealgiver.org"
@@ -65,7 +65,7 @@ const ContactUsPage = () => {
               </a>
             </p>
 
-            <p className="text-gray-700 mb-3">
+            <p className=" mb-3">
               🕒 Hours: Open 24/7 except Friday 11am–2pm (closed)
             </p>
           </div>
@@ -78,7 +78,7 @@ const ContactUsPage = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               {/* Name */}
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium ">
                   Your Name
                 </label>
                 <input
@@ -96,7 +96,7 @@ const ContactUsPage = () => {
 
               {/* Email */}
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium ">
                   Email Address
                 </label>
                 <input
@@ -120,7 +120,7 @@ const ContactUsPage = () => {
 
               {/* Message */}
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium ">
                   Your Message
                 </label>
                 <textarea

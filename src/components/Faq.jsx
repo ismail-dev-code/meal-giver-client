@@ -105,7 +105,7 @@ const Faq = () => {
           >
             <input type="radio" name={`faq-accordion-${index}`} />
             <div className="collapse-title font-semibold">{faq.question}</div>
-            <div className="collapse-content text-sm text-gray-700">
+            <div className="collapse-content text-sm">
               {faq.answer}
             </div>
           </div>

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
+import { FaEdit, FaTrash } from "react-icons/fa";
 import { toast } from "react-hot-toast";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 import ConfirmModal from "../../../../../components/Modal/ConfirmModal";
 import { Helmet } from "react-helmet-async";
+import Loading from "../../../../../components/MealGiver/Loading";
 
 const MyDonations = () => {
   const axiosSecure = useAxiosSecure();
@@ -49,7 +51,7 @@ const MyDonations = () => {
   };
 
   if (isLoading)
-    return <div className="text-center py-10">Loading donations...</div>;
+    return <Loading/>;
 
   return (
     <>
@@ -80,7 +82,9 @@ const MyDonations = () => {
                 className="w-full h-48 object-cover"
               />
               <div className="p-4 space-y-2">
-                <h2 className="text-xl font-semibold">{donation.title}</h2>
+                <h2 className="text-xl text-gray-900 font-semibold">
+                  {donation.title}
+                </h2>
                 <p className="text-sm text-gray-500">Type: {donation.type}</p>
                 <p className="text-sm text-gray-500">
                   Quantity: {donation.quantity}
@@ -88,7 +92,7 @@ const MyDonations = () => {
                 <p className="text-sm text-gray-500">
                   Restaurant: {donation.restaurant?.name}
                 </p>
-                <p className="text-sm font-medium">
+                <p className="text-sm text-gray-900 font-medium">
                   Status:{" "}
                   <span
                     className={`capitalize ${
@@ -110,19 +114,21 @@ const MyDonations = () => {
                 <div className="flex gap-2 mt-3">
                   {donation.status !== "rejected" && (
                     <button
-                      className="btn btn-sm btn-primary"
+                      title="Edit Donation"
                       onClick={() =>
                         navigate(`/dashboard/edit-donation/${donation._id}`)
                       }
+                      className="btn btn-xs btn-circle btn-primary"
                     >
-                      Update
+                      <FaEdit className="text-white text-sm" />
                     </button>
                   )}
                   <button
-                    className="btn btn-sm btn-error"
+                    title="Delete Donation"
                     onClick={() => handleDelete(donation._id)}
+                    className="btn btn-xs btn-circle btn-error"
                   >
-                    Delete
+                    <FaTrash className="text-white text-sm" />
                   </button>
                 </div>
               </div>

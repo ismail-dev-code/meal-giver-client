@@ -23,7 +23,7 @@ const AdminManageUsers = () => {
     },
   });
 
-  // Update role mutation using email
+  // Update role mutation
   const updateRoleMutation = useMutation({
     mutationFn: async ({ email, role }) => {
       return await axiosSecure.patch(`/users/${email}/role`, { role });
@@ -51,7 +51,7 @@ const AdminManageUsers = () => {
     },
   });
 
-  // Handle role assignment by email
+  // Handle role assignment
   const handleRoleChange = (email, role) => {
     Swal.fire({
       title: "Are you sure?",
@@ -66,7 +66,7 @@ const AdminManageUsers = () => {
     });
   };
 
-  // Handle user deletion
+  // Handle delete
   const handleDeleteUser = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -117,39 +117,36 @@ const AdminManageUsers = () => {
                   <td className="capitalize">{user.role || "user"}</td>
                   <td className="flex flex-wrap gap-2 justify-center">
                     <button
-                      className="btn btn-xs btn-success flex items-center gap-1"
-                      disabled={
-                        user.role === "admin" || updateRoleMutation.isLoading
-                      }
+                      className="btn btn-xs btn-success"
+                      title="Make Admin"
+                      disabled={user.role === "admin" || updateRoleMutation.isLoading}
                       onClick={() => handleRoleChange(user.email, "admin")}
                     >
-                      <FaUserShield /> Admin
+                      <FaUserShield />
                     </button>
                     <button
-                      className="btn btn-xs btn-warning flex items-center gap-1"
-                      disabled={
-                        user.role === "restaurant" ||
-                        updateRoleMutation.isLoading
-                      }
+                      className="btn btn-xs btn-warning"
+                      title="Make Restaurant"
+                      disabled={user.role === "restaurant" || updateRoleMutation.isLoading}
                       onClick={() => handleRoleChange(user.email, "restaurant")}
                     >
-                      <FaUtensils /> Restaurant
+                      <FaUtensils />
                     </button>
                     <button
-                      className="btn btn-xs btn-info flex items-center gap-1"
-                      disabled={
-                        user.role === "charity" || updateRoleMutation.isLoading
-                      }
+                      className="btn btn-xs btn-info"
+                      title="Make Charity"
+                      disabled={user.role === "charity" || updateRoleMutation.isLoading}
                       onClick={() => handleRoleChange(user.email, "charity")}
                     >
-                      <FaHandHoldingHeart /> Charity
+                      <FaHandHoldingHeart />
                     </button>
                     <button
-                      className="btn btn-xs btn-error flex items-center gap-1"
+                      className="btn btn-xs btn-error"
+                      title="Delete User"
                       disabled={deleteUserMutation.isLoading}
                       onClick={() => handleDeleteUser(user._id)}
                     >
-                      <FaTrash /> Delete
+                      <FaTrash />
                     </button>
                   </td>
                 </tr>

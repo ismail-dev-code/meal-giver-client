@@ -36,7 +36,7 @@ export default function TrustedPartners() {
   return (
     <section className="py-12">
       <div className="max-w-7xl mx-auto px-6 text-center">
-        <h2 data-aos="fade-up" className="md:text-3xl text-xl font-bold text-gray-800 mb-4">
+        <h2 data-aos="fade-up" className="md:text-3xl text-xl font-bold  mb-4">
           Our Trusted Partners & Sponsors
         </h2>
         <p data-aos="fade-up" data-aos-delay="100" className="text-gray-600 mb-12 max-w-2xl mx-auto">

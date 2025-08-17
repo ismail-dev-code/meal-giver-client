@@ -51,11 +51,12 @@ const AdminProfile = () => {
             alt="Admin"
             className="w-28 h-28 rounded-full border-4 border-primary object-cover"
           />
-          <h2 className="text-2xl font-bold mt-4">{profile.name || "N/A"}</h2>
+          <h2 className="text-2xl text-gray-600 font-bold mt-4">{profile.name || "N/A"}</h2>
           <p className="text-gray-600 text-sm mb-1">{profile.email}</p>
           <p className="bg-primary/10 text-primary font-medium text-sm px-3 py-1 rounded-full">
             Role: {profile.role || "user"}
           </p>
+          
           {profile.last_log_in && (
             <p className="text-sm text-gray-500 mt-2">
              Joined:{" "}

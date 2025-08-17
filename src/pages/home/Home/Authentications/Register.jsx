@@ -87,7 +87,7 @@ const Register = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
           {/* Name */}
           <div>
-            <label className="label">Full Name</label>
+            <label className="label text-gray-500">Full Name</label>
             <input
               type="text"
               {...register("name", {
@@ -107,7 +107,7 @@ const Register = () => {
 
           {/* Profile Picture */}
           <div>
-            <label className="label">Profile Picture</label>
+            <label className="label text-gray-500">Profile Picture</label>
             <input
               type="file"
               accept="image/*"
@@ -125,7 +125,7 @@ const Register = () => {
 
           {/* Email */}
           <div>
-            <label className="label">Email</label>
+            <label className="label text-gray-500">Email</label>
             <input
               type="email"
               {...register("email", { required: true })}
@@ -139,7 +139,7 @@ const Register = () => {
 
           {/* Password */}
           <div>
-            <label className="label">Password</label>
+            <label className="label text-gray-500">Password</label>
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
@@ -166,7 +166,7 @@ const Register = () => {
 
           {/* Confirm Password */}
           <div>
-            <label className="label">Confirm Password</label>
+            <label className="label text-gray-500">Confirm Password</label>
             <div className="relative">
               <input
                 type={showConfirmPassword ? "text" : "password"}
@@ -201,7 +201,7 @@ const Register = () => {
             {uploading ? "Uploading image..." : "Register"}
           </button>
 
-          <p className="text-center text-sm mt-4">
+          <p className="text-center text-gray-500 text-sm mt-4">
             Already have an account?{" "}
             <Link to="/login" className="text-primary hover:underline">
               Login

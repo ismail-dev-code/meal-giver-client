@@ -35,8 +35,8 @@ const RestaurantProfile = () => {
           className="w-24 h-24 rounded-full border object-cover"
         />
 
-        <h2 className="text-2xl font-bold mt-4">{profile?.name}</h2>
-        <p className="flex items-center gap-2 justify-center"><strong>Role:</strong> <span className="badge badge-primary mt-1 capitalize">{profile?.role}</span></p>
+        <h2 className="text-2xl text-gray-900 font-bold mt-4">{profile?.name}</h2>
+        <p className="flex items-center gap-2 justify-center text-gray-900"><strong>Role:</strong> <span className="badge badge-primary mt-1 capitalize">{profile?.role}</span></p>
 
         <div className="mt-4 w-full space-y-2 text-center text-sm text-gray-700">
           <p><strong>Email:</strong> {profile?.email}</p>

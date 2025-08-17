@@ -88,7 +88,7 @@ const DashboardLayout = () => {
 
             <li>
               <Link to="/dashboard" className="flex items-center gap-2">
-                <FaHome /> Dashboard Home
+                <FaHome />Home
               </Link>
             </li>
 

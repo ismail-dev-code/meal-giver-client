@@ -20,7 +20,7 @@ const FeaturedDonationsHome = () => {
   return (
     <section className="pb-12 pt-5">
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="md:text-3xl text-xl font-bold text-center text-secondary mb-10">
+        <h2 className="md:text-3xl text-xl font-bold text-center  mb-10">
           Featured Donations
         </h2>
 
@@ -67,7 +67,7 @@ const FeaturedDonationsHome = () => {
                 </div>
 
                 {/* Footer */}
-                <div className="p-4 flex items-center justify-between bg-gray-50 rounded-b-xl">
+                <div className="p-4 flex items-center justify-between rounded-b-xl">
                   <div className="flex items-center gap-2">
                     {donation.verified && (
                       <FaCheckCircle
@@ -88,7 +88,7 @@ const FeaturedDonationsHome = () => {
 
                   <Link
                     to={`/donation-details/${donation._id}`}
-                    className="text-sm font-medium text-white bg-accent hover:bg-primary transition px-4 py-2 rounded-full hover:scale-105"
+                    className="text-sm font-medium text-white bg-primary hover:bg-accent transition px-4 py-2 rounded-full hover:scale-105"
                   >
                     View Details
                   </Link>

@@ -23,15 +23,15 @@ const TransactionHistory = () => {
         <Helmet>
             <title>MealGiver | Transaction History</title>
           </Helmet> 
-    <div className="max-w-6xl mx-auto p-6 bg-white shadow rounded">
-      <h2 className="text-xl font-semibold mb-4">Charity Role Transaction History</h2>
+    <div className="max-w-6xl mx-auto p-6 bg-white text-gray-900 shadow rounded">
+      <h2 className="text-xl text-gray-900 font-semibold mb-4">Charity Role Transaction History</h2>
       {transactions.length === 0 ? (
         <p>No transactions found.</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="table w-full border">
             <thead className="bg-gray-100">
-              <tr>
+              <tr className="text-gray-900">
                 <th className="p-2 border">#</th>
                 <th className="p-2 border">Transaction ID</th>
                 <th className="p-2 border">Amount</th>

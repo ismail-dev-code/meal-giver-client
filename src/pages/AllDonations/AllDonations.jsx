@@ -97,15 +97,15 @@ const AllDonations = () => {
               </div>
 
               <div className="p-4 flex flex-col flex-grow">
-                <h2 className="text-xl font-semibold mb-1">{d.title}</h2>
-                <p className="text-sm text-gray-600">{d.restaurant.name}</p>
-                <p className="text-sm">{d.restaurant.location}</p>
+                <h2 className="text-xl text-gray-900 font-semibold mb-1">{d.title}</h2>
+                <p className="text-sm text-gray-900">{d.restaurant.name}</p>
+                <p className="text-sm text-gray-500">{d.restaurant.location}</p>
                 {d.charity && (
-                  <p className="text-sm text-gray-600 mt-1">
+                  <p className="text-sm text-gray-900 mt-1">
                     Assigned to: {d.charity.name}
                   </p>
                 )}
-                <p className="text-sm font-medium mt-2">
+                <p className="text-sm text-gray-900 font-medium mt-2">
                   Status:{" "}
                   <span
                     className={`capitalize ${
@@ -123,7 +123,7 @@ const AllDonations = () => {
                 </p>
                 <p className="text-sm text-gray-600">Quantity: {d.quantity} KG</p>
                 <p className="text-sm mt-1">
-                  <strong>Approved:</strong>{" "}
+                  <strong className="text-gray-600">Approved:</strong>{" "}
                   <span className="text-green-500">Yes</span>
                 </p>
 
@@ -131,7 +131,7 @@ const AllDonations = () => {
                 <div className="mt-auto">
                   <Link
                     to={`/donation-details/${d._id}`}
-                    className="inline-block mt-3 bg-accent hover:bg-primary text-white px-4 py-2 rounded-full transition hover:scale-105 text-sm font-medium"
+                    className="inline-block mt-3 bg-primary hover:bg-accent text-white px-4 py-2 rounded-full transition hover:scale-105 text-sm font-medium"
                   >
                     View Details
                   </Link>

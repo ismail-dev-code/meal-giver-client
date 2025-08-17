@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { FaHome, FaHandsHelping, FaTachometerAlt, FaInfoCircle, FaEnvelope, FaMapMarkedAlt } from "react-icons/fa";
+import { FaHome, FaHandsHelping, FaTachometerAlt, FaInfoCircle, FaEnvelope, FaMapMarkedAlt, FaSun, FaMoon } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import MealGiverLogo from "../../components/MealGiver/MealGiverLogo";
 
@@ -9,6 +9,25 @@ const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const { user, logOut } = useAuth();
+
+  const [isDark, setIsDark] = useState(() => {
+    return localStorage.getItem("theme") === "dark";
+  });
+  useEffect(() => {
+    const root = document.documentElement;
+
+    if (isDark) {
+      root.classList.add("dark");
+      root.setAttribute("data-theme", "dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      root.classList.remove("dark");
+      root.setAttribute("data-theme", "light");
+      localStorage.setItem("theme", "light");
+    }
+  }, [isDark]);
+
+  const toggleTheme = () => setIsDark(!isDark);
 
   const handleLogout = () => {
     logOut()
@@ -98,6 +117,18 @@ const Navbar = () => {
 
         {/* Navbar End */}
         <div className="navbar-end">
+           {/* Theme Toggle */}
+       
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-full cursor-pointer dark:bg-gray-700 transition"
+          >
+            {isDark ? (
+              <FaSun className="text-gray-100 w-5 h-5" />
+            ) : (
+              <FaMoon className="text-gray-200 w-5 h-5" />
+            )}
+          </button>
           {user ? (
             <div className="dropdown dropdown-end">
               <label

@@ -68,11 +68,11 @@ const AddDonation = () => {
         <title>MealGiver | Add Donation</title>
       </Helmet>
       <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
-        <h1 className="text-2xl font-bold mb-6 text-center">Add Donation</h1>
+        <h1 className="text-2xl text-gray-900 font-bold mb-6 text-center">Add Donation</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {/* Title */}
           <div>
-            <label className="block mb-1 font-medium">Donation Title</label>
+            <label className="block mb-1 text-gray-900 font-medium">Donation Title</label>
             <input
               type="text"
               {...register("title", { required: true })}
@@ -86,7 +86,7 @@ const AddDonation = () => {
 
           {/* Food Type */}
           <div>
-            <label className="block mb-1 font-medium">Food Type</label>
+            <label className="block mb-1 text-gray-900 font-medium">Food Type</label>
             <select
               {...register("type", { required: true })}
               className="select select-bordered w-full"
@@ -105,7 +105,7 @@ const AddDonation = () => {
 
           {/* Quantity */}
           <div>
-            <label className="block mb-1 font-medium">
+            <label className="block mb-1 font-medium text-gray-900">
               Quantity (kg or portions)
             </label>
             <input
@@ -121,7 +121,7 @@ const AddDonation = () => {
 
           {/* Pickup Time Window */}
           <div>
-            <label className="block mb-1 font-medium">Pickup Time Window</label>
+            <label className="block mb-1 font-medium text-gray-900">Pickup Time Window</label>
             <input
               type="text"
               {...register("pickupWindow", { required: true })}
@@ -135,7 +135,7 @@ const AddDonation = () => {
 
           {/* Location */}
           <div>
-            <label className="block mb-1 font-medium">Location</label>
+            <label className="block mb-1 font-medium text-gray-900">Location</label>
             <input
               type="text"
               {...register("location", { required: true })}
@@ -149,7 +149,7 @@ const AddDonation = () => {
 
           {/* Image */}
           <div>
-            <label className="block mb-1 font-medium">Image</label>
+            <label className="block mb-1 font-medium text-gray-900">Image</label>
             <input
               type="file"
               {...register("image", { required: true })}
@@ -164,7 +164,7 @@ const AddDonation = () => {
           {/* Readonly Fields */}
           <div className="grid sm:grid-cols-2 gap-4">
             <div>
-              <label className="block mb-1 font-medium">Restaurant Name</label>
+              <label className="block mb-1 font-medium text-gray-900">Restaurant Name</label>
               <input
                 type="text"
                 value={user?.displayName || ""}
@@ -173,7 +173,7 @@ const AddDonation = () => {
               />
             </div>
             <div>
-              <label className="block mb-1 font-medium">Email</label>
+              <label className="block mb-1 font-medium text-gray-900">Email</label>
               <input
                 type="email"
                 value={user?.email || ""}

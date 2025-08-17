@@ -68,7 +68,7 @@ const Login = () => {
         data-aos="fade-up"
         className="card max-w-md mx-auto md:px-4 pb-3 md:shadow-md bg-white"
       >
-        <h2 className="md:text-2xl text-xl text-nowrap font-bold text-center mb-4 text-primary">
+        <h2 className="md:text-2xl text-xl text-nowrap font-bold text-center mt-4 text-primary">
           {forgotMode ? "Reset Your Password" : "Access your account"}
         </h2>
 
@@ -76,7 +76,7 @@ const Login = () => {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
             {/* Email */}
             <div>
-              <label className="label font-medium" htmlFor="email">
+              <label className="label text-gray-500 font-medium" htmlFor="email">
                 Email
               </label>
               <input
@@ -103,7 +103,7 @@ const Login = () => {
 
             {/* Password */}
             <div>
-              <label className="label font-medium" htmlFor="password">
+              <label className="label text-gray-500 font-medium" htmlFor="password">
                 Password
               </label>
               <div className="relative">
@@ -141,7 +141,7 @@ const Login = () => {
               <button
                 type="button"
                 onClick={() => setForgotMode(true)}
-                className="link link-hover text-sm"
+                className="link text-gray-500 link-hover text-sm"
               >
                 Forgot password?
               </button>
@@ -157,7 +157,7 @@ const Login = () => {
             </button>
 
             {/* Register Link */}
-            <p className="text-sm text-center mt-4">
+            <p className="text-sm text-gray-500 text-center mt-4">
               Don’t have an account?{" "}
               <Link
                 state={{ from }}
@@ -202,7 +202,7 @@ const Login = () => {
               <button
                 onClick={() => setForgotMode(false)}
                 disabled={resetLoading}
-                className="btn btn-outline w-full sm:w-auto"
+                className="btn btn-outline w-full text-black hover:text-accent sm:w-auto"
               >
                 Cancel
               </button>

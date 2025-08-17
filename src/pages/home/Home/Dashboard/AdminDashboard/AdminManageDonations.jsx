@@ -38,9 +38,7 @@ const AdminManageDonations = () => {
   const handleAction = (id, status) => {
     Swal.fire({
       title: `Are you sure?`,
-      text: `You want to ${
-        status === "verified" ? "verify" : "reject"
-      } this donation.`,
+      text: `You want to ${status === "verified" ? "verify" : "reject"} this donation.`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Yes",
@@ -67,7 +65,6 @@ const AdminManageDonations = () => {
       </Helmet>
       <div className="p-6">
         <h2 className="text-2xl font-bold mb-4">Manage Donations</h2>
-
         <div className="overflow-x-auto">
           <table className="table table-zebra w-full text-sm">
             <thead className="bg-base-200 text-xs text-gray-600 uppercase">
@@ -79,7 +76,7 @@ const AdminManageDonations = () => {
                 <th>Email</th>
                 <th>Quantity</th>
                 <th>Status</th>
-                <th>Actions</th>
+                <th className="text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -104,23 +101,24 @@ const AdminManageDonations = () => {
                       {donation.status}
                     </span>
                   </td>
-                  <td className="flex gap-2">
-                    {donation.status === "verified" ||
-                    donation.status === "rejected" ? (
+                  <td className="flex gap-2 justify-center">
+                    {donation.status === "verified" || donation.status === "rejected" ? (
                       <span className="text-gray-400 italic">No action</span>
                     ) : (
                       <>
                         <button
+                          title="Verify Donation"
                           onClick={() => handleAction(donation._id, "verified")}
-                          className="btn btn-xs btn-success"
+                          className="btn btn-xs btn-circle btn-success"
                         >
-                          <FaCheckCircle />
+                          <FaCheckCircle className="text-white text-sm" />
                         </button>
                         <button
+                          title="Reject Donation"
                           onClick={() => handleAction(donation._id, "rejected")}
-                          className="btn btn-xs btn-error"
+                          className="btn btn-xs btn-circle btn-error"
                         >
-                          <FaTimesCircle />
+                          <FaTimesCircle className="text-white text-sm" />
                         </button>
                       </>
                     )}
