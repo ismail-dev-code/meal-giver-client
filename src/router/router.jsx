@@ -34,6 +34,8 @@ import MyReviews from "../pages/home/Home/Dashboard/UserDashboard/MyReviews";
 import MyProfile from "../pages/home/Home/Dashboard/UserDashboard/MyProfile";
 import AboutPage from "../components/AboutPage";
 import ContactUsPage from "../components/ContactUsPage";
+import Coverage from "../components/Branches/Coverage";
+import Loading from "../components/MealGiver/Loading";
 
 export const router = createBrowserRouter([
   {
@@ -60,6 +62,12 @@ export const router = createBrowserRouter([
       {
         path: "contact-us",
         Component: ContactUsPage,
+      },
+      {
+        path: "coverage",
+        Component: Coverage,
+        loader: () => fetch("./districtBranches.json"),
+        hydrateFallbackElement: <Loading />,
       },
       {
         path: "forbidden",

@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
-import { FaHome, FaHandsHelping, FaTachometerAlt, FaInfoCircle, FaEnvelope } from "react-icons/fa";
+import { FaHome, FaHandsHelping, FaTachometerAlt, FaInfoCircle, FaEnvelope, FaMapMarkedAlt } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import MealGiverLogo from "../../components/MealGiver/MealGiverLogo";
 
@@ -43,6 +43,11 @@ const Navbar = () => {
 <li>
   <NavLink to="/contact-us" className="mr-4 flex items-center gap-2">
     <FaEnvelope /> Contact Us
+  </NavLink>
+</li>
+<li>
+  <NavLink to="/coverage" className="mr-4 flex items-center gap-2">
+    <FaMapMarkedAlt /> Coverage
   </NavLink>
 </li>
        {user && (
