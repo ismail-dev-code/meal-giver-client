@@ -87,9 +87,9 @@ const Faq = () => {
   const faqsToShow = showMore ? [...initialFaqs, ...extraFaqs] : initialFaqs;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
+    <div className="max-w-6xl mx-auto px-4 py-12">
       <div className="text-center mb-8" data-aos="fade-down">
-        <h1 className="text-3xl font-bold mb-2">Frequently Asked Questions (FAQ)</h1>
+        <h1 className="md:text-3xl text-xl font-bold mb-2">Frequently Asked Questions (FAQ)</h1>
         <p className="text-gray-600">
           Find quick answers about donating, receiving, and participating in the MealGiver platform.
         </p>
@@ -115,7 +115,7 @@ const Faq = () => {
       <div className="text-center mt-8" data-aos="zoom-in">
         <button
           onClick={() => setShowMore(!showMore)}
-          className="text-black btn btn-primary"
+          className="text-white btn btn-primary"
         >
           {showMore ? "Show Less" : "See More FAQ's"}
         </button>
