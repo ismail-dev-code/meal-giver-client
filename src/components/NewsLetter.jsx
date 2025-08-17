@@ -55,7 +55,7 @@ const NewsLetter = () => {
   return (
     <div className="flex flex-col md:flex-row gap-6 justify-between border border-gray-200 shadow-lg mb-10 rounded-xl py-10 mx-4 md:py-16 px-4 md:px-10 bg-gradient-to-r from-teal-50 to-white">
       <div className="flex-1 text-center md:text-left">
-        <h2 className="md:text-xl text-2xl font-semibold text-teal-600">
+        <h2 className="md:text-xl text-2xl font-semibold text-primary">
           MealGiver Newsletter
         </h2>
         <h1 className="text-xl md:text-4xl font-bold text-gray-800">

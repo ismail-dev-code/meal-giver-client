@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet-async";
 import Faq from "../../../components/Faq";
 import OurServices from "../../../components/OurServices";
 import NewsLetter from "../../../components/NewsLetter";
+import TrustedPartners from "../../../components/TrustedPartners";
 
 const Home = () => {
   useEffect(() => {
@@ -28,6 +29,7 @@ const Home = () => {
         <CommunityStories />
         <OurServices/>
         <Faq/>
+        <TrustedPartners/>
         <NewsLetter/>
       </div>
     </>

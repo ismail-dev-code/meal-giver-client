@@ -58,7 +58,7 @@ const AboutPage = () => {
         <p className="text-gray-700 mb-6 leading-relaxed">
           Since launching in early 2023, MealGiver has helped redistribute over{" "}
           <strong> 18,400+ meals </strong>
-          across 18 cities, prevented an estimated <strong>25 tons</strong> of
+          across 64 districts, prevented an estimated <strong>25 tons</strong> of
           food waste, and supported over
           <strong> 120 charitable organizations</strong> working at the
           grassroots level. Behind every donation is a story — of a child fed,

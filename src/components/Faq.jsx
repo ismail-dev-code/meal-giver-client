@@ -87,7 +87,7 @@ const Faq = () => {
   const faqsToShow = showMore ? [...initialFaqs, ...extraFaqs] : initialFaqs;
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-12">
+    <div className="px-4 py-12">
       <div className="text-center mb-8" data-aos="fade-down">
         <h1 className="md:text-3xl text-xl font-bold mb-2">Frequently Asked Questions (FAQ)</h1>
         <p className="text-gray-600">
