@@ -3,6 +3,10 @@ import {
   FaTwitter,
   FaInstagram,
   FaLinkedinIn,
+  FaHandsHelping,
+  FaMapMarkedAlt,
+  FaEnvelope,
+  FaInfoCircle,
 } from "react-icons/fa";
 import { Link } from "react-router";
 import MealGiverLogo from "../../../components/MealGiver/MealGiverLogo";
@@ -29,20 +33,25 @@ const Footer = () => {
           <h2 className="text-lg font-semibold mb-2">Quick Links</h2>
           <ul className="space-y-1 text-sm">
             <li>
-              <Link to="/about-us" className="hover:underline">
-                About
-              </Link>
-            </li>
-            <li>
-              <Link to="/contact-us" className="hover:underline">
-                Contact
-              </Link>
-            </li>
-            <li>
-              <Link to="/all-donations" className="hover:underline">
-                Browse Donations
-              </Link>
-            </li>
+  <Link to="/about-us" className="hover:underline flex items-center gap-2">
+    <FaInfoCircle /> About
+  </Link>
+</li>
+<li>
+  <Link to="/contact-us" className="hover:underline flex items-center gap-2">
+    <FaEnvelope /> Contact
+  </Link>
+</li>
+<li>
+  <Link to="/coverage" className="hover:underline flex items-center gap-2">
+    <FaMapMarkedAlt /> Coverage
+  </Link>
+</li>
+<li>
+  <Link to="/all-donations" className="hover:underline flex items-center gap-2">
+    <FaHandsHelping /> Browse Donations
+  </Link>
+</li>
           </ul>
         </div>
 

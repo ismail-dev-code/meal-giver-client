@@ -45,11 +45,11 @@ const Navbar = () => {
     <FaEnvelope /> Contact Us
   </NavLink>
 </li>
-<li>
+{/* <li>
   <NavLink to="/coverage" className="mr-4 flex items-center gap-2">
     <FaMapMarkedAlt /> Coverage
   </NavLink>
-</li>
+</li> */}
        {user && (
       <li>
         <NavLink to="/dashboard" className="mr-4 flex items-center gap-2">
