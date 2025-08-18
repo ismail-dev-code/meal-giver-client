@@ -43,7 +43,7 @@ const ReviewModal = ({ donationId, donation, user, onClose, refetchReviews }) =>
     <Dialog open={true} onClose={onClose} className="relative z-50">
       <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
 
-      <div className="fixed inset-0 flex items-center justify-center p-4">
+      <div className="fixed inset-0 flex items-center text-gray-900 justify-center p-4">
         <Dialog.Panel className="w-full max-w-md rounded bg-white p-6 shadow-lg">
           <Dialog.Title className="text-xl font-bold mb-4">Submit a Review</Dialog.Title>
 
@@ -53,7 +53,7 @@ const ReviewModal = ({ donationId, donation, user, onClose, refetchReviews }) =>
               <textarea
                 name="comment"
                 required
-                className="w-full textarea textarea-bordered"
+                className="w-full text-gray-500 textarea textarea-bordered"
                 placeholder="Write your experience..."
               ></textarea>
             </div>
@@ -63,7 +63,7 @@ const ReviewModal = ({ donationId, donation, user, onClose, refetchReviews }) =>
               <select
                 name="rating"
                 required
-                className="select select-bordered w-full"
+                className="select text-gray-500 select-bordered w-full"
                 defaultValue=""
               >
                 <option value="" disabled>

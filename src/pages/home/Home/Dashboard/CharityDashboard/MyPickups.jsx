@@ -78,7 +78,7 @@ const MyPickups = () => {
                 {item.status !== "picked_up" && (
                   <button
                     onClick={() => confirmPickup.mutate(item._id)}
-                    className="btn btn-success mt-3 btn-sm"
+                    className="btn text-white btn-success mt-3 btn-sm"
                   >
                     Confirm Pickup
                   </button>

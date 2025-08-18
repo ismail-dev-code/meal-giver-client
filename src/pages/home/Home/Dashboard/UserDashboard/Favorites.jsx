@@ -77,54 +77,58 @@ const Favorites = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {favorites.map((fav) => (
-            <div key={fav._id} className="card bg-base-100 shadow">
-              <img
-                src={fav.donation?.image || "/placeholder.jpg"}
-                alt={fav.donation?.title}
-                className="h-48 object-cover w-full rounded-t"
-              />
-              <div className="p-4 space-y-2">
-                <h3 className="text-lg font-semibold">{fav.donation?.title}</h3>
-                <p className="text-sm text-gray-600">
-                  <strong>Restaurant:</strong> {fav.donation?.restaurant?.name || "N/A"}
-                </p>
-                <p className="text-sm text-gray-600">
-                  <strong>Location:</strong> {fav.donation?.restaurant?.location || "N/A"}
-                </p>
-                <p className="text-sm text-gray-600">
-                  <strong>Status:</strong>{" "}
-                  <span
-                    className={`badge ${
-                      fav.donation?.status === "verified"
-                        ? "badge-info"
-                        : fav.donation?.status === "accepted"
-                        ? "badge-success"
-                        : "badge-warning"
-                    } capitalize`}
-                  >
-                    {fav.donation?.status || "N/A"}
-                  </span>
-                </p>
-                <p className="text-sm text-gray-600">
-                  <strong>Quantity:</strong> {fav.donation?.quantity || "N/A"}
-                </p>
+           <div key={fav._id} className="card bg-base-100 shadow flex flex-col">
+  <img
+    src={fav.donation?.image || "/placeholder.jpg"}
+    alt={fav.donation?.title}
+    className="h-48 object-cover w-full rounded-t"
+  />
+  
+  {/* Details */}
+  <div className="p-4 flex-1 space-y-2">
+    <h3 className="text-lg font-semibold">{fav.donation?.title}</h3>
+    <p className="text-sm text-gray-600">
+      <strong>Restaurant:</strong> {fav.donation?.restaurant?.name || "N/A"}
+    </p>
+    <p className="text-sm text-gray-600">
+      <strong>Location:</strong> {fav.donation?.restaurant?.location || "N/A"}
+    </p>
+    <p className="text-sm text-gray-600">
+      <strong>Status:</strong>{" "}
+      <span
+        className={`badge ${
+          fav.donation?.status === "verified"
+            ? "badge-info"
+            : fav.donation?.status === "accepted"
+            ? "badge-success"
+            : "badge-warning"
+        } capitalize`}
+      >
+        {fav.donation?.status || "N/A"}
+      </span>
+    </p>
+    <p className="text-sm text-gray-600">
+      <strong>Quantity:</strong> {fav.donation?.quantity || "N/A"} KG
+    </p>
+  </div>
 
-                <div className="flex gap-2 mt-3">
-                  <Link
-                    to={`/donation-details/${fav.donation?._id}`}
-                    className="btn btn-sm btn-outline"
-                  >
-                    <FaExternalLinkAlt /> Details
-                  </Link>
-                  <button
-                    onClick={() => handleRemove(fav._id)}
-                    className="btn btn-sm btn-error text-white"
-                  >
-                    <FaTrash /> Remove
-                  </button>
-                </div>
-              </div>
-            </div>
+  {/* Buttons pinned at bottom */}
+  <div className="p-4 pt-0 mt-auto flex gap-2">
+    <Link
+      to={`/donation-details/${fav.donation?._id}`}
+      className="btn btn-sm btn-outline flex-1"
+    >
+      <FaExternalLinkAlt /> Details
+    </Link>
+    <button
+      onClick={() => handleRemove(fav._id)}
+      className="btn btn-sm btn-error text-white flex-1"
+    >
+      <FaTrash /> Remove
+    </button>
+  </div>
+</div>
+
           ))}
         </div>
       )}

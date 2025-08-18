@@ -22,7 +22,7 @@ const RequestModal = ({ donation, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-blur/60 flex items-center justify-center z-50">
       <div className="bg-white max-w-md w-full p-6 space-y-4 rounded-lg">
         <h2 className="text-lg font-semibold">Request Donation</h2>
         <div className="space-y-2">

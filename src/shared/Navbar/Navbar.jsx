@@ -1,9 +1,19 @@
 import { Link, NavLink } from "react-router";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { FaHome, FaHandsHelping, FaTachometerAlt, FaInfoCircle, FaEnvelope, FaMapMarkedAlt, FaSun, FaMoon } from "react-icons/fa";
+import {
+  FaHome,
+  FaHandsHelping,
+  FaTachometerAlt,
+  FaInfoCircle,
+  FaEnvelope,
+  FaMapMarkedAlt,
+  FaSun,
+  FaMoon,
+} from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import MealGiverLogo from "../../components/MealGiver/MealGiverLogo";
+import { FiLogOut } from "react-icons/fi";
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -54,29 +64,28 @@ const Navbar = () => {
           <FaHandsHelping /> All Donations
         </NavLink>
       </li>
-     <li>
-  <NavLink to="/about-us" className="mr-4 flex items-center gap-2">
-    <FaInfoCircle /> About Us
-  </NavLink>
-</li>
-<li>
-  <NavLink to="/contact-us" className="mr-4 flex items-center gap-2">
-    <FaEnvelope /> Contact Us
-  </NavLink>
-</li>
-{/* <li>
+      <li>
+        <NavLink to="/about-us" className="mr-4 flex items-center gap-2">
+          <FaInfoCircle /> About Us
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/contact-us" className="mr-4 flex items-center gap-2">
+          <FaEnvelope /> Contact Us
+        </NavLink>
+      </li>
+      {/* <li>
   <NavLink to="/coverage" className="mr-4 flex items-center gap-2">
     <FaMapMarkedAlt /> Coverage
   </NavLink>
 </li> */}
-       {user && (
-      <li>
-        <NavLink to="/dashboard" className="mr-4 flex items-center gap-2">
-          <FaTachometerAlt /> Dashboard
-        </NavLink>
-      </li>
-    )}
-    
+      {user && (
+        <li>
+          <NavLink to="/dashboard" className="mr-4 flex items-center gap-2">
+            <FaTachometerAlt /> Dashboard
+          </NavLink>
+        </li>
+      )}
     </>
   );
 
@@ -117,16 +126,16 @@ const Navbar = () => {
 
         {/* Navbar End */}
         <div className="navbar-end">
-           {/* Theme Toggle */}
-       
+          {/* Theme Toggle */}
+
           <button
             onClick={toggleTheme}
             className="p-2 rounded-full cursor-pointer dark:bg-gray-700 transition"
           >
             {isDark ? (
-              <FaSun className="text-gray-100 w-5 h-5" />
+              <FaSun className="text-gray-100 w-4 h-4 mr-2" />
             ) : (
-              <FaMoon className="text-gray-200 w-5 h-5" />
+              <FaMoon className="text-gray-200 w-4 h-4 mr-2" />
             )}
           </button>
           {user ? (
@@ -157,7 +166,8 @@ const Navbar = () => {
                     onClick={() => setShowModal(true)}
                     className="text-red-600 hover:bg-red-100"
                   >
-                    🔓 Log Out
+                    <FiLogOut className="text-lg" />
+                    Log Out
                   </button>
                 </li>
               </ul>

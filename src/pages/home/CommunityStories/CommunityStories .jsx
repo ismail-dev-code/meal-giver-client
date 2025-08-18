@@ -72,7 +72,7 @@ const CommunityStories = () => {
                     />
                     <div className="text-left">
                       <p
-                        className="font-semibold md:text-lg text-gray-800"
+                        className="font-semibold capitalize md:text-lg text-gray-800"
                         title={story.name || story.reviewer || "Anonymous"}
                       >
                         {story.name || story.reviewer || "Anonymous"}

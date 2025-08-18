@@ -37,7 +37,7 @@ const ContactUsPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {/* Contact Info */}
           <div>
-            <h2 className="text-2xl font-semibold text-secondary mb-4">
+            <h2 className="text-2xl font-semibold mb-4">
               Our Office
             </h2>
             <p className=" mb-3">
@@ -72,7 +72,7 @@ const ContactUsPage = () => {
 
           {/* Contact Form */}
           <div>
-            <h2 className="text-2xl font-semibold text-secondary mb-4">
+            <h2 className="text-2xl font-semibold mb-4">
               Send a Message
             </h2>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">

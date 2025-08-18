@@ -66,9 +66,9 @@ const Login = () => {
       </Helmet>
       <div
         data-aos="fade-up"
-        className="card max-w-md mx-auto md:px-4 pb-3 md:shadow-md bg-white"
+        className="card max-w-md mx-auto px-4 pb-3 md:shadow-md bg-white"
       >
-        <h2 className="md:text-2xl text-xl text-nowrap font-bold text-center mt-4 text-primary">
+        <h2 className="md:text-2xl text-base text-nowrap font-bold text-center mt-4 text-primary">
           {forgotMode ? "Reset Your Password" : "Access your account"}
         </h2>
 
@@ -211,7 +211,7 @@ const Login = () => {
         )}
 
         {/* Social Login */}
-        <div className="md:mt-2">
+        <div className="mb-2">
           <SocialLogin />
         </div>
       </div>

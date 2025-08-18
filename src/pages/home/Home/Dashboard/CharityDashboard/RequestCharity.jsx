@@ -116,7 +116,7 @@ const CheckoutForm = () => {
         <title>MealGiver | Request Charity Role</title>
       </Helmet> 
     <div className="max-w-xl mx-auto bg-white p-6 shadow rounded space-y-4">
-      <h2 className="text-xl font-semibold mb-4">Request Charity Role</h2>
+      <h2 className="text-xl font-semibold mb-4 text-gray-800">Request Charity Role</h2>
 
       {existingStatus ? (
         <div className="bg-yellow-100 text-yellow-800 p-4 rounded text-center">

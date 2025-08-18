@@ -62,9 +62,9 @@ const ReviewModal = ({ donation, onClose, refetchReviews }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-[2px] flex justify-center items-center z-50">
+    <div className="fixed inset-0 bg-blur/50 backdrop-blur-[2px] flex justify-center items-center z-50">
       <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
-        <h2 className="text-xl font-bold mb-4">Review Donation</h2>
+        <h2 className="text-xl text-gray-500 font-bold mb-4">Review Donation</h2>
 
         <p className="mb-3 text-gray-700 text-sm">
           Reviewing:{" "}
@@ -112,7 +112,7 @@ const ReviewModal = ({ donation, onClose, refetchReviews }) => {
 
         {/* Buttons */}
         <div className="flex justify-end gap-2">
-          <button className="btn btn-outline btn-sm" onClick={onClose}>
+          <button className="btn btn-outline text-gray-500 btn-sm" onClick={onClose}>
             Cancel
           </button>
           <button

@@ -58,7 +58,7 @@ const Banner = () => {
                   <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold md:mb-1 drop-shadow">
                     {slide.title}
                   </h2>
-                  <p className="text-sm md:text-base lg:text-lg mb-2 drop-shadow">
+                  <p className="text-sm md:text-base lg:text-lg mb-5 drop-shadow">
                     {slide.description}
                   </p>
                   <Link

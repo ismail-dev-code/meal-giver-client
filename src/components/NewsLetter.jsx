@@ -72,7 +72,7 @@ const NewsLetter = () => {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full sm:w-auto flex-1 border border-gray-300 pl-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-400"
+          className="w-full sm:w-auto flex-1 border text-gray-800 border-gray-300 pl-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-400"
           placeholder="Enter your email address..."
         />
         <button

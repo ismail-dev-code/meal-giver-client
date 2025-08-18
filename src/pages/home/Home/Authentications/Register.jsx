@@ -78,7 +78,7 @@ const Register = () => {
       </Helmet>
       <div
         data-aos="fade-up"
-        className="card max-w-md mx-auto md:px-4 py-6 md:shadow-md bg-white"
+        className="card max-w-md mx-auto px-4 py-6 md:shadow-md bg-white"
       >
         <h1 className="md:text-2xl text-xl text-center font-bold mb-4 text-primary">
           Join MealGiver
@@ -210,7 +210,7 @@ const Register = () => {
         </form>
 
         {/* Social login */}
-        <div className="md:mt-2">
+        <div className="mb-2">
           <SocialLogin />
         </div>
       </div>

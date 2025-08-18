@@ -50,9 +50,9 @@ const RequestDonationModal = ({ donation, onClose, refetch }) => {
 
   return (
     <Dialog open={true} onClose={onClose} className="relative z-50">
-      <div className="fixed inset-0 bg-black/40" aria-hidden="true" />
+      <div className="fixed inset-0 bg-black/60" aria-hidden="true" />
       <div className="fixed inset-0 flex items-center justify-center p-4">
-        <Dialog.Panel className="bg-white rounded-lg p-6 max-w-md w-full space-y-4">
+        <Dialog.Panel className="bg-white text-gray-600 rounded-lg p-6 max-w-md w-full space-y-4">
           <Dialog.Title className="text-lg font-semibold">Request Donation</Dialog.Title>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>

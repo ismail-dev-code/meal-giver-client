@@ -106,7 +106,7 @@ const DonationDetails = () => {
           {/* Content */}
           <div data-aos="fade-left" className="flex flex-col flex-grow">
             <h2 className="text-3xl font-semibold mb-4">{donation?.title}</h2>
-            <div className="space-y-2 text-gray-700 text-base">
+            <div className="space-y-2 text-base">
               <p><strong>Type:</strong> {donation?.type}</p>
               <p><strong>Quantity:</strong> {donation?.quantity} KG</p>
               <p><strong>Restaurant:</strong> {donation?.restaurant?.name}</p>
@@ -178,8 +178,8 @@ const DonationDetails = () => {
             <div className="space-y-4">
               {reviews.map((rev) => (
                 <div key={rev._id} className="p-5 rounded shadow-sm">
-                  <p className="font-semibold">{rev.reviewer}</p>
-                  <p className="text-gray-700">{rev.comment}</p>
+                  <p className="font-semibold capitalize">{rev.reviewer}</p>
+                  <p>{rev.comment}</p>
                   <p className="text-yellow-500 mt-1">⭐ {rev.rating}/5</p>
                 </div>
               ))}
