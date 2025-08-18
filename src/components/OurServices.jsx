@@ -65,7 +65,7 @@ const OurServices = () => {
   return (
     <section className="py-12 px-4 md:px-8 bg-base-100 text-base-content">
       <div className="text-center mb-10" data-aos="fade-up">
-        <h2 className="md:text-3xl text-xl font-bold mb-4">Our Services</h2>
+        <h2 className="md:text-3xl text-2xl font-bold mb-4">Our Services</h2>
         <p className="max-w-3xl mx-auto text-gray-600 text-lg">
           MealGiver is more than a platform it’s a movement. From donating surplus food 
           to supporting charities and empowering volunteers, we work together to 

@@ -27,7 +27,7 @@ const LatestCharityRequests = () => {
   return (
     <section className="py-12">
       <div className="max-w-6xl mx-auto px-4">
-        <h2 className="md:text-3xl text-xl font-bold text-center mb-4 md:mb-10">
+        <h2 className="md:text-3xl text-2xl font-bold text-center mb-10">
           Latest Charity Requests
         </h2>
 
@@ -49,7 +49,7 @@ const LatestCharityRequests = () => {
                       alt={req.charityName || "Charity"}
                       className="w-12 h-12 rounded-full object-cover border"
                     />
-                    <h3 className="text-lg font-semibold text-gray-800">
+                    <h3 className="text-lg capitalize font-semibold text-gray-800">
                       {req.charityName || "Unknown Charity"}
                     </h3>
                   </div>

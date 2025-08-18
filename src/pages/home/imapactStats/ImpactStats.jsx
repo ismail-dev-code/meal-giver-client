@@ -11,7 +11,7 @@ const ImpactStats = () => {
   return (
     <section className="py-12">
       <div className="max-w-6xl mx-auto px-4 text-center">
-        <h2 className="md:text-3xl text-xl font-bold text-center mb-4 md:mb-10">Our Collective Impact</h2>
+        <h2 className="md:text-3xl text-2xl font-bold text-center mb-10">Our Collective Impact</h2>
         <div className="grid gap-6 md:grid-cols-3">
           {stats.map((stat, i) => (
             <div key={i}

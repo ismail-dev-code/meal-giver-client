@@ -20,7 +20,7 @@ const FeaturedDonationsHome = () => {
   return (
     <section className="pb-12 pt-5">
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="md:text-3xl text-xl font-bold text-center  mb-10">
+        <h2 className="md:text-3xl text-2xl font-bold text-center  mb-10">
           Featured Donations
         </h2>
 
